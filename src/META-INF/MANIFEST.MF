@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: com.github.VengiMa.Pipeline.TaskVent
+Main-Class: com.github.VEngiMa.Pipeline.TaskVent
 
