@@ -2,7 +2,7 @@
   <artifact type="jar" name="test:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/test_jar</output-path>
     <root id="archive" name="test.jar">
-      <element id="module-output" name="test" />
+      <element id="module-output" name="TSP" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/zeromq/jeromq/0.4.0/jeromq-0.4.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Desktop/zeromq-test-master/target/zeromq-test-1.0-SNAPSHOT.jar" path-in-jar="/" />
     </root>
