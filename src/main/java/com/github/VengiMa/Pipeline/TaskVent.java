@@ -18,9 +18,30 @@ import org.zeromq.ZMQ;
 public class TaskVent {
     public static void main (String[] args) throws Exception {
 
-        int number = Integer.parseInt(System.getenv("NUMBER_OF_CLUSTERS"));
-        String host_Sink = String.valueOf(System.getenv("HOST_SINK"));
-        String filePath = String.valueOf(System.getenv("FILE_PATH"));
+
+        int number;
+        String host_Sink;
+        String filePath;
+
+        try {
+            number = Integer.parseInt(System.getenv("NUMBER_OF_CLUSTERS"));
+        }
+        catch(Exception e) {
+            number = 4;
+        }
+
+        host_Sink = System.getenv("HOST_SINK");
+        if (host_Sink == null)
+            host_Sink = "localhost";
+
+        filePath = System.getenv("FILE_PATH");
+        if(filePath == null)
+            filePath = "src/main/ressources/coordinates.txt";
+
+        System.out.println("Parameters:");
+        System.out.println("NUMBER_OF_CLUSTERS: " + number);
+        System.out.println("HOST_SINK: " + host_Sink);
+        System.out.println("FILE_PATH: " + filePath);
 
         File file = new File(filePath);
 
@@ -39,8 +60,6 @@ public class TaskVent {
         //  Socket to send messages on
         ZMQ.Socket sink = context.socket(ZMQ.PUSH);
         sink.connect("tcp://" + host_Sink + ":5558");
-        System.out.println("Press Enter when the workers are ready: ");
-        System.in.read();
         System.out.println("Sending tasks to workers\n");
 
         //  The first message is "0" and signals start of batch
