@@ -56,6 +56,25 @@
                         </goals>
                     </execution>
                     <execution>
+                        <id>build-TaskWork</id>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <archive>
+                                <manifest>
+                                    <mainClass>com.github.VengiMa.Pipeline.TaskWork</mainClass>
+                                </manifest>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <finalName>TSP-TaskWork</finalName>
+                        </configuration>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                    <execution>
                         <id>build-TaskSink</id>
                         <configuration>
                             <appendAssemblyId>false</appendAssemblyId>
