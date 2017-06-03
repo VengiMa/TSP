@@ -11,11 +11,9 @@ public class TourConstruction {
         Tour tour = new Tour(0);
         double length =0;
 
-        if (cluster.getPoints().size() == 0) {
-        } else if (cluster.getPoints().size() == 1){
+        if (cluster.getPoints().size() == 1){
             tour.addPoint(cluster.getPoints().get(0));
         } else {
-
             Point out = cluster.getOutPoint();
             Point in = cluster.getInPoint();
 
@@ -82,8 +80,7 @@ public class TourConstruction {
         Tour tour = new Tour(0);
         int start, ziel;
 
-        if (cluster.getPoints().size() == 0) {
-        } else if (cluster.getPoints().size() == 1){
+        if (cluster.getPoints().size() == 1){
             tour.addPoint(cluster.getPoints().get(0));
         } else {
 
@@ -139,5 +136,74 @@ public class TourConstruction {
         return tour;
     }
 
-    //todo: Farthest Insertion
+    public static Tour FarthestInsertion (double distancematrix [][], Cluster cluster) {
+        Tour tour = new Tour(0);
+        int numbernodes;
+        //visited = List of elements, either value = 1 for visited or value = 0 for unvisited
+        numbernodes = cluster.getPoints().size();
+        System.out.println(numbernodes);
+        int visited[] = new int[numbernodes];
+        //int unvisitedRest;
+        double max;
+        double min;
+        int chosenPoint = 0;
+        int pos = -1;
+
+        Point out = cluster.getOutPoint();
+        Point in = cluster.getInPoint();
+
+        if (cluster.getPoints().size() == 1){
+            tour.addPoint(cluster.getPoints().get(0));
+        } else {
+            //visited is true; because they are already part of the tour;
+            visited[cluster.getPointIndex(out)] = 1;
+            visited[cluster.getPointIndex(in)] = 1;
+            //add those starting points to the tour
+            tour.addPoint(in);
+            tour.addPoint(out);
+            //every vertex from 0 to probleminstance -1 will be parsed
+            while (tour.getSize() != numbernodes) {
+                int point = 1;
+                int insertPoint = 1;
+                max =0;
+                for (int i = 0; i < numbernodes; i++) {
+                    //unvisitedRest = numbernodes - tour.getSize();
+                    double minimum = Double.MAX_VALUE;
+
+                    int cityIndex = cluster.getPoints().get(i).getPointNumber() - 1;
+                    //if the recent vertex is part of the tour already, do nothing
+                    if (visited[i] == 1) {
+                    } else {
+                        //else try to insert the vertex in every possible position of the former tour
+                        //compare the distances for each insertion point to the minimum
+                        double distance;
+
+                        for (int j = 1; j <= tour.getSize() - 1; j++) {
+                            int vor = tour.getPoint((j - 1)).getPointNumber() - 1;
+                            distance = distancematrix[vor][cityIndex];
+                            if (distance < minimum) {
+                                minimum = distance;
+                                point = j;
+                                pos = i;
+                            }
+                        }
+                        if (minimum > max){
+                            max = minimum;
+                            chosenPoint = pos;
+                            insertPoint = point;
+                        }
+                    }
+                }
+                System.out.println(max + " " + insertPoint + " " + chosenPoint);
+                tour.insertPoint(insertPoint, cluster.getPoints().get(chosenPoint));
+                visited[chosenPoint] = 1;
+                System.out.println(tour.tour2String());
+            }
+        }
+        tour.removePoint(in);
+        tour.addPoint(in);
+        return tour;
+    }
 }
+
+

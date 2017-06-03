@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  * Created by Admin on 05.04.2017.
  */
-public class LocalSearchRoutines {
+public class LocalSearchForClusters {
     /**
     *Methoden
     **/
@@ -35,8 +35,6 @@ public class LocalSearchRoutines {
                 Random randomNumberGenerator = new Random();
                 randomNumber1 = randomNumberGenerator.nextInt(tourSize);
 
-                //todo: check both possibilities, random points, but the 10-15 nearest neighbours
-                //todo: or use an interative approach, starting from the one end
                 if (nearestNeighbours){
                     for (int i = 0; i< sizeNeighbours-2; i++){
                         randomNumber2 = (randomNumber1 +(i+2))%tourSize;
@@ -159,8 +157,6 @@ public class LocalSearchRoutines {
                 Random randomNumberGenerator = new Random();
                 randomNumber1 = randomNumberGenerator.nextInt(tourSize);
 
-                //todo: check both possibilities, random points, but the 10-15 nearest neighbours
-                //todo: or use an interative approach, starting from the one end
                 if (nearestNeighbours){
                     for (int i = 0; i< sizeNeighbours-2; i++){
                         randomNumber2 = (randomNumber1 +(i+2))%tourSize;

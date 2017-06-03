@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Created by Admin on 06.04.2017.
  */
-public class ConstructionHeuristicsCluster {
+public class ConstructionTourThroughClusters {
     public static Tour NNHeuristic (double distancematrix [][], List<Point> pointList) {
         Stack<Integer> stack= new Stack<Integer>();
         Tour tour = new Tour(0);

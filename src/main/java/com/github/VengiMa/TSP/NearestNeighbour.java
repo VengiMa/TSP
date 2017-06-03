@@ -66,7 +66,7 @@ public class NearestNeighbour {
         File file = new File("C:\\Users\\Admin\\Desktop\\Hochschule\\Master\\Thesis - Richter\\Java\\Testdateien\\ha30_dist.txt");
         //generate the distance matrix out of the txtfile
         NearestNeighbour tsp = new NearestNeighbour();
-        double matrix[][] = InputToMatrix.TextdataInput(file);
+        double matrix[][] = InputToMatrix.FileToMatrix(file);
         //1. generate the distance matrix out of the txtfile --> InputdataTextdatei
         //2. initiliaze an NN-Tour with tsp.tspNN
         //3. compute the tour length

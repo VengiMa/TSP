@@ -52,7 +52,7 @@ class TestTour {
         try {
             File file = new File("C:\\Users\\Admin\\Desktop\\Hochschule\\Master\\Thesis - Richter\\Java\\Testdateien\\kn57.txt");
             //generate the distance matrix out of the txtfile
-            matrix = InputToMatrix.TextdataInput(file);
+            matrix = InputToMatrix.FileToMatrix(file);
             for (int i = 0; i < 100; i++) {
                 ArrayList<Integer> temp = NearestNeighbour.tspNN(matrix);
                 Tour t1 = new Tour(temp);

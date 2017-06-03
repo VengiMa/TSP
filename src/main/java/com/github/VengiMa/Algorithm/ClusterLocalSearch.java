@@ -95,7 +95,7 @@ public class ClusterLocalSearch {
         int a,b,c,d;
         int improve = 0;
         if (tour.getSize() >= 4) {
-            while (improve < ((groesseTour)/2.5)) {
+            while (improve < ((groesseTour)/2)) {
                 //if (System.currentTimeMillis() - startTime >=10000 || counter >= 15000) {
                 //    return t;
                 //}
@@ -131,6 +131,7 @@ public class ClusterLocalSearch {
                                 tour.setPoint(l, tempList.get(j));
                                 l++;
                             }
+                            geschafft = true;
                         }
                     }
                 }

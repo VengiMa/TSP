@@ -177,16 +177,23 @@ public class K_Means{
         long elapsed;
         long start = System.nanoTime();
         try {
-            int number =4;
-            String fileName = "sgb128_xy";
+            int number =1;
+            double distanceMatrix [][];
+            String fileName = "lau15_xy";
             String path = "C:\\Users\\Admin\\Desktop\\Hochschule\\Master\\Thesis - Richter\\Java\\Testdateien\\" + fileName + ".txt";
             File file = new File(path);
 
                     //"C:\\Users\\Admin\\Desktop\\Hochschule\\Master\\Thesis - Richter\\Java\\Testdateien\\sgb_128.txt");
 
             double coordinates[][] = InputCoordinates.FileToCoordinates(file);
+
+            try{
+                File file2 = new File("C:\\Users\\Admin\\Desktop\\Hochschule\\Master\\Thesis - Richter\\Java\\Testdateien\\lau15.txt");
+                distanceMatrix = InputCoordinates.FileToMatrix(file2);
+            }catch (Exception e){
+                distanceMatrix = InputCoordinates.distanceMatrix(coordinates);
+            }
             LinkedList<Point> init = InputCoordinates.createPointList(coordinates);
-            double distanceMatrix [][] = InputCoordinates.distanceMatrix(coordinates);
             System.out.println(init.size());
             List<Cluster> clusters = null;
 
@@ -196,65 +203,79 @@ public class K_Means{
             kmeans.calculate();
             clusters = kmeans.getClusters();
 
-            ClusterDistance [][] distance = clusterMatrix.clusterMatrix(distanceMatrix,clusters);
+            for (int i =0; i< clusters.size(); i++){
+                Cluster c = clusters.get(i);
+                c.setInPoint(c.getPoints().get(4));
+                c.setOutPoint(c.getPoints().get(6));
 
-            List<Integer> filledClusters = clusterMatrix.getFilledCluster();
-
-            if (filledClusters.get(0) == 1){//für den Fall das es nur ein Cluster gibt füllen, normale Tour berechnen
+                Tour tour = TourConstruction.NNHeuristic(distanceMatrix, c);
+                ClusterLocalSearch twoOpt = new ClusterLocalSearch();
+                twoOpt.twoOpt(distanceMatrix,c,tour);
+                System.out.println(tour.distanceTourLength(distanceMatrix));
+                System.out.println(tour.isFeasible(init) +" ; "+ tour.tour2String());
             }
-            else {
 
-                //System.out.println(distance.length);
-               // System.out.println(filledClusters.toString());
 
-                for (int i = 0; i < distance.length; i++) {
-                    System.out.println("\n");
-                    for (int j = 0; j < distance.length; j++) {
-                        System.out.print(distance[i][j].getClusterDistance() + ", " + distance[i][j].getfromNode().getPointNumber() + ", "
-                                + distance[i][j].gettoNode().getPointNumber() + "  ");
-                    }
-                }
+
+            //ClusterDistance [][] distance = clusterMatrix.clusterMatrix(distanceMatrix,clusters);
+
+           // List<Integer> filledClusters = clusterMatrix.getFilledCluster();
+
+            //System.out.println(distance.length);
+           // System.out.println(filledClusters.toString());
+
+
+            /*
+
+            for (int i = 0; i < distance.length; i++) {
                 System.out.println("\n");
-                Tour test = VisitingOrderCluster.orderCluster(distance, clusters);
-                System.out.println(test.tour2String());
-
-                for (Cluster c : clusters){
-                    c.plotCluster();
+                for (int j = 0; j < distance.length; j++) {
+                    System.out.print(distance[i][j].getClusterDistance() + ", " + distance[i][j].getfromNode().getPointNumber() + ", "
+                            + distance[i][j].gettoNode().getPointNumber() + "  ");
                 }
-                Tour tour = new Tour(0);
-                for (int i =0; i< test.getSize(); i++){
-                    int j = test.getPoint(i).getPointNumber()-1;
-                    Cluster c = clusters.get(j);
-
-                    start = System.nanoTime();
-                    Tour clusterTour = ClusterComputation.createTour(c,distanceMatrix);
-                    System.out.println(clusterTour.getDistance());
-                    System.out.println(clusterTour.distanceTourLength(distanceMatrix));
-                    tour.addTour(ClusterComputation.createTour(c,distanceMatrix));
-
-                    elapsed = (System.nanoTime() - start) / 1_000_000L;
-                    System.out.println("completed in " + elapsed + "ms");
-
-                    /*
-                    Tour clusterTour = TourConstruction.NNHeuristic(distanceMatrix, clusters.get(j));
-                    System.out.println(clusterTour.tour2String());
-                    ClusterLocalSearch two = new ClusterLocalSearch();
-                    two.twoOpt(distanceMatrix,clusters.get(j),clusterTour);
-                    System.out.println(clusterTour.tour2String());
-                    tour.addTour(clusterTour);
-                    */
-                }
-                /*
-                System.out.println(tour.tour2String());
-                System.out.println("Tour is feasible: " + tour.isFeasible(init));
-                System.out.println(tour.distanceTourLength(distanceMatrix));
-
-                LocalSearchRoutines after = new LocalSearchRoutines();
-                after.twoOpt(tour, distanceMatrix);
-                System.out.println(tour.tour2String());
-                System.out.println(tour.distanceTourLength(distanceMatrix));
-                */
             }
+            System.out.println("\n");
+            Tour test = VisitingOrderCluster.orderCluster(distance, clusters);
+            System.out.println(test.tour2String());
+
+            for (Cluster c : clusters){
+                c.plotCluster();
+            }
+            Tour tour = new Tour(0);
+            for (int i =0; i< test.getSize(); i++){
+                int j = test.getPoint(i).getPointNumber()-1;
+                Cluster c = clusters.get(j);
+
+                start = System.nanoTime();
+                Tour clusterTour = ClusterComputation.createTour(c,distanceMatrix);
+                System.out.println(clusterTour.getDistance());
+                System.out.println(clusterTour.distanceTourLength(distanceMatrix));
+                tour.addTour(ClusterComputation.createTour(c,distanceMatrix));
+
+                elapsed = (System.nanoTime() - start) / 1_000_000L;
+                System.out.println("completed in " + elapsed + "ms");
+
+                */
+
+                /*
+                Tour clusterTour = TourConstruction.NNHeuristic(distanceMatrix, clusters.get(j));
+                System.out.println(clusterTour.tour2String());
+                ClusterLocalSearch two = new ClusterLocalSearch();
+                two.twoOpt(distanceMatrix,clusters.get(j),clusterTour);
+                System.out.println(clusterTour.tour2String());
+                tour.addTour(clusterTour);
+                */
+            // }
+            /*
+            System.out.println(tour.tour2String());
+            System.out.println("Tour is feasible: " + tour.isFeasible(init));
+            System.out.println(tour.distanceTourLength(distanceMatrix));
+
+            LocalSearchForClusters after = new LocalSearchForClusters();
+            after.twoOpt(tour, distanceMatrix);
+            System.out.println(tour.tour2String());
+            System.out.println(tour.distanceTourLength(distanceMatrix));
+            */
         }
         catch (IOException e) {
             System.out.println("Fehler: IOException");

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class TaskSink {
     public static void main (String[] args) throws Exception {
+
         //  Prepare our context and socket
         ZMQ.Context context = ZMQ.context(1);
         ZMQ.Socket receiver = context.socket(ZMQ.PULL);
@@ -27,7 +28,7 @@ public class TaskSink {
 
         //  Start our clock now
         long tstart =0;
-        double [][] distanceMatrix;
+        double [][] distanceMatrix = new double[0][0];
         Tour clusterTour = new Tour();
         Tour partialTour;
         Tour finalTour = new Tour();
@@ -36,12 +37,14 @@ public class TaskSink {
 
         //  Process the confirmations
         int task_nbr;
+        tstart = System.currentTimeMillis();
         for (task_nbr = 0; task_nbr < maxTask_nbr; task_nbr++) {
-            if (task_nbr ==0){
-                tstart = System.currentTimeMillis();
-            }
             byte[] byteArray = receiver.recv();
             data = (DataPackage) SerializationUtil.deserialize(byteArray);
+
+            if (task_nbr ==0){
+                distanceMatrix = data.getDistanceMatrixData();
+            }
             if(data.getClusterTourData()!=null){
                 clusterTour = data.getClusterTourData();
             }
@@ -67,11 +70,12 @@ public class TaskSink {
             for(int j=0; j<dataSet.size(); j++){
                 if(point == dataSet.get(j).getiDData()){
                     finalTour.addTour(dataSet.get(j).getTourData());
+                    dataSet.remove(j);
                 }
             }
         }
 
-        System.out.println(finalTour.tour2String());
+        System.out.println(finalTour.distanceTourLength(distanceMatrix) + " ; " + finalTour.tour2String());
         //  Calculate and report duration of batch
         long tend = System.currentTimeMillis();
         System.out.println("\nTotal elapsed time: " + (tend - tstart) + " msec");

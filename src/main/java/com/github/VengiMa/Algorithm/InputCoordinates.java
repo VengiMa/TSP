@@ -15,7 +15,7 @@ public class InputCoordinates implements Serializable{
         String line;
         BufferedReader in;
         int i = 0;
-        int größe = 0;
+        int size = 0;
         String[] inputLines;
         // REading of the txt file; only distancematrix, no other information before
         // File should be opened by a dialogue, so the right one can be chosen
@@ -31,7 +31,7 @@ public class InputCoordinates implements Serializable{
                 line = in.readLine();
                 i++;
             }
-            größe = i;
+            size = i;
             in.close();
         }
         catch (IOException e) {
@@ -40,7 +40,7 @@ public class InputCoordinates implements Serializable{
         in = new BufferedReader(new FileReader(data));
         line = in.readLine();
         //Definition of the size of the problem, generating an array of that size: inputLines
-        inputLines = new String[größe];
+        inputLines = new String[size];
         i = 0;
         // saving the data in inputLines, read out of the file, line per line
         while (line != null) {
@@ -96,6 +96,59 @@ public class InputCoordinates implements Serializable{
         return pointList;
     }
 
+    public static double[][] FileToMatrix(File data) throws IOException {
+        String line;
+        BufferedReader in;
+        int i = 0;
+        int size = 0;
+        String[] inputLines;
+        // REading of the txt file; only distancematrix, no other information before
+        // File should be opened by a dialogue, so the right one can be chosen
+        try {
+            // Method of creating the data matrix must be written!!!!!
+            in = new BufferedReader(new FileReader(data));
+            line = in.readLine();
+            // get the size of the problem
+            while (line != null) {
+                line = in.readLine();
+                i++;
+            }
+            size = i;
+            in.close();
+        }
+        catch (IOException e) {
+            System.out.println("Fehler: IOException");
+        }
+        in = new BufferedReader(new FileReader(data));
+        line = in.readLine();
+        //Definition of the size of the problem, generating an array of that size: inputLines
+        inputLines = new String[size];
+        i = 0;
+        // saving the data in inputLines, read out of the file, line per line
+        while (line != null) {
+            inputLines[i] = line;
+            line = in.readLine();
+            i++;
+        }
+        //String[] data = inputLines[].split("\\s+");
+        double matrix[][] = new double[inputLines.length][inputLines.length];
+        for (int j = 0; j < inputLines.length; j++) {
+            //first lines of the matrix cannot be parsed...only the matrix!!!
+            //Also no empty lines should be read.
+            //System.out.println("");
+            Pattern p = Pattern.compile("[0-9]+");
+            Matcher m = p.matcher(inputLines[j]);
+            int k = 0;
+            while (m.find()) {
+                matrix[j][k] = Double.parseDouble(m.group());
+                //System.out.print(" "+matrix[j][k]);
+                k++;
+            }
+
+        }
+        return matrix;
+    }
+
     public static void main(String[] args){
         try {
             File file = new File("C:\\Users\\Admin\\Desktop\\Hochschule\\Master\\Thesis - Richter\\Java\\Testdateien\\sgb128_xy.txt");
@@ -116,10 +169,10 @@ public class InputCoordinates implements Serializable{
             LinkedList<Point> init = createPointList(coordinates);
             System.out.println(init.size());
             Tour tour = new Tour(0);
-            tour = ConstructionHeuristicsCluster.NNHeuristic(distanceMatrix, init);
+            tour = ConstructionTourThroughClusters.NNHeuristic(distanceMatrix, init);
             tour.isFeasible(init);
             System.out.println(tour.tour2String() + " Länge: " + tour.distanceTourLength(distanceMatrix));
-            LocalSearchRoutines two = new LocalSearchRoutines();
+            LocalSearchForClusters two = new LocalSearchForClusters();
             two.twoOpt(tour, distanceMatrix);
             System.out.println(tour.tour2String() + "\n" + " Länge: " + tour.distanceTourLength(distanceMatrix));
             //two.threeOpt(tour, distanceMatrix);

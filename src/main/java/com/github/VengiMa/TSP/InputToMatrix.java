@@ -13,11 +13,11 @@ import java.text.DecimalFormat;
  * Created by Admin on 18.03.2017.
  */
 public class InputToMatrix {
-    public static double[][] TextdataInput(File data) throws IOException {
+    public static double[][] FileToMatrix(File data) throws IOException {
         String line;
         BufferedReader in;
         int i = 0;
-        int größe = 0;
+        int size = 0;
         String[] inputLines;
         // REading of the txt file; only distancematrix, no other information before
         // File should be opened by a dialogue, so the right one can be chosen
@@ -30,7 +30,7 @@ public class InputToMatrix {
                 line = in.readLine();
                 i++;
             }
-            größe = i;
+            size = i;
             in.close();
         }
         catch (IOException e) {
@@ -39,7 +39,7 @@ public class InputToMatrix {
         in = new BufferedReader(new FileReader(data));
         line = in.readLine();
         //Definition of the size of the problem, generating an array of that size: inputLines
-        inputLines = new String[größe];
+        inputLines = new String[size];
         i = 0;
         // saving the data in inputLines, read out of the file, line per line
         while (line != null) {
@@ -72,7 +72,7 @@ public class InputToMatrix {
         String line;
         BufferedReader in;
         int i = 0;
-        int größe = 0;
+        int size = 0;
         String[] inputLines;
             // REading of the txt file; only distancematrix, no other information before
             // File should be opened by a dialogue, so the right one can be chosen
@@ -86,7 +86,7 @@ public class InputToMatrix {
                     line = in.readLine();
                     i++;
             }
-            größe = i;
+            size = i;
             in.close();
         }
         catch (IOException e) {
@@ -95,7 +95,7 @@ public class InputToMatrix {
         in = new BufferedReader(new FileReader(data));
         line = in.readLine();
         //Definition of the size of the problem, generating an array of that size: inputLines
-        inputLines = new String[größe];
+        inputLines = new String[size];
         i = 0;
         // saving the data in inputLines, read out of the file, line per line
         while (line != null) {

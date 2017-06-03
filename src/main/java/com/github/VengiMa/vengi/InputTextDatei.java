@@ -34,12 +34,12 @@ public class InputTextDatei {
             line = in.readLine();
             i++;
         }
-        int größe = i;
+        int size = i;
         in.close();
         in = new BufferedReader(new FileReader(data));
         line = in.readLine();
         //Definition of the size of the problem, generating an array of that size: inputLines
-        String[] inputLines = new String[größe];
+        String[] inputLines = new String[size];
         i = 0;
         // saving the data in inputLines, read out of the file, line per line
         while(line != null)

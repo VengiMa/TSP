@@ -73,7 +73,7 @@ public class CheapestInsertion {
         try {
             File file = new File("C:\\Users\\Admin\\Desktop\\Hochschule\\Master\\Thesis - Richter\\Java\\Testdateien\\lau15.txt");
             //generate the distance matrix out of the txtfile
-            matrix = InputToMatrix.TextdataInput(file);
+            matrix = InputToMatrix.FileToMatrix(file);
                 ArrayList<Integer> temp = CheapestInsert(matrix);
                 Tour t1 = new Tour(temp);
                     System.out.println(Arrays.toString(t1.getTour().toArray())+ " Länge " +t1.getTourLength(matrix));

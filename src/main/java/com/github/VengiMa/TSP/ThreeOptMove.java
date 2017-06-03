@@ -98,7 +98,7 @@ public class ThreeOptMove {
     public static void main(String[] args) throws IOException{
         File file = new File("C:\\Users\\Admin\\Desktop\\Hochschule\\Master\\Thesis - Richter\\Java\\Testdateien\\ha30.txt");
         //generate the distance matrix out of the txtfile
-        double matrix[][] = InputToMatrix.TextdataInput(file);
+        double matrix[][] = InputToMatrix.FileToMatrix(file);
         ArrayList<Integer> temp = NearestNeighbour.tspNN(matrix);
         ThreeOpt(temp, matrix);
     }

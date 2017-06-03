@@ -29,8 +29,7 @@ public class clusterMatrix {
                     }
                     else {
                         /**
-                         * todo MAtrix needs to set the right in and out point in the clusrter, cluster 3 is always wrong
-                         * todo distance must be 0 if the cluster is empty
+                         *
                          */
         /*
                         if (i == j) {
@@ -103,6 +102,9 @@ public class clusterMatrix {
 
         filledCluster.add(filled);
 
+        //todo: find a solution for calcualting the distance between the clusters, no direct calculation of both points
+        //probably only one? and the other one when searching for the closest vertex?
+        //calculate the closest edge, no matter if the vertex is already used or not, (visited)
         if (filled > 2) {
             for (int i = 0; i < clusters.size(); i++) {
                 if (clusters.get(i).getPoints().size() != 0){

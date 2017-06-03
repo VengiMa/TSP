@@ -88,8 +88,6 @@ public class TaskVent {
 
         Tour test = VisitingOrderCluster.orderCluster(distance, clusters);
 
-        System.out.println(test.tour2String());
-
         for (Cluster c : clusters){
             c.plotCluster();
         }

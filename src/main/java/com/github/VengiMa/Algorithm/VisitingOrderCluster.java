@@ -33,12 +33,9 @@ public class VisitingOrderCluster {
             Point temp = new Point(i+1, -1, -1);
             clusterPoint.add(temp);
         }
-        /**
-         * todo NNHEuristic, search in the method
-         */
-        orderCluster = ConstructionHeuristicsCluster.NNHeuristic(distance, clusterPoint);
+        orderCluster = ConstructionTourThroughClusters.NNHeuristic(distance, clusterPoint);
 
-        LocalSearchRoutines twoOpt = new LocalSearchRoutines();
+        LocalSearchForClusters twoOpt = new LocalSearchForClusters();
         twoOpt.twoOpt(orderCluster, distance);
 
         int tourLength = orderCluster.getSize();
