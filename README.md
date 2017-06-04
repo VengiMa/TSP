@@ -29,7 +29,7 @@ docker run --rm -d --name sink -h sink --network tsp vengima/tsp java -jar TSP-T
 # TaskVent
 docker run --rm -d --name vent -h vent --network tsp -e HOST_SINK=sink -e FILE_PATH=$FILE_PATH vengima/tsp /bin/sh -c 'sleep 10; java -jar TSP-TaskVent.jar'
 
-# TaskSink
+# TaskWork
 for i in $(seq 1 $NUMBER_OF_CLUSTERS) 
 do
    docker run --rm -d --network tsp -e HOST_SINK=sink -e HOST_MASTER=vent vengima/tsp java -jar TSP-TaskWork.jar 
