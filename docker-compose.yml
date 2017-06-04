@@ -58,6 +58,18 @@ services:
     networks:
       default:
 
+  work4:
+    container_name: work4
+    hostname: work4
+    image: vengima/tsp
+    environment:
+       HOST_SINK: sink
+       HOST_MASTER: vent
+    command: java -jar TSP-TaskWork.jar
+    #restart: always
+    networks:
+      default:
+
 networks:
  default:
     driver: bridge
