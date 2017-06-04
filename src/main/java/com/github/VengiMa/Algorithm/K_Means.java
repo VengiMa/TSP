@@ -59,7 +59,7 @@ public class K_Means{
             cluster.setCentroid(centroid);
             clusters.add(cluster);
         }
-        plotClusters();
+        //plotClusters();
     }
 
     private void plotClusters(){
@@ -101,10 +101,13 @@ public class K_Means{
             System.out.println("#######");
             System.out.println("Iteration: " + iteration);
             System.out.println("Centroid distances: " + distance);
-            plotClusters();
+            //plotClusters();
 
             if(sum==0) {
                 finish = true;
+                for (Cluster c: clusters){
+                    c.plotCluster();
+                }
             }
         }
     }
