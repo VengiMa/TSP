@@ -10,11 +10,13 @@ mvn package
 docker-compose up
 ```
 
-*TODO*
-
-@vengima
-Beschreibe, in welcher Reihenfolge die Befehler ausgeführt werden müssen
-
+###Starting Order
+```bash
+Starting in following order:
+1. TaskSink
+2. Amount of TaskWork
+3. TaskVent
+```
 
 ## Run with Docker
 
@@ -34,7 +36,6 @@ docker run --rm -it --name vent -h vent --network tsp -e HOST_SINK=sink -e FILE_
 
 ### TaskWork
 Starte gewünschte Anzahl an Worker
-
 
 ```bash
 for i in 1 2 3
@@ -71,4 +72,15 @@ java -jar target\TSP-TaskSink.jar
 Linux:
 ```bash
 java -jar target/TSP-TaskSink.jar
+```
+
+### TaskWork
+Windows:
+```bash
+java -jar target\TSP-TaskWork.jar
+```
+
+Linux:
+```bash
+java -jar target/TSP-TaskWork.jar
 ```
