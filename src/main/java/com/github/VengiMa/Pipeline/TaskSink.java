@@ -16,6 +16,8 @@ public class TaskSink {
         //  Prepare our context and socket
         ZMQ.Context context = ZMQ.context(1);
         ZMQ.Socket receiver = context.socket(ZMQ.PULL);
+
+        System.out.println("Bind Sink to " + "tcp://*:5558");
         receiver.bind("tcp://*:5558");
 
         // Socket for subscribe
