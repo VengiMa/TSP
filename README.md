@@ -10,7 +10,7 @@ mvn package
 docker-compose up
 ```
 
-###Starting Order
+### Starting Order
 ```bash
 Starting in following order:
 1. TaskSink
