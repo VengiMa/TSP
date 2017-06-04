@@ -1,0 +1,67 @@
+version: '2.1'
+services:
+
+  sink:
+    container_name: sink
+    hostname: sink
+    image: vengima/tsp
+    command: java -jar TSP-TaskSink.jar
+    #restart: always
+    networks:
+      default:
+
+  vent:
+    container_name: vent
+    hostname: vent
+    image: vengima/tsp
+    environment:
+       HOST_SINK: sink
+       FILE_PATH: coordinates.txt
+    command: java -jar TSP-TaskVent.jar
+    #restart: always
+    networks:
+      default:
+
+  work1:
+    container_name: work1
+    hostname: work1
+    image: vengima/tsp
+    environment:
+       HOST_SINK: sink
+       HOST_MASTER: vent
+    command: java -jar TSP-TaskWork.jar
+    #restart: always
+    networks:
+      default:
+
+  work2:
+    container_name: work2
+    hostname: work2
+    image: vengima/tsp
+    environment:
+       HOST_SINK: sink
+       HOST_MASTER: vent
+    command: java -jar TSP-TaskWork.jar
+    #restart: always
+    networks:
+      default:
+
+  work3:
+    container_name: work3
+    hostname: work3
+    image: vengima/tsp
+    environment:
+       HOST_SINK: sink
+       HOST_MASTER: vent
+    command: java -jar TSP-TaskWork.jar
+    #restart: always
+    networks:
+      default:
+
+networks:
+ default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.2.0/24
