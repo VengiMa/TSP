@@ -11,12 +11,9 @@ docker-compose up
 ```
 
 ### Starting Order
-```bash
-Starting in following order:
 1. TaskSink
 2. Amount of TaskWork
 3. TaskVent
-```
 
 ## Run with Docker
 
