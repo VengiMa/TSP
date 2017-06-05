@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * Created by Admin on 05.04.2017.
  */
 public class InputCoordinates implements Serializable{
-    public static double[][] FileToCoordinates(File data) throws IOException {
+    public static double[][] FileToCoordinates(File data, boolean pointNamed) throws IOException {
         String line;
         BufferedReader in;
         int i = 0;
@@ -49,20 +49,40 @@ public class InputCoordinates implements Serializable{
             i++;
         }
         in.close();
-        double input[][] = new double[inputLines.length][2];
-        for (int j = 0; j < inputLines.length; j++) {
-            //first lines of the matrix cannot be parsed...only the matrix!!!
-            //Also no empty lines should be read.
-            //System.out.println("");
-            Pattern p = Pattern.compile("[-]?[0-9]+.[0-9]+");
-            Matcher m = p.matcher(inputLines[j]);
-            int k = 0;
-            while (m.find()) {
-                input[j][k] = Double.parseDouble(m.group());
-                //System.out.print(" "+matrix[j][k]);
-                k++;
+        double input[][];
+        input = new double[inputLines.length][2];
+        if (pointNamed){
+            for (int j = 0; j < inputLines.length; j++) {
+                //first lines of the matrix cannot be parsed...only the matrix!!!
+                //Also no empty lines should be read.
+                //System.out.println("");
+                Pattern p = Pattern.compile("[-]?[0-9]+[.0-9]*");
+                Matcher m = p.matcher(inputLines[j]);
+                int k = -1;
+                while (m.find()) {
+                    if (k ==-1){
+                    }else{
+                        input[j][k] = Double.parseDouble(m.group());
+                    }
+                    k++;
+                }
+            }
+        }else{
+            for (int j = 0; j < inputLines.length; j++) {
+                //first lines of the matrix cannot be parsed...only the matrix!!!
+                //Also no empty lines should be read.
+                //System.out.println("");
+                Pattern p = Pattern.compile("[-]?[0-9]+.[0-9]+");
+                Matcher m = p.matcher(inputLines[j]);
+                int k = 0;
+                while (m.find()) {
+                    input[j][k] = Double.parseDouble(m.group());
+                    //System.out.print(" "+matrix[j][k]);
+                    k++;
+                }
             }
         }
+
         /*double matrix[][] = new double[inputLines.length][inputLines.length];
         for (int j = 0; j < inputLines.length; j++) {
             for (int k = 0; k < inputLines.length; k++) {
@@ -151,8 +171,8 @@ public class InputCoordinates implements Serializable{
 
     public static void main(String[] args){
         try {
-            File file = new File("C:\\Users\\Admin\\Desktop\\Hochschule\\Master\\Thesis - Richter\\Java\\Testdateien\\sgb128_xy.txt");
-            double coordinates[][] = FileToCoordinates(file);
+            File file = new File("C:\\Users\\Admin\\Desktop\\Hochschule\\Master\\Thesis - Richter\\Java\\Testdateien\\qa194.txt");
+            double coordinates[][] = FileToCoordinates(file, true);
             double distanceMatrix [][] = distanceMatrix(coordinates);
             boolean showDistance = false;
             List<Integer> filled = new ArrayList<Integer>();

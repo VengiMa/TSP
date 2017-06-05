@@ -22,6 +22,7 @@ public class TaskVent {
         int number;
         String host_Sink;
         String filePath;
+        boolean pointNamed = false;
 
         try {
             number = Integer.parseInt(System.getenv("NUMBER_OF_CLUSTERS"));
@@ -71,7 +72,7 @@ public class TaskVent {
         /**
          * Test-File
          */
-        double coordinates[][] = InputCoordinates.FileToCoordinates(file);
+        double coordinates[][] = InputCoordinates.FileToCoordinates(file, pointNamed);
         LinkedList<Point> init = InputCoordinates.createPointList(coordinates);
         double distanceMatrix[][] = InputCoordinates.distanceMatrix(coordinates);
         System.out.println(init.size());

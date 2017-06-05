@@ -188,7 +188,7 @@ public class K_Means{
 
                     //"C:\\Users\\Admin\\Desktop\\Hochschule\\Master\\Thesis - Richter\\Java\\Testdateien\\sgb_128.txt");
 
-            double coordinates[][] = InputCoordinates.FileToCoordinates(file);
+            double coordinates[][] = InputCoordinates.FileToCoordinates(file, false);
 
             try{
                 File file2 = new File("C:\\Users\\Admin\\Desktop\\Hochschule\\Master\\Thesis - Richter\\Java\\Testdateien\\lau15.txt");
