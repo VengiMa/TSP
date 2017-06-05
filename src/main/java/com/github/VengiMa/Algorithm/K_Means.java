@@ -105,9 +105,6 @@ public class K_Means{
 
             if(sum==0) {
                 finish = true;
-                for (Cluster c: clusters){
-                    c.plotCluster();
-                }
             }
         }
     }
