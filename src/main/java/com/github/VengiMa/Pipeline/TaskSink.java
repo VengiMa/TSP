@@ -28,14 +28,13 @@ public class TaskSink {
         byte[] maxTaskByte = receiver.recv();
         int maxTask_nbr = (int) SerializationUtil.deserialize(maxTaskByte);
 
-        //  Start our clock now
-        long tstart =0;
         double [][] distanceMatrix = new double[0][0];
         Tour clusterTour = new Tour();
         Tour partialTour;
         Tour finalTour = new Tour();
         ArrayList<DataPackage> dataSet = new ArrayList<>();
         DataPackage data;
+        long tstart =0;
 
         //  Process the confirmations
         int task_nbr;
@@ -55,7 +54,7 @@ public class TaskSink {
             //distanceMatrix = data.getDistanceMatrixData();
             partialTour = data.getTourData();
 
-            System.out.println(partialTour.tour2String() + " ; ID: " + data.getiDData());
+            System.out.println("ID: " + data.getiDData());
 
             /*
             if ((task_nbr / 10) * 10 == task_nbr) {
@@ -77,7 +76,7 @@ public class TaskSink {
             }
         }
 
-        System.out.println(finalTour.distanceTourLength(distanceMatrix) + " ; " + finalTour.tour2String());
+        System.out.println(finalTour.distanceTourLength(distanceMatrix));
         //  Calculate and report duration of batch
         long tend = System.currentTimeMillis();
         System.out.println("\nTotal elapsed time: " + (tend - tstart) + " msec");

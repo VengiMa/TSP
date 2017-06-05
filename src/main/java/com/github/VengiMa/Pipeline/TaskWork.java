@@ -20,10 +20,12 @@ public class TaskWork {
         //  Socket to receive messages on
         ZMQ.Socket receiver = context.socket(ZMQ.PULL);
         receiver.connect("tcp://"+ host_Master + ":5557");
+        System.out.println("connect to receiver: " + "tcp://"+ host_Master + ":5557");
 
         //  Socket to send messages to
         ZMQ.Socket sender = context.socket(ZMQ.PUSH);
         sender.connect("tcp://"+ host_Sink + ":5558");
+        System.out.println("connect to sender: " + "tcp://"+ host_Sink + ":5558");
 
         DataPackage data;
         double[][] distanceMatrix;
