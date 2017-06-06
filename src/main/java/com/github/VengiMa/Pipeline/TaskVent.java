@@ -78,16 +78,18 @@ public class TaskVent {
         System.out.println(init.size());
         List<Cluster> clusters = null;
 
-        K_Means kmeans = new K_Means();
-        kmeans.init(init,number);
-        kmeans.calculate();
-        clusters = kmeans.getClusters();
+        for(int i=0; i<9; i++) {
 
-        //declare the distancematrix for each cluster
+            K_Means kmeans = new K_Means();
+            kmeans.init(init, number);
+            kmeans.calculate();
+            clusters = kmeans.getClusters();
 
-        ClusterDistance [][] distance = clusterMatrix.clusterMatrix(distanceMatrix,clusters);
+            //declare the distancematrix for each cluster
 
-        Tour test = VisitingOrderCluster.orderCluster(distance, clusters);
+            ClusterDistance[][] distance = clusterMatrix.clusterMatrix(distanceMatrix, clusters);
+
+            Tour test = VisitingOrderCluster.orderCluster(distance, clusters);
 
         /*
         int counter = 0;
@@ -99,19 +101,21 @@ public class TaskVent {
         }
         */
 
-        //  Send number of tasks
-        int task_nbr;
-        for (task_nbr = 0; task_nbr < number; task_nbr++) {
-            int workload;
-            Cluster c = clusters.get(task_nbr);
-            DataPackage data;
-            if (task_nbr ==0){
-                data = new DataPackage(c.getId(), c, distanceMatrix, test);
-            } else {
-                data = new DataPackage(c.getId(), c, distanceMatrix);
+            //  Send number of tasks
+            int task_nbr;
+            for (task_nbr = 0; task_nbr < number; task_nbr++) {
+                int workload;
+                Cluster c = clusters.get(task_nbr);
+                DataPackage data;
+                if (task_nbr == 0) {
+                    data = new DataPackage(c.getId(), c, distanceMatrix, test);
+                } else {
+                    data = new DataPackage(c.getId(), c, distanceMatrix);
+                }
+                byte[] byteArray = SerializationUtil.serialize(data);
+                sender.send(byteArray, 0);
             }
-            byte[] byteArray = SerializationUtil.serialize(data);
-            sender.send(byteArray, 0);
+            Thread.sleep(1500);
         }
 
         Thread.sleep(1000);              //  Give 0MQ time to deliver

@@ -30,6 +30,9 @@ public class TaskWork {
         DataPackage data;
         double[][] distanceMatrix;
 
+        //choice of the construction heuristic: 1 = NN, 2 = Farthest Insertion, 3 = Cheapest Insertion
+        int choice = 1;
+
         while (!Thread.currentThread ().isInterrupted ()) {
 
             byte[] byteArray = receiver.recv();
@@ -40,7 +43,7 @@ public class TaskWork {
             Cluster c = data.getClusterData();
             distanceMatrix = data.getDistanceMatrixData();
 
-            Tour partialTour = ClusterComputation.createTour(c,distanceMatrix);
+            Tour partialTour = ClusterComputation.createTour(c,distanceMatrix, choice);
 
             data.setTourData(partialTour);
             System.out.flush();

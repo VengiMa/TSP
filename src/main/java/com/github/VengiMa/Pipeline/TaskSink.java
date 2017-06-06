@@ -28,33 +28,35 @@ public class TaskSink {
         byte[] maxTaskByte = receiver.recv();
         int maxTask_nbr = (int) SerializationUtil.deserialize(maxTaskByte);
 
-        double [][] distanceMatrix = new double[0][0];
-        Tour clusterTour = new Tour();
-        Tour partialTour;
-        Tour finalTour = new Tour();
-        ArrayList<DataPackage> dataSet = new ArrayList<>();
-        DataPackage data;
-        long tstart =0;
+        for (int ii=0; ii<9; ii++) {
 
-        //  Process the confirmations
-        int task_nbr;
-        tstart = System.currentTimeMillis();
-        for (task_nbr = 0; task_nbr < maxTask_nbr; task_nbr++) {
-            byte[] byteArray = receiver.recv();
-            data = (DataPackage) SerializationUtil.deserialize(byteArray);
+            double[][] distanceMatrix = new double[0][0];
+            Tour clusterTour = new Tour();
+            Tour partialTour;
+            Tour finalTour = new Tour();
+            ArrayList<DataPackage> dataSet = new ArrayList<>();
+            DataPackage data;
+            long tstart = 0;
 
-            if (task_nbr ==0){
-                distanceMatrix = data.getDistanceMatrixData();
-            }
-            if(data.getClusterTourData()!=null){
-                clusterTour = data.getClusterTourData();
-            }
-            dataSet.add(data);
+            //  Process the confirmations
+            int task_nbr;
+            tstart = System.currentTimeMillis();
+            for (task_nbr = 0; task_nbr < maxTask_nbr; task_nbr++) {
+                byte[] byteArray = receiver.recv();
+                data = (DataPackage) SerializationUtil.deserialize(byteArray);
 
-            //distanceMatrix = data.getDistanceMatrixData();
-            partialTour = data.getTourData();
+                if (task_nbr == 0) {
+                    distanceMatrix = data.getDistanceMatrixData();
+                }
+                if (data.getClusterTourData() != null) {
+                    clusterTour = data.getClusterTourData();
+                }
+                dataSet.add(data);
 
-            System.out.println("ID: " + data.getiDData());
+                //distanceMatrix = data.getDistanceMatrixData();
+                partialTour = data.getTourData();
+
+                System.out.println("ID: " + data.getiDData());
 
             /*
             if ((task_nbr / 10) * 10 == task_nbr) {
@@ -63,23 +65,24 @@ public class TaskSink {
                 System.out.print(".");
             }
             */
-            System.out.flush();
-        }
+                System.out.flush();
+            }
 
-        for (int i =0; i< clusterTour.getSize(); i++){
-            int point = clusterTour.getPoint(i).getPointNumber()-1;
-            for(int j=0; j<dataSet.size(); j++){
-                if(point == dataSet.get(j).getiDData()){
-                    finalTour.addTour(dataSet.get(j).getTourData());
-                    dataSet.remove(j);
+            for (int i = 0; i < clusterTour.getSize(); i++) {
+                int point = clusterTour.getPoint(i).getPointNumber() - 1;
+                for (int j = 0; j < dataSet.size(); j++) {
+                    if (point == dataSet.get(j).getiDData()) {
+                        finalTour.addTour(dataSet.get(j).getTourData());
+                        dataSet.remove(j);
+                    }
                 }
             }
-        }
 
-        System.out.println(finalTour.distanceTourLength(distanceMatrix));
-        //  Calculate and report duration of batch
-        long tend = System.currentTimeMillis();
-        System.out.println("\nTotal elapsed time: " + (tend - tstart) + " msec");
+            System.out.println(finalTour.distanceTourLength(distanceMatrix));
+            //  Calculate and report duration of batch
+            long tend = System.currentTimeMillis();
+            System.out.println("Total elapsed time: " + (tend - tstart) + " msec \n");
+        }
 
         //  Send the kill signal to the workers
         //controller.send("KILL", 0);
