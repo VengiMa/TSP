@@ -22,22 +22,22 @@ public class TaskVent {
         int number;
         String host_Sink;
         String filePath;
-        boolean pointNamed = false;
+        boolean pointNamed = true;
 
         try {
             number = Integer.parseInt(System.getenv("NUMBER_OF_CLUSTERS"));
         }
         catch(Exception e) {
-            number = 4;
+            number = 8;
         }
 
         host_Sink = System.getenv("HOST_SINK");
         if (host_Sink == null)
             host_Sink = "localhost";
 
-        filePath = System.getenv("FILE_PATH");
-        if(filePath == null)
-            filePath = "src/main/ressources/coordinates.txt";
+        //filePath = System.getenv("FILE_PATH");
+        //if(filePath == null)
+            filePath = "src/main/ressources/qa194.txt";
 
         System.out.println("Parameters:");
         System.out.println("NUMBER_OF_CLUSTERS: " + number);
@@ -78,7 +78,7 @@ public class TaskVent {
         System.out.println(init.size());
         List<Cluster> clusters = null;
 
-        for(int i=0; i<9; i++) {
+        for(int i=0; i<10; i++) {
 
             K_Means kmeans = new K_Means();
             kmeans.init(init, number);

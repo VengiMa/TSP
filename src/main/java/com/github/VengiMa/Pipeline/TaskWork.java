@@ -44,6 +44,7 @@ public class TaskWork {
             distanceMatrix = data.getDistanceMatrixData();
 
             Tour partialTour = ClusterComputation.createTour(c,distanceMatrix, choice);
+            System.out.println();
 
             data.setTourData(partialTour);
             System.out.flush();

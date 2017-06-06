@@ -93,9 +93,9 @@ public class ClusterLocalSearch {
         boolean geschafft = false;
         double before, after;
         int a,b,c,d;
-        int improve = 0;
+        int steps = 0;
         if (tour.getSize() >= 4) {
-            while (improve < ((groesseTour)/2)) {
+            while (steps < ((groesseTour)/1.5)) {
                 //if (System.currentTimeMillis() - startTime >=10000 || counter >= 15000) {
                 //    return t;
                 //}
@@ -118,7 +118,7 @@ public class ClusterLocalSearch {
                         after = distance[a][c]+distance[b][d];
 
                         if(after < before){
-                            improve = 0;
+                            steps = 0;
                             gain = before - after;
 
                             LinkedList<Point> tempList = new LinkedList<Point>();
@@ -135,7 +135,7 @@ public class ClusterLocalSearch {
                         }
                     }
                 }
-                improve++;
+                steps++;
             }
         }
         if (geschafft) {

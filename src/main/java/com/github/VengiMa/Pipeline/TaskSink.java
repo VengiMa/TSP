@@ -17,7 +17,7 @@ public class TaskSink {
         ZMQ.Context context = ZMQ.context(1);
         ZMQ.Socket receiver = context.socket(ZMQ.PULL);
 
-        System.out.println("Bind Sink to " + "tcp://*:5558");
+        System.out.println("Bind Sink to " + "tcp://*:5558 \n");
         receiver.bind("tcp://*:5558");
 
         // Socket for subscribe
@@ -28,36 +28,29 @@ public class TaskSink {
         byte[] maxTaskByte = receiver.recv();
         int maxTask_nbr = (int) SerializationUtil.deserialize(maxTaskByte);
 
-        for (int ii=0; ii<9; ii++) {
+        for (int ii=0; ii<10; ii++) {
 
             double[][] distanceMatrix = new double[0][0];
             Tour clusterTour = new Tour();
-            Tour partialTour;
             Tour finalTour = new Tour();
             ArrayList<DataPackage> dataSet = new ArrayList<>();
             DataPackage data;
-            long tstart = 0;
+            long tstart =0;
 
             //  Process the confirmations
             int task_nbr;
-            tstart = System.currentTimeMillis();
             for (task_nbr = 0; task_nbr < maxTask_nbr; task_nbr++) {
                 byte[] byteArray = receiver.recv();
                 data = (DataPackage) SerializationUtil.deserialize(byteArray);
 
                 if (task_nbr == 0) {
+                    tstart = System.currentTimeMillis();
                     distanceMatrix = data.getDistanceMatrixData();
                 }
                 if (data.getClusterTourData() != null) {
                     clusterTour = data.getClusterTourData();
                 }
                 dataSet.add(data);
-
-                //distanceMatrix = data.getDistanceMatrixData();
-                partialTour = data.getTourData();
-
-                System.out.println("ID: " + data.getiDData());
-
             /*
             if ((task_nbr / 10) * 10 == task_nbr) {
                 System.out.print(":");
