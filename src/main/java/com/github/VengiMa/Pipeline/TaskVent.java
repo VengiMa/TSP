@@ -35,8 +35,8 @@ public class TaskVent {
         if (host_Sink == null)
             host_Sink = "localhost";
 
-        //filePath = System.getenv("FILE_PATH");
-        //if(filePath == null)
+        filePath = System.getenv("FILE_PATH");
+        if(filePath == null)
             filePath = "src/main/ressources/qa194.txt";
 
         System.out.println("Parameters:");
