@@ -89,7 +89,7 @@ public class TaskVent {
 
             ClusterDistance[][] distance = clusterMatrix.clusterMatrix(distanceMatrix, clusters);
 
-            Tour test = VisitingOrderCluster.orderCluster(distance, clusters);
+            Tour test = VisitingOrderCluster.orderCluster(distance, distanceMatrix, clusters);
 
         /*
         int counter = 0;

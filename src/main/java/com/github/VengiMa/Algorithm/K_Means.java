@@ -177,7 +177,7 @@ public class K_Means{
         long elapsed;
         long start = System.nanoTime();
         try {
-            int number =1;
+            int number =4;
             double distanceMatrix [][];
             String fileName = "lau15_xy";
             String path = "C:\\Users\\Admin\\Desktop\\Hochschule\\Master\\Thesis - Richter\\Java\\Testdateien\\" + fileName + ".txt";
@@ -187,12 +187,8 @@ public class K_Means{
 
             double coordinates[][] = InputCoordinates.FileToCoordinates(file, false);
 
-            try{
-                File file2 = new File("C:\\Users\\Admin\\Desktop\\Hochschule\\Master\\Thesis - Richter\\Java\\Testdateien\\lau15.txt");
-                distanceMatrix = InputCoordinates.FileToMatrix(file2);
-            }catch (Exception e){
-                distanceMatrix = InputCoordinates.distanceMatrix(coordinates);
-            }
+            distanceMatrix = InputCoordinates.distanceMatrix(coordinates);
+
             LinkedList<Point> init = InputCoordinates.createPointList(coordinates);
             System.out.println(init.size());
             List<Cluster> clusters = null;
@@ -203,6 +199,11 @@ public class K_Means{
             kmeans.calculate();
             clusters = kmeans.getClusters();
 
+            ClusterDistance[][] distance = clusterMatrix.clusterMatrix(distanceMatrix, clusters);
+
+            Tour test = VisitingOrderCluster.orderCluster(distance, distanceMatrix, clusters);
+
+            /*
             for (int i =0; i< clusters.size(); i++){
                 Cluster c = clusters.get(i);
                 c.setInPoint(c.getPoints().get(4));
@@ -214,6 +215,7 @@ public class K_Means{
                 System.out.println(tour.distanceTourLength(distanceMatrix));
                 System.out.println(tour.isFeasible(init) +" ; "+ tour.tour2String());
             }
+            */
 
 
 
