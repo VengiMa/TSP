@@ -70,11 +70,11 @@ public class TaskSink {
                     }
                 }
             }
-
-            System.out.println(finalTour.distanceTourLength(distanceMatrix));
+            double distance = finalTour.distanceTourLength(distanceMatrix);
+            System.out.println(String.format("%.2f", distance));
             //  Calculate and report duration of batch
             long tend = System.currentTimeMillis();
-            System.out.println("time: " + (tend - tstart) + " msec \n");
+            System.out.println((tend - tstart));
         }
 
         //  Send the kill signal to the workers
