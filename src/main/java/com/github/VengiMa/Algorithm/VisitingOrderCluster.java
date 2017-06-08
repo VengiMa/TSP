@@ -55,7 +55,7 @@ public class VisitingOrderCluster {
             clusters.get(clusterNumber).setOutPoint(fromPoint);
             clusters.get(following).setInPoint(toPoint);
         }
-        System.out.println("Successful orderCluster");
+        //System.out.println("Successful orderCluster");
         return orderCluster;
 
 

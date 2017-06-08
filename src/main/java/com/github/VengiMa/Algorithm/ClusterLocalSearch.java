@@ -139,7 +139,7 @@ public class ClusterLocalSearch {
             }
         }
         if (geschafft) {
-            System.out.println("TwoOpt executed!");
+            //System.out.println("TwoOpt executed!");
         }
         tour.setStartingPoint(cluster.getInPoint());
     }

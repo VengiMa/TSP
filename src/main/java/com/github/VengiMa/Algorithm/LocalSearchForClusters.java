@@ -15,7 +15,6 @@ public class LocalSearchForClusters {
     public void twoOpt (Tour tour, double[][] distance){
         //long startTime = System.currentTimeMillis();
         int tourSize = tour.getSize();
-        boolean geschafft = false;
         boolean nearestNeighbours = false;
         int sizeNeighbours = 20;
         int counter = 0, temp2, temp4;
@@ -74,9 +73,6 @@ public class LocalSearchForClusters {
                         tour.setPoint(l, tempList.get(k));
                         l++;
                     }
-                    //System.out.println(Arrays.toString(tem1));
-                    //System.out.println(Arrays.toString(tem2));
-                    geschafft = true;
                 }else {
 
                     randomNumber2 = randomNumberGenerator.nextInt(tourSize);
@@ -117,18 +113,12 @@ public class LocalSearchForClusters {
                                 tour.setPoint(l, tempList.get(k));
                                 l++;
                             }
-                            //System.out.println(Arrays.toString(tem1));
-                            //System.out.println(Arrays.toString(tem2));
-                            geschafft = true;
                         } else {
                             counter++;
                         }
                     }
                 }
             }
-        }
-        if (geschafft) {
-            System.out.println("TwoOpt executed!");
         }
     }
 

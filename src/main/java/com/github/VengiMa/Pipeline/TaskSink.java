@@ -74,7 +74,7 @@ public class TaskSink {
             System.out.println(finalTour.distanceTourLength(distanceMatrix));
             //  Calculate and report duration of batch
             long tend = System.currentTimeMillis();
-            System.out.println("Total elapsed time: " + (tend - tstart) + " msec \n");
+            System.out.println("time: " + (tend - tstart) + " msec \n");
         }
 
         //  Send the kill signal to the workers

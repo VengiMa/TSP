@@ -98,13 +98,13 @@ public class K_Means{
                 distance = Math.sqrt(Math.pow((currentCentroids.get(i).getYCoord() - last[i][1]), 2) + Math.pow((currentCentroids.get(i).getXCoord() - last[i][0]), 2));
                 sum = sum + distance;
             }
-            System.out.println("#######");
-            System.out.println("Iteration: " + iteration);
-            System.out.println("Centroid distances: " + distance);
             //plotClusters();
 
             if(sum==0) {
                 finish = true;
+                System.out.println("Iteration: " + iteration);
+                System.out.println("#######");
+                //System.out.println("Centroid distances: " + distance);
             }
         }
     }

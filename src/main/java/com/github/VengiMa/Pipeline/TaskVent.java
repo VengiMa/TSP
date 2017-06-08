@@ -75,10 +75,10 @@ public class TaskVent {
         double coordinates[][] = InputCoordinates.FileToCoordinates(file, pointNamed);
         LinkedList<Point> init = InputCoordinates.createPointList(coordinates);
         double distanceMatrix[][] = InputCoordinates.distanceMatrix(coordinates);
-        System.out.println(init.size());
         List<Cluster> clusters = null;
 
         for(int i=0; i<10; i++) {
+            System.out.println("Number:  " + i);
 
             K_Means kmeans = new K_Means();
             kmeans.init(init, number);
