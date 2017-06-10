@@ -24,9 +24,9 @@ public class TaskSink {
         String database;
         database = System.getenv("DATABASE");
         if (database == null)
-            database = "10.95.61.77:5433";
+            database = "10.95.61.77:5433/postgres";
         Class.forName("org.postgresql.Driver");
-        String url = "jdbc:postgresql://" + database + "/postgres";
+        String url = "jdbc:postgresql://" + database;
         Connection conn = DriverManager.getConnection(url,"postgres","postgres");
 
         //  Wait for start of batch
