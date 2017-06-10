@@ -16,6 +16,10 @@ public class TaskWork {
     public static void main (String[] args) throws Exception {
         String host_Sink = String.valueOf(System.getenv("HOST_SINK"));
         String host_Master = String.valueOf(System.getenv("HOST_MASTER"));
+        int choice = Integer.parseInt(System.getenv("HEURISTIC"));
+        if (System.getenv("HEURISTIC") == null){
+            choice = 2;
+        }
 
         ZMQ.Context context = ZMQ.context(1);
 
@@ -33,7 +37,6 @@ public class TaskWork {
         double[][] distanceMatrix;
 
         //choice of the construction heuristic: 1 = NN, 2 = Farthest Insertion, 3 = Cheapest Insertion
-        int choice = 2;
         String typ;
         switch (choice){
             case 1: typ = "NN";
