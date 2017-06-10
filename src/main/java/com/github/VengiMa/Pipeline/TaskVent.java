@@ -22,6 +22,7 @@ public class TaskVent {
 
 
         int number;
+        int iterations;
         String host_Sink;
         String filePath;
         boolean pointNamed = true;
@@ -31,6 +32,12 @@ public class TaskVent {
         }
         catch(Exception e) {
             number = 4;
+        }
+        try {
+            iterations = Integer.parseInt(System.getenv("ITERATIONS"));
+        }
+        catch(Exception e) {
+            iterations = 4;
         }
 
         host_Sink = System.getenv("HOST_SINK");
@@ -51,6 +58,7 @@ public class TaskVent {
         DataPackage toSink = new DataPackage();
         toSink.setNumberClusters(number);
         toSink.setTyp(filePath);
+        toSink.setIterations(iterations);
 
         byte[] dataToSink = SerializationUtil.serialize(toSink);
 
@@ -83,7 +91,7 @@ public class TaskVent {
         double distanceMatrix[][] = InputCoordinates.distanceMatrix(coordinates);
         List<Cluster> clusters = null;
 
-        for(int i=0; i<5; i++) {
+        for(int i=0; i<iterations; i++) {
             System.out.println("Number:  " + i);
 
             K_Means kmeans = new K_Means();

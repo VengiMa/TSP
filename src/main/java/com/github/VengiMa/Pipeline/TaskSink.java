@@ -31,11 +31,12 @@ public class TaskSink {
 
         //  Wait for start of batch
         byte[] maxTaskByte = receiver.recv();
-        DataPackage fromSink = (DataPackage) SerializationUtil.deserialize(maxTaskByte);
-        int maxTask_nbr = fromSink.getNumberClusters();
-        String typemap = fromSink.getTyp();
+        DataPackage fromVent = (DataPackage) SerializationUtil.deserialize(maxTaskByte);
+        int maxTask_nbr = fromVent.getNumberClusters();
+        int iterations = fromVent.getIterations();
+        String typemap = fromVent.getTyp();
 
-        for (int ii=0; ii<5; ii++) {
+        for (int ii=0; ii<iterations; ii++) {
 
             double[][] distanceMatrix = new double[0][0];
             Tour clusterTour = new Tour();

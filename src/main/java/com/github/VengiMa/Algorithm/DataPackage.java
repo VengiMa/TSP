@@ -16,6 +16,7 @@ public class DataPackage implements Serializable {
     public String heuristic;
     public int numberClusters;
     public Timestamp startTime;
+    int iterations;
 
 
     public DataPackage(){}
@@ -54,6 +55,8 @@ public class DataPackage implements Serializable {
     public int getNumberClusters(){return numberClusters;}
 
     public Timestamp getStartTime() {return startTime;}
+
+    public int getIterations(){return iterations;}
     /**
      * setter
      */
@@ -75,4 +78,6 @@ public class DataPackage implements Serializable {
     public void setNumberClusters (int number){this.numberClusters = number;}
 
     public void setStartTime (Timestamp start){this.startTime = start;}
+
+    public void setIterations (int iter){this.iterations = iter;}
 }
