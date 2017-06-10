@@ -141,7 +141,6 @@ public class TourConstruction {
         int numbernodes;
         //visited = List of elements, either value = 1 for visited or value = 0 for unvisited
         numbernodes = cluster.getPoints().size();
-        System.out.println(numbernodes);
         int visited[] = new int[numbernodes];
         //int unvisitedRest;
         double max;
@@ -194,10 +193,8 @@ public class TourConstruction {
                         }
                     }
                 }
-                System.out.println(max + " " + insertPoint + " " + chosenPoint);
                 tour.insertPoint(insertPoint, cluster.getPoints().get(chosenPoint));
                 visited[chosenPoint] = 1;
-                System.out.println(tour.tour2String());
             }
         }
         tour.removePoint(in);

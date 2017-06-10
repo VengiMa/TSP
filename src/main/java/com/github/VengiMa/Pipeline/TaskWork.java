@@ -10,6 +10,8 @@ import com.github.VengiMa.Algorithm.Tour;
 import org.zeromq.ZMQ;
 import com.github.VengiMa.Algorithm.*;
 
+import java.sql.Timestamp;
+
 public class TaskWork {
     public static void main (String[] args) throws Exception {
         String host_Sink = String.valueOf(System.getenv("HOST_SINK"));
@@ -31,7 +33,18 @@ public class TaskWork {
         double[][] distanceMatrix;
 
         //choice of the construction heuristic: 1 = NN, 2 = Farthest Insertion, 3 = Cheapest Insertion
-        int choice = 1;
+        int choice = 2;
+        String typ;
+        switch (choice){
+            case 1: typ = "NN";
+                break;
+            case 2: typ = "Far";
+                break;
+            case 3: typ = "Cheap";
+                break;
+            default: typ = "NN";
+                break;
+        }
 
         while (!Thread.currentThread ().isInterrupted ()) {
 
@@ -47,53 +60,12 @@ public class TaskWork {
             System.out.println();
 
             data.setTourData(partialTour);
+            data.setHeuristic(typ);
             System.out.flush();
 
             //  convert the tour into byteArray and send results to sink
             byteArray = SerializationUtil.serialize(data);
             sender.send(byteArray, 0);
-
-            /*
-            ZMQ.Socket controller = context.socket(ZMQ.SUB);
-            controller.connect("tcp://localhost:5559");
-            controller.subscribe("".getBytes());
-
-            ZMQ.Poller items = new ZMQ.Poller(context,2);
-            items.register(receiver, ZMQ.Poller.POLLIN);
-            items.register(controller, ZMQ.Poller.POLLIN);
-
-            //  Process tasks forever
-            while (true) {
-                items.poll();
-
-                if (items.pollin(0)) {
-                    //String string = new String(receiver.recv(0)).trim();
-                    //long msec = Long.parseLong(string);
-                    byte[] test = receiver.recv();
-
-
-                    //  Simple progress indicator for the viewer
-                    System.out.flush();
-                    //System.out.print(string + '.');
-
-                    System.out.print("[ ");
-                    for (int j = 0; j < test.length; j++) {
-                        System.out.print(test[j] + " ");
-                    }
-                    System.out.print("]\n");
-
-                    //  Do the work
-                    //Thread.sleep(msec);
-
-                    //  Send results to sink
-                    //sender.send("".getBytes(), 0);
-                    //sender.send(string + '.', 0);
-                    sender.send(test, 0);
-                }
-                if (items.pollin(1)) {
-                    break; // Exit loop
-                }
-                */
         }
         sender.close();
         receiver.close();

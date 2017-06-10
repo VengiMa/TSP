@@ -2,7 +2,10 @@ package com.github.VengiMa.Algorithm;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.*;
+import java.time.Duration;
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * Created by Admin on 10.04.2017.
@@ -173,7 +176,7 @@ public class K_Means{
         return clusters;
     }
 
-    public static void main(String[] args) throws IOException{
+    public static void main2(String[] args) throws IOException{
         long elapsed;
         long start = System.nanoTime();
         try {
@@ -285,4 +288,45 @@ public class K_Means{
         //elapsed = (System.nanoTime() - start) / 1_000_000L;
         //System.out.println("completed in " + elapsed + "ms");
     }
+
+    public static void main (String[] args) {
+        try
+        {
+            // Step 1: "Load" the JDBC driver
+            Class.forName("org.postgresql.Driver");
+
+            // Step 2: Establish the connection to the database
+            String url = "jdbc:postgresql://10.95.61.77:5433/postgres";
+            Connection conn = DriverManager.getConnection(url,"postgres","postgres");
+
+            Timestamp start = new Timestamp(System.currentTimeMillis());
+            Timestamp stop = new Timestamp(System.currentTimeMillis()+20);
+            long dur = stop.getNanos() - start.getNanos();
+            System.out.println(dur/1000);
+            double length = 154624.213;
+            String map = "qa194";
+            String heur = "NN";
+            int number = 4;
+            String sql = "INSERT INTO test_results " +
+                    "(begin, ending, duration, tourlength, typ, heuristic, clusters)"+
+                    "VALUES(?,?,?,?,?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setTimestamp(1,start);
+            pst.setTimestamp(2,stop);
+            pst.setLong(3, dur);
+            pst.setDouble(4,length);
+            pst.setString(5,map);
+            pst.setString(6,heur);
+            pst.setInt(7,number);
+            pst.executeUpdate();
+
+            System.out.println("Inserting successful!");
+        }
+        catch (Exception e)
+        {
+            System.err.println("D'oh! Got an exception!");
+            System.err.println(e.getMessage());
+        }
+    }
+
 }

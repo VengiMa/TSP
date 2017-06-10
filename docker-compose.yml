@@ -5,7 +5,7 @@ services:
     container_name: sink
     hostname: sink
     image: vengima/tsp
-    command: java -jar TSP-TaskSink.jar
+    command: java -Xmx124g -jar TSP-TaskSink.jar
     #restart: always
     networks:
       default:
@@ -17,7 +17,7 @@ services:
     environment:
        HOST_SINK: sink
        FILE_PATH: coordinates.txt
-    command: java -jar TSP-TaskVent.jar
+    command: java -Xmx124g -jar TSP-TaskVent.jar
     #restart: always
     networks:
       default:

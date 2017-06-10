@@ -4,6 +4,8 @@ package com.github.VengiMa.Pipeline;
  * Created by Admin on 21.05.2017.
  */
 import java.io.File;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -28,7 +30,7 @@ public class TaskVent {
             number = Integer.parseInt(System.getenv("NUMBER_OF_CLUSTERS"));
         }
         catch(Exception e) {
-            number = 8;
+            number = 4;
         }
 
         host_Sink = System.getenv("HOST_SINK");
@@ -46,7 +48,11 @@ public class TaskVent {
 
         File file = new File(filePath);
 
-        byte[] maxTask = SerializationUtil.serialize(number);
+        DataPackage toSink = new DataPackage();
+        toSink.setNumberClusters(number);
+        toSink.setTyp(filePath);
+
+        byte[] dataToSink = SerializationUtil.serialize(toSink);
 
         ZMQ.Context context = ZMQ.context(1);
 
@@ -64,7 +70,7 @@ public class TaskVent {
         System.out.println("Sending tasks to workers\n");
 
         //  The first message is "0" and signals start of batch
-        sink.send(maxTask, 0);
+        sink.send(dataToSink, 0);
 
         //  Initialize random number generator
         Random srandom = new Random(System.currentTimeMillis());
@@ -77,7 +83,7 @@ public class TaskVent {
         double distanceMatrix[][] = InputCoordinates.distanceMatrix(coordinates);
         List<Cluster> clusters = null;
 
-        for(int i=0; i<10; i++) {
+        for(int i=0; i<5; i++) {
             System.out.println("Number:  " + i);
 
             K_Means kmeans = new K_Means();
@@ -103,14 +109,17 @@ public class TaskVent {
 
             //  Send number of tasks
             int task_nbr;
+            Timestamp start = new Timestamp(System.currentTimeMillis());
             for (task_nbr = 0; task_nbr < number; task_nbr++) {
                 int workload;
                 Cluster c = clusters.get(task_nbr);
                 DataPackage data;
                 if (task_nbr == 0) {
                     data = new DataPackage(c.getId(), c, distanceMatrix, test);
+                    data.setStartTime(start);
                 } else {
                     data = new DataPackage(c.getId(), c, distanceMatrix);
+                    data.setStartTime(start);
                 }
                 byte[] byteArray = SerializationUtil.serialize(data);
                 sender.send(byteArray, 0);
