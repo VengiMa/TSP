@@ -16,8 +16,11 @@ public class TaskWork {
     public static void main (String[] args) throws Exception {
         String host_Sink = String.valueOf(System.getenv("HOST_SINK"));
         String host_Master = String.valueOf(System.getenv("HOST_MASTER"));
-        int choice = Integer.parseInt(System.getenv("HEURISTIC"));
-        if (System.getenv("HEURISTIC") == null){
+        int choice;
+        try {
+            choice = Integer.parseInt(System.getenv("HEURISTIC"));
+        }
+        catch(Exception e) {
             choice = 2;
         }
 
