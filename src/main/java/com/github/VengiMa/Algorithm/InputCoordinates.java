@@ -150,6 +150,7 @@ public class InputCoordinates implements Serializable{
             line = in.readLine();
             i++;
         }
+        in.close();
         //String[] data = inputLines[].split("\\s+");
         double matrix[][] = new double[inputLines.length][inputLines.length];
         for (int j = 0; j < inputLines.length; j++) {
