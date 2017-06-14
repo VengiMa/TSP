@@ -1,5 +1,6 @@
 package com.github.VengiMa.Algorithm;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Random;
@@ -16,14 +17,16 @@ public class LocalSearchForClusters {
         //long startTime = System.currentTimeMillis();
         int tourSize = tour.getSize();
         boolean nearestNeighbours = false;
-        int sizeNeighbours = 20;
+        int sizeNeighbours = 25;
         int counter = 0, temp2, temp4;
 
+        int randomNumber;
         int randomNumber1;
         int randomNumber2;
         double minimum = Double.MAX_VALUE;
         int a, b, c, d;
         int exchangeFrom = 0, exchangeTo = 0;
+        Tour comparison = tour;
 
         if (tour.getSize() >= 4) {
             while (counter < 10000) {
@@ -32,7 +35,9 @@ public class LocalSearchForClusters {
                 //}
                 //choose two random numbers, which are used as the reference for the twoOpt
                 Random randomNumberGenerator = new Random();
-                randomNumber1 = randomNumberGenerator.nextInt(tourSize);
+                randomNumber = randomNumberGenerator.nextInt(comparison.getSize());
+                randomNumber1 = tour.getPoint(randomNumber).getPointNumber();
+                comparison.removePointAtIndex(randomNumber);
 
                 if (nearestNeighbours){
                     for (int i = 0; i< sizeNeighbours-2; i++){
@@ -75,7 +80,10 @@ public class LocalSearchForClusters {
                     }
                 }else {
 
-                    randomNumber2 = randomNumberGenerator.nextInt(tourSize);
+                    //randomNumber2 = randomNumberGenerator.nextInt(tourSize);
+                    randomNumber = randomNumberGenerator.nextInt(comparison.getSize());
+                    randomNumber2 = tour.getPoint(randomNumber).getPointNumber();
+                    comparison.removePointAtIndex(randomNumber);
 
                     //get sure, that the two numbers are different
                     while (randomNumber1 == randomNumber2) {

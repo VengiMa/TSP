@@ -5,7 +5,7 @@ import java.util.LinkedList;
 /**
  * Created by Admin on 19.04.2017.
  */
-public class ClusterLocalSearch {
+public class LocalSearch {
 
     /*
     public void twoOpt (double[][] distance, Cluster cluster, Tour tour){
@@ -99,8 +99,6 @@ public class ClusterLocalSearch {
                 //if (System.currentTimeMillis() - startTime >=10000 || counter >= 15000) {
                 //    return t;
                 //}
-                //choose two random numbers, which are used as the reference for the twoOpt
-
                 double gain = 0;
 
                 for (int i =0; i<groesseTour - 3;i++){
@@ -138,9 +136,57 @@ public class ClusterLocalSearch {
                 steps++;
             }
         }
-        if (geschafft) {
-            //System.out.println("TwoOpt executed!");
-        }
         tour.setStartingPoint(cluster.getInPoint());
+    }
+
+    public void twoOptSequentiel (Tour tour, double[][] distance) {
+        //long startTime = System.currentTimeMillis();
+        int groesseTour = tour.getSize();
+        boolean geschafft = false;
+        double before, after;
+        int a, b, c, d;
+        int steps = 0;
+        if (tour.getSize() >= 4) {
+            while (steps < ((groesseTour) / 1.5)) {
+                //if (System.currentTimeMillis() - startTime >=10000 || counter >= 15000) {
+                //    return t;
+                //}
+                double gain = 0;
+
+                for (int i = 0; i < groesseTour - 3; i++) {
+                    for (int k = i + 1; k < groesseTour - 2; k++) {
+                        if (i == 0) {
+                            a = tour.getPoint(groesseTour - 1).getPointNumber() - 1;
+                        } else {
+                            a = tour.getPoint(i - 1).getPointNumber() - 1;
+                        }
+
+                        b = tour.getPoint(i).getPointNumber() - 1;
+                        c = tour.getPoint(k).getPointNumber() - 1;
+                        d = tour.getPoint(k + 1).getPointNumber() - 1;
+                        before = distance[a][b] + distance[c][d];
+                        after = distance[a][c] + distance[b][d];
+
+                        if (after < before) {
+                            steps = 0;
+                            gain = before - after;
+
+                            LinkedList<Point> tempList = new LinkedList<Point>();
+                            int l = i;
+                            for (l = i; l <= k; l++) {
+                                tempList.add(tour.getPoint(l));
+                            }
+                            l = i;
+                            for (int j = tempList.size() - 1; j >= 0; j--) {
+                                tour.setPoint(l, tempList.get(j));
+                                l++;
+                            }
+                            geschafft = true;
+                        }
+                    }
+                }
+                steps++;
+            }
+        }
     }
 }

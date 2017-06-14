@@ -93,6 +93,7 @@ public class TaskVent {
 
         for(int i=0; i<iterations; i++) {
             System.out.println("Number:  " + i);
+            Timestamp start = new Timestamp(System.currentTimeMillis());
 
             K_Means kmeans = new K_Means();
             kmeans.init(init, number);
@@ -117,7 +118,6 @@ public class TaskVent {
 
             //  Send number of tasks
             int task_nbr;
-            Timestamp start = new Timestamp(System.currentTimeMillis());
             for (task_nbr = 0; task_nbr < number; task_nbr++) {
                 int workload;
                 Cluster c = clusters.get(task_nbr);
@@ -133,6 +133,7 @@ public class TaskVent {
                 sender.send(byteArray, 0);
             }
             Thread.sleep(1500);
+            System.gc();
         }
 
         Thread.sleep(1000);              //  Give 0MQ time to deliver

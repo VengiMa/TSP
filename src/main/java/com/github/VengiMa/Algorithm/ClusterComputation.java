@@ -17,7 +17,7 @@ public class ClusterComputation {
             break;
         }
         System.out.println(clusterTour.distanceTourLength(distanceMatrix));
-        ClusterLocalSearch two = new ClusterLocalSearch();
+        LocalSearch two = new LocalSearch();
         two.twoOpt(distanceMatrix,c,clusterTour);
         System.out.println(clusterTour.distanceTourLength(distanceMatrix));
         return clusterTour;

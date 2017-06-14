@@ -213,7 +213,7 @@ public class K_Means{
                 c.setOutPoint(c.getPoints().get(6));
 
                 Tour tour = TourConstruction.NNHeuristic(distanceMatrix, c);
-                ClusterLocalSearch twoOpt = new ClusterLocalSearch();
+                LocalSearch twoOpt = new LocalSearch();
                 twoOpt.twoOpt(distanceMatrix,c,tour);
                 System.out.println(tour.distanceTourLength(distanceMatrix));
                 System.out.println(tour.isFeasible(init) +" ; "+ tour.tour2String());
@@ -265,7 +265,7 @@ public class K_Means{
                 /*
                 Tour clusterTour = TourConstruction.NNHeuristic(distanceMatrix, clusters.get(j));
                 System.out.println(clusterTour.tour2String());
-                ClusterLocalSearch two = new ClusterLocalSearch();
+                LocalSearch two = new LocalSearch();
                 two.twoOpt(distanceMatrix,clusters.get(j),clusterTour);
                 System.out.println(clusterTour.tour2String());
                 tour.addTour(clusterTour);

@@ -76,13 +76,18 @@ public class TaskSink {
                     }
                 }
             }
-            double distance = ((double) Math.round(finalTour.distanceTourLength(distanceMatrix)*100))/100;
-
-            //distance = Double.parseDouble(String.format("%.2f", distance));
-            System.out.println(String.format("%.2f", distance));
             //  Calculate and report duration of batch
             Timestamp tend = new Timestamp(System.currentTimeMillis());
             dur = (tend.getTime()-tstart.getTime());
+            //todo:
+            //garbage collector gc finalize, memory deallocation
+            //10 nearest neighbours, storage
+            //clusterung, schnittebenen
+            //java-doc file erzeugen, mit dokumentation
+
+            double distance = ((double) Math.round(finalTour.distanceTourLength(distanceMatrix)*100))/100;
+
+            System.out.println(String.format("%.2f", distance));
 
             String sql = "INSERT INTO test_results " +
                     "(begin, ending, duration, tourlength, typ, heuristic, clusters)"+
