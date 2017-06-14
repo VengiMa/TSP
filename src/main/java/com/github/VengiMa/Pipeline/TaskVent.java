@@ -37,7 +37,7 @@ public class TaskVent {
             iterations = Integer.parseInt(System.getenv("ITERATIONS"));
         }
         catch(Exception e) {
-            iterations = 4;
+            iterations = 10;
         }
 
         host_Sink = System.getenv("HOST_SINK");
@@ -104,6 +104,7 @@ public class TaskVent {
 
             ClusterDistance[][] distance = clusterMatrix.clusterMatrix(distanceMatrix, clusters);
 
+        //todo:try and test if it works
             Tour test = VisitingOrderCluster.orderCluster(distance, distanceMatrix, clusters);
 
         /*

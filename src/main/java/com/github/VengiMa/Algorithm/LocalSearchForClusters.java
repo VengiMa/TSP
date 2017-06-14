@@ -28,6 +28,8 @@ public class LocalSearchForClusters {
         int exchangeFrom = 0, exchangeTo = 0;
         Tour comparison = tour;
 
+
+        /*
         if (tour.getSize() >= 4) {
             while (counter < 10000) {
                 //if (System.currentTimeMillis() - startTime >=10000 || counter >= 15000) {
@@ -35,9 +37,8 @@ public class LocalSearchForClusters {
                 //}
                 //choose two random numbers, which are used as the reference for the twoOpt
                 Random randomNumberGenerator = new Random();
-                randomNumber = randomNumberGenerator.nextInt(comparison.getSize());
-                randomNumber1 = tour.getPoint(randomNumber).getPointNumber();
-                comparison.removePointAtIndex(randomNumber);
+                randomNumber1 = randomNumberGenerator.nextInt(tour.getSize());
+                //comparison.removePointAtIndex(randomNumber);
 
                 if (nearestNeighbours){
                     for (int i = 0; i< sizeNeighbours-2; i++){
@@ -81,9 +82,8 @@ public class LocalSearchForClusters {
                 }else {
 
                     //randomNumber2 = randomNumberGenerator.nextInt(tourSize);
-                    randomNumber = randomNumberGenerator.nextInt(comparison.getSize());
-                    randomNumber2 = tour.getPoint(randomNumber).getPointNumber();
-                    comparison.removePointAtIndex(randomNumber);
+                    randomNumber2 = randomNumberGenerator.nextInt(tour.getSize());
+                    //comparison.removePointAtIndex(randomNumber);
 
                     //get sure, that the two numbers are different
                     while (randomNumber1 == randomNumber2) {
@@ -126,6 +126,51 @@ public class LocalSearchForClusters {
                         }
                     }
                 }
+            }
+        }
+        */
+
+        int steps = 0;
+        double before, after;
+        if (tour.getSize() >= 4) {
+            while (steps < ((tourSize)/1.5)) {
+                //if (System.currentTimeMillis() - startTime >=10000 || counter >= 15000) {
+                //    return t;
+                //}
+                double gain = 0;
+
+                for (int i =0; i<tourSize - 3;i++){
+                    for (int k =i+1; k<tourSize-2; k++){
+                        if(i == 0) {
+                            a = tour.getPoint(tourSize-1).getPointNumber()-1;
+                        }else {
+                            a = tour.getPoint(i-1).getPointNumber()-1;
+                        }
+
+                        b = tour.getPoint(i).getPointNumber()-1;
+                        c = tour.getPoint(k).getPointNumber()-1;
+                        d = tour.getPoint(k+1).getPointNumber()-1;
+                        before = distance[a][b]+distance[c][d];
+                        after = distance[a][c]+distance[b][d];
+
+                        if(after < before){
+                            steps = 0;
+                            gain = before - after;
+
+                            LinkedList<Point> tempList = new LinkedList<Point>();
+                            int l = i;
+                            for (l = i; l <= k; l++) {
+                                tempList.add(tour.getPoint(l));
+                            }
+                            l = i;
+                            for (int j = tempList.size() - 1; j >= 0; j--) {
+                                tour.setPoint(l, tempList.get(j));
+                                l++;
+                            }
+                        }
+                    }
+                }
+                steps++;
             }
         }
     }
