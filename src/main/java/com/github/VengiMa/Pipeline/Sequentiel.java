@@ -24,7 +24,7 @@ public class Sequentiel {
         int cluster = 0;
         int choice;
         int iterations;
-        /*
+
         String database;
         database = System.getenv("DATABASE");
         if (database == null)
@@ -32,7 +32,7 @@ public class Sequentiel {
         Class.forName("org.postgresql.Driver");
         String url = "jdbc:postgresql://" + database;
         Connection conn = DriverManager.getConnection(url,"postgres","postgres");
-        */
+
 
         try {
             choice = Integer.parseInt(System.getenv("HEURISTIC"));
@@ -53,7 +53,6 @@ public class Sequentiel {
         catch(Exception e) {
             iterations = 10;
         }
-
 
 
         double coordinates[][] = InputCoordinates.FileToCoordinates(file, pointNamed);
@@ -89,24 +88,21 @@ public class Sequentiel {
             distance = tour.distanceTourLength(distanceMatrix);
             System.out.println(distance + " ; time: " + dur + "msec ; feasible: " + tour.isFeasible(init));
 
-        /*
-        String sql = "INSERT INTO test_results " +
-                "(begin, ending, duration, tourlength, typ, heuristic, clusters)"+
-                "VALUES(?,?,?,?,?,?,?)";
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setTimestamp(1,tstart);
-        pst.setTimestamp(2,tend);
-        pst.setLong(3, dur);
-        pst.setDouble(4,distance);
-        pst.setString(5,filePath);
-        pst.setString(6,typ);
-        pst.setInt(7,cluster);
-        pst.executeUpdate();
 
-        System.out.println("Inserting successful!");
-        */
+            String sql = "INSERT INTO test_results " +
+                    "(begin, ending, duration, tourlength, typ, heuristic, clusters)"+
+                    "VALUES(?,?,?,?,?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setTimestamp(1,tstart);
+            pst.setTimestamp(2,tend);
+            pst.setLong(3, dur);
+            pst.setDouble(4,distance);
+            pst.setString(5,filePath);
+            pst.setString(6,typ);
+            pst.setInt(7,cluster);
+            pst.executeUpdate();
+
+            System.out.println("Inserting successful!");
         }
-
-
     }
 }
