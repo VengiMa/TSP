@@ -107,6 +107,8 @@ public class TaskSink {
 
         }
 
+        System.out.println("Calculation finished!");
+
         //  Send the kill signal to the workers
         //controller.send("KILL", 0);
 

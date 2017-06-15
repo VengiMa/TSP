@@ -123,7 +123,7 @@ public class TaskVent {
                 byte[] byteArray = SerializationUtil.serialize(data);
                 sender.send(byteArray, 0);
             }
-            Thread.sleep(1500);
+            Thread.sleep(4000);
             System.gc();
         }
 
