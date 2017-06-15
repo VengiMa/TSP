@@ -89,7 +89,7 @@ public class TaskSink {
 
             System.out.println(String.format("%.2f", distance));
 
-            
+
             String sql = "INSERT INTO test_results " +
                     "(begin, ending, duration, tourlength, typ, heuristic, clusters)"+
                     "VALUES(?,?,?,?,?,?,?)";

@@ -107,16 +107,6 @@ public class TaskVent {
         //todo:try and test if it works
             Tour test = VisitingOrderCluster.orderCluster(distance, distanceMatrix, clusters);
 
-        /*
-        int counter = 0;
-        while(counter<2) {
-            System.out.println("Publishing");
-            byte [] info = SerializationUtil.serialize(test);
-            pub.send(info,0);
-            counter++;
-        }
-        */
-
             //  Send number of tasks
             int task_nbr;
             for (task_nbr = 0; task_nbr < number; task_nbr++) {

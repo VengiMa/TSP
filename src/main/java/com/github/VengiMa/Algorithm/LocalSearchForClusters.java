@@ -134,11 +134,6 @@ public class LocalSearchForClusters {
         double before, after;
         if (tour.getSize() >= 4) {
             while (steps < ((tourSize)/1.5)) {
-                //if (System.currentTimeMillis() - startTime >=10000 || counter >= 15000) {
-                //    return t;
-                //}
-                double gain = 0;
-
                 for (int i =0; i<tourSize - 3;i++){
                     for (int k =i+1; k<tourSize-2; k++){
                         if(i == 0) {
@@ -155,8 +150,6 @@ public class LocalSearchForClusters {
 
                         if(after < before){
                             steps = 0;
-                            gain = before - after;
-
                             LinkedList<Point> tempList = new LinkedList<Point>();
                             int l = i;
                             for (l = i; l <= k; l++) {
@@ -172,131 +165,6 @@ public class LocalSearchForClusters {
                 }
                 steps++;
             }
-        }
-    }
-
-    public void twoOpt (Tour tour,Cluster cluster, double[][] distance){
-        //long startTime = System.currentTimeMillis();
-        int tourSize = tour.getSize();
-        boolean geschafft = false;
-        boolean nearestNeighbours = false;
-        int sizeNeighbours = 20;
-        int counter = 0, temp2, temp4;
-        int tourIn = tour.getPointIndex(cluster.getInPoint());
-        int tourOut = tour.getPointIndex(cluster.getOutPoint());
-
-        int randomNumber1;
-        int randomNumber2;
-        double minimum = Double.MAX_VALUE;
-        int a, b, c, d;
-        int exchangeFrom = 0, exchangeTo = 0;
-
-        if (tour.getSize() >= 4) {
-            while (counter < 10000) {
-                //if (System.currentTimeMillis() - startTime >=10000 || counter >= 15000) {
-                //    return t;
-                //}
-                //choose two random numbers, which are used as the reference for the twoOpt
-                Random randomNumberGenerator = new Random();
-                randomNumber1 = randomNumberGenerator.nextInt(tourSize);
-
-                if (nearestNeighbours){
-                    for (int i = 0; i< sizeNeighbours-2; i++){
-                        randomNumber2 = (randomNumber1 +(i+2))%tourSize;
-                        temp2 = (randomNumber1 + 1) % tourSize;
-                        temp4 = (randomNumber2 + 1) % tourSize;
-
-                        if ((temp2 != randomNumber2 && temp4 != randomNumber1)&&
-                        (randomNumber2 != tourOut && temp4 != tourIn) &&
-                        (randomNumber1 != tourOut && temp2 != tourIn) &&
-                        (randomNumber1 != tourIn && temp2 != tourOut) &&
-                        (randomNumber2 != tourIn && temp4 != tourOut)){
-                            a = tour.getPoint(randomNumber1).getPointNumber() - 1;
-                            b = tour.getPoint(temp2).getPointNumber() - 1;
-                            c = tour.getPoint(randomNumber2).getPointNumber() - 1;
-                            d = tour.getPoint(temp4).getPointNumber() - 1;
-
-                            //compute the distances before and after the change of the edges
-                            double vorher = distance[a][b] + distance[c][d];
-                            double danach = distance[a][c] + distance[b][d];
-
-                            //System.out.println("d1= "+vorher + "; d2= " +danach );
-                            if (danach < vorher) {
-                                if (danach < minimum) {
-                                    minimum = danach;
-                                    exchangeFrom = temp2;
-                                    exchangeTo = randomNumber2;
-                                }
-                            } else {
-                                counter++;
-                            }
-                        }
-                    }
-                    LinkedList<Point> tempList = new LinkedList<Point>();
-                    int l;
-                    for (l = exchangeFrom; l <= exchangeTo; l++) {
-                        tempList.add(tour.getPoint(l));
-                    }
-                    l = exchangeFrom;
-                    for (int k = tempList.size() - 1; k >= 0; k--) {
-                        tour.setPoint(l, tempList.get(k));
-                        l++;
-                    }
-                    //System.out.println(Arrays.toString(tem1));
-                    //System.out.println(Arrays.toString(tem2));
-                    geschafft = true;
-                }else {
-
-                    randomNumber2 = randomNumberGenerator.nextInt(tourSize);
-
-                    //get sure, that the two numbers are different
-                    while (randomNumber1 == randomNumber2) {
-                        randomNumber2 = randomNumberGenerator.nextInt(tourSize);
-                    }
-
-                    int[] edges = {randomNumber1, randomNumber2};
-                    Arrays.sort(edges);
-                    randomNumber1 = edges[0];
-                    randomNumber2 = edges[1];
-                    temp2 = randomNumber1 + 1;
-                    temp4 = (randomNumber2 + 1) % tourSize;
-
-                    //Two Opt can only be computed, if the tour has at minimum 4 points
-                    if (temp2 != randomNumber2 && temp4 != randomNumber1) {
-                        a = tour.getPoint(randomNumber1).getPointNumber() - 1;
-                        b = tour.getPoint(temp2).getPointNumber() - 1;
-                        c = tour.getPoint(randomNumber2).getPointNumber() - 1;
-                        d = tour.getPoint(temp4).getPointNumber() - 1;
-
-                        //System.out.println(a+ "  " +b+ "  " +c+ "  " +d);
-                        //compute the distances before and after the change of the edges
-                        double vorher = distance[a][b] + distance[c][d];
-                        double danach = distance[a][c] + distance[b][d];
-
-                        //System.out.println("d1= "+vorher + "; d2= " +danach );
-                        if (danach < vorher) {
-                            LinkedList<Point> tempList = new LinkedList<Point>();
-                            int l = temp2;
-                            for (l = temp2; l <= randomNumber2; l++) {
-                                tempList.add(tour.getPoint(l));
-                            }
-                            l = temp2;
-                            for (int k = tempList.size() - 1; k >= 0; k--) {
-                                tour.setPoint(l, tempList.get(k));
-                                l++;
-                            }
-                            //System.out.println(Arrays.toString(tem1));
-                            //System.out.println(Arrays.toString(tem2));
-                            geschafft = true;
-                        } else {
-                            counter++;
-                        }
-                    }
-                }
-            }
-        }
-        if (geschafft) {
-            System.out.println("TwoOpt executed!");
         }
     }
 
@@ -431,6 +299,131 @@ public class LocalSearchForClusters {
             }
         }
         //System.out.println(tour.tour2String());
+    }
+
+    public void twoOpt (Tour tour,Cluster cluster, double[][] distance){
+        //long startTime = System.currentTimeMillis();
+        int tourSize = tour.getSize();
+        boolean geschafft = false;
+        boolean nearestNeighbours = false;
+        int sizeNeighbours = 20;
+        int counter = 0, temp2, temp4;
+        int tourIn = tour.getPointIndex(cluster.getInPoint());
+        int tourOut = tour.getPointIndex(cluster.getOutPoint());
+
+        int randomNumber1;
+        int randomNumber2;
+        double minimum = Double.MAX_VALUE;
+        int a, b, c, d;
+        int exchangeFrom = 0, exchangeTo = 0;
+
+        if (tour.getSize() >= 4) {
+            while (counter < 10000) {
+                //if (System.currentTimeMillis() - startTime >=10000 || counter >= 15000) {
+                //    return t;
+                //}
+                //choose two random numbers, which are used as the reference for the twoOpt
+                Random randomNumberGenerator = new Random();
+                randomNumber1 = randomNumberGenerator.nextInt(tourSize);
+
+                if (nearestNeighbours){
+                    for (int i = 0; i< sizeNeighbours-2; i++){
+                        randomNumber2 = (randomNumber1 +(i+2))%tourSize;
+                        temp2 = (randomNumber1 + 1) % tourSize;
+                        temp4 = (randomNumber2 + 1) % tourSize;
+
+                        if ((temp2 != randomNumber2 && temp4 != randomNumber1)&&
+                                (randomNumber2 != tourOut && temp4 != tourIn) &&
+                                (randomNumber1 != tourOut && temp2 != tourIn) &&
+                                (randomNumber1 != tourIn && temp2 != tourOut) &&
+                                (randomNumber2 != tourIn && temp4 != tourOut)){
+                            a = tour.getPoint(randomNumber1).getPointNumber() - 1;
+                            b = tour.getPoint(temp2).getPointNumber() - 1;
+                            c = tour.getPoint(randomNumber2).getPointNumber() - 1;
+                            d = tour.getPoint(temp4).getPointNumber() - 1;
+
+                            //compute the distances before and after the change of the edges
+                            double vorher = distance[a][b] + distance[c][d];
+                            double danach = distance[a][c] + distance[b][d];
+
+                            //System.out.println("d1= "+vorher + "; d2= " +danach );
+                            if (danach < vorher) {
+                                if (danach < minimum) {
+                                    minimum = danach;
+                                    exchangeFrom = temp2;
+                                    exchangeTo = randomNumber2;
+                                }
+                            } else {
+                                counter++;
+                            }
+                        }
+                    }
+                    LinkedList<Point> tempList = new LinkedList<Point>();
+                    int l;
+                    for (l = exchangeFrom; l <= exchangeTo; l++) {
+                        tempList.add(tour.getPoint(l));
+                    }
+                    l = exchangeFrom;
+                    for (int k = tempList.size() - 1; k >= 0; k--) {
+                        tour.setPoint(l, tempList.get(k));
+                        l++;
+                    }
+                    //System.out.println(Arrays.toString(tem1));
+                    //System.out.println(Arrays.toString(tem2));
+                    geschafft = true;
+                }else {
+
+                    randomNumber2 = randomNumberGenerator.nextInt(tourSize);
+
+                    //get sure, that the two numbers are different
+                    while (randomNumber1 == randomNumber2) {
+                        randomNumber2 = randomNumberGenerator.nextInt(tourSize);
+                    }
+
+                    int[] edges = {randomNumber1, randomNumber2};
+                    Arrays.sort(edges);
+                    randomNumber1 = edges[0];
+                    randomNumber2 = edges[1];
+                    temp2 = randomNumber1 + 1;
+                    temp4 = (randomNumber2 + 1) % tourSize;
+
+                    //Two Opt can only be computed, if the tour has at minimum 4 points
+                    if (temp2 != randomNumber2 && temp4 != randomNumber1) {
+                        a = tour.getPoint(randomNumber1).getPointNumber() - 1;
+                        b = tour.getPoint(temp2).getPointNumber() - 1;
+                        c = tour.getPoint(randomNumber2).getPointNumber() - 1;
+                        d = tour.getPoint(temp4).getPointNumber() - 1;
+
+                        //System.out.println(a+ "  " +b+ "  " +c+ "  " +d);
+                        //compute the distances before and after the change of the edges
+                        double vorher = distance[a][b] + distance[c][d];
+                        double danach = distance[a][c] + distance[b][d];
+
+                        //System.out.println("d1= "+vorher + "; d2= " +danach );
+                        if (danach < vorher) {
+                            LinkedList<Point> tempList = new LinkedList<Point>();
+                            int l = temp2;
+                            for (l = temp2; l <= randomNumber2; l++) {
+                                tempList.add(tour.getPoint(l));
+                            }
+                            l = temp2;
+                            for (int k = tempList.size() - 1; k >= 0; k--) {
+                                tour.setPoint(l, tempList.get(k));
+                                l++;
+                            }
+                            //System.out.println(Arrays.toString(tem1));
+                            //System.out.println(Arrays.toString(tem2));
+                            geschafft = true;
+                        } else {
+                            counter++;
+                        }
+                    }
+                }
+            }
+        }
+        if (geschafft) {
+            System.out.println("TwoOpt executed!");
+        }
     }
 }
 
