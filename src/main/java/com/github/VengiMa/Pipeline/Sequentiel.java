@@ -85,7 +85,7 @@ public class Sequentiel {
 
             Timestamp tend = new Timestamp(System.currentTimeMillis());
             dur = (tend.getTime() - tstart.getTime());
-            distance = tour.distanceTourLength(distanceMatrix);
+            distance = ((double) Math.round(tour.distanceTourLength(distanceMatrix)*100))/100;
             System.out.println(distance + " ; time: " + dur + "msec ; feasible: " + tour.isFeasible(init));
 
 
@@ -104,5 +104,6 @@ public class Sequentiel {
 
             System.out.println("Inserting successful!");
         }
+        System.out.println("Calculation executed!");
     }
 }
