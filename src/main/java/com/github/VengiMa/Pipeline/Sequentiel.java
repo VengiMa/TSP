@@ -54,6 +54,11 @@ public class Sequentiel {
             iterations = 10;
         }
 
+        System.out.println("Parameters:");
+        System.out.println("Iterations " + iterations);
+        System.out.println("Heuristic " + choice);
+        System.out.println("FILE_PATH: " + filePath);
+
 
         double coordinates[][] = InputCoordinates.FileToCoordinates(file, pointNamed);
         LinkedList<Point> init = InputCoordinates.createPointList(coordinates);
