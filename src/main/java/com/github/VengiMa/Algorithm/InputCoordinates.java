@@ -56,7 +56,7 @@ public class InputCoordinates implements Serializable{
                 //first lines of the matrix cannot be parsed...only the matrix!!!
                 //Also no empty lines should be read.
                 //System.out.println("");
-                Pattern p = Pattern.compile("[-]?[0-9]+[.0-9]*");
+                Pattern p = Pattern.compile("[-]?[0-9]+[.|,0-9]*");
                 Matcher m = p.matcher(inputLines[j]);
                 int k = -1;
                 while (m.find()) {
