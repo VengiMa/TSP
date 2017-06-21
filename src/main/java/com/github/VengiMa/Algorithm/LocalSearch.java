@@ -49,12 +49,14 @@ public class LocalSearch {
                                 l++;
                             }
                             geschafft = true;
-                            System.out.println("2-Opt executed!");
                         }
                     }
                 }
                 steps++;
             }
+        }
+        if (geschafft == true){
+            System.out.println("2-Opt executed!");
         }
         tour.setStartingPoint(cluster.getInPoint());
     }
