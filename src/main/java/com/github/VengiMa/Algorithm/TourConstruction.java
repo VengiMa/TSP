@@ -204,8 +204,6 @@ public class TourConstruction {
         return tour;
     }
 
-    //todo: Apply these heuristics to the sequentiel algorithm!
-
     public static Tour NN (double distancematrix [][], List<Point> pointList) {
         Stack<Integer> stack= new Stack<Integer>();
         Tour tour = new Tour(0);

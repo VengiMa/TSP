@@ -39,8 +39,6 @@ public class VisitingOrderCluster {
         LocalSearchForClusters twoOpt = new LocalSearchForClusters();
         twoOpt.twoOpt(orderCluster, distance);
 
-
-        //todo: this is the working method!
         int tourLength = orderCluster.getSize();
         for (int i=0; i < tourLength; i++){
             //how to put the in and out points into each cluster, cluster 0 to i

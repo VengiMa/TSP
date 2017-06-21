@@ -80,7 +80,6 @@ public class TaskSink {
             Timestamp tend = new Timestamp(System.currentTimeMillis());
             dur = (tend.getTime()-tstart.getTime());
             //todo:
-            //garbage collector gc finalize, memory deallocation
             //10 nearest neighbours, storage
             //clusterung, schnittebenen
             //java-doc file erzeugen, mit dokumentation
