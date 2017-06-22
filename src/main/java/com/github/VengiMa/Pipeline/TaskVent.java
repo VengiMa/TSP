@@ -26,6 +26,7 @@ public class TaskVent {
         String host_Sink;
         String filePath;
         boolean pointNamed = true;
+        long sleeptime;
 
         try {
             number = Integer.parseInt(System.getenv("NUMBER_OF_CLUSTERS"));
@@ -38,6 +39,12 @@ public class TaskVent {
         }
         catch(Exception e) {
             iterations = 10;
+        }
+        try {
+            sleeptime = Long.parseLong(System.getenv("SLEEP"));
+        }
+        catch(Exception e) {
+            sleeptime = 40000;
         }
 
         host_Sink = System.getenv("HOST_SINK");
@@ -123,7 +130,7 @@ public class TaskVent {
                 byte[] byteArray = SerializationUtil.serialize(data);
                 sender.send(byteArray, 0);
             }
-            Thread.sleep(50000);
+            Thread.sleep(sleeptime);
             System.gc();
         }
 
