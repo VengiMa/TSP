@@ -14,6 +14,7 @@ public class HelloWorld {
         tour.add(4);
         tour.add(5);
         tour.add(2);
+        double test =30e02;
         //for (Integer number : tour) {
         //    System.out.println(number);
         //}
@@ -24,11 +25,7 @@ public class HelloWorld {
         //System.out.println(d[0].length);
         //System.out.println(d[1].length);
         //System.out.println(d[2].length);
-        for (int i=0; i<100; i++){
-            double random = Math.random()*30;
-            int erg = (int) random;
-            System.out.println(erg);
-        }
+        System.out.println(test);
 
     }
     public static int add(int num1, int num2) {
