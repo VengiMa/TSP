@@ -1,13 +1,17 @@
 package com.github.VengiMa.vengi;
 
+import com.github.VengiMa.Algorithm.InputCoordinates;
+
+import java.io.File;
 import java.util.ArrayList;
 /**
  * Created by Admin on 27.02.2017.
  */
 public class HelloWorld {
-    public static void main (String[] args) {
+    public static void main (String[] args) throws Exception {
         String marco = "59";
         String stephan = "60";
+        String filePath;
         ArrayList<Integer> tour = new ArrayList<Integer>();
         tour.add(3);
         tour.add(1);
@@ -25,7 +29,17 @@ public class HelloWorld {
         //System.out.println(d[0].length);
         //System.out.println(d[1].length);
         //System.out.println(d[2].length);
+
         System.out.println(test);
+
+
+        filePath = "src/main/ressources/mu1979.txt";
+        File file = new File(filePath);
+        double [][] coordinates = InputCoordinates.FileToCoordinates(file, true);
+        for (int i=0; i<coordinates.length; i++){
+            System.out.println( coordinates[i][0] + "  "+ coordinates[i][1]);
+        }
+
 
     }
     public static int add(int num1, int num2) {

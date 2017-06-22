@@ -64,7 +64,7 @@ public class InputCoordinates implements Serializable{
                 while (m.find()) {
                     if (k ==-1){
                     }else{
-                        input[j][k] = Double.parseDouble(m.group());
+                        input[j][k] = Double.parseDouble(m.group().replace(",","."));
                     }
                     k++;
                 }
@@ -74,7 +74,8 @@ public class InputCoordinates implements Serializable{
                 //first lines of the matrix cannot be parsed...only the matrix!!!
                 //Also no empty lines should be read.
                 //System.out.println("");
-                Pattern p = Pattern.compile("[-]?[0-9]+.[0-9]+");
+                //[-]?[0-9]+.[0-9]+
+                Pattern p = Pattern.compile("[+\\-]?(?:0|[1-9]\\d*)(?:(\\,|\\.)\\d*)?(?:[eE][+\\-]?\\d+)?");
                 Matcher m = p.matcher(inputLines[j]);
                 int k = 0;
                 while (m.find()) {
