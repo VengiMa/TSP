@@ -29,7 +29,7 @@ public class K_Means{
         double minY = Double.MAX_VALUE;
         double maxY = Double.MIN_VALUE;
 
-        maxPointsperCluster = (int)Math.ceil((points.size()/number) + 0.2*points.size());
+        maxPointsperCluster = (int)Math.ceil((points.size()/number) + 0.1*points.size());
         minPointsperCluster = (int)Math.ceil((points.size()/number) - 0.1*points.size());
 
         for (Point p: init) {
