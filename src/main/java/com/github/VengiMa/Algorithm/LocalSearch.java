@@ -49,10 +49,11 @@ public class LocalSearch {
                                 l++;
                             }
                             geschafft = true;
+                        }else{
+                            steps++;
                         }
                     }
                 }
-                steps++;
             }
         }
         if (geschafft == true){
