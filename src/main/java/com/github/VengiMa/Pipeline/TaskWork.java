@@ -65,6 +65,7 @@ public class TaskWork {
             Tour partialTour = ClusterComputation.createTour(c,distanceMatrix, choice);
             System.out.println();
 
+            System.out.println("Calculation finished");
             data.setTourData(partialTour);
             data.setHeuristic(typ);
             System.out.flush();
@@ -72,6 +73,8 @@ public class TaskWork {
             //  convert the tour into byteArray and send results to sink
             byteArray = SerializationUtil.serialize(data);
             sender.send(byteArray, 0);
+            System.out.println("and sendt!");
+
         }
         sender.close();
         receiver.close();
