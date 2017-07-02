@@ -53,7 +53,7 @@ public class TaskSink {
             for (task_nbr = 0; task_nbr < maxTask_nbr; task_nbr++) {
                 byte[] byteArray = receiver.recv();
                 data = (DataPackage) SerializationUtil.deserialize(byteArray);
-                System.out.println(index + "/" + task_nbr+1);
+                System.out.println(index + "/" + maxTask_nbr);
 
                 if (task_nbr == 0) {
                     distanceMatrix = data.getDistanceMatrixData();
