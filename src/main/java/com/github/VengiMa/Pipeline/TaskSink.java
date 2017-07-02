@@ -67,7 +67,7 @@ public class TaskSink {
                 }
                 dataSet.add(data);
                 System.out.flush();
-                index++
+                index++;
             }
 
             for (int i = 0; i < clusterTour.getSize(); i++) {
