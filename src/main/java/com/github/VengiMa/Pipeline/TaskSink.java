@@ -49,9 +49,11 @@ public class TaskSink {
 
             //  Process the confirmations
             int task_nbr;
+            int index =1;
             for (task_nbr = 0; task_nbr < maxTask_nbr; task_nbr++) {
                 byte[] byteArray = receiver.recv();
                 data = (DataPackage) SerializationUtil.deserialize(byteArray);
+                System.out.println(index + "/" + task_nbr+1);
 
                 if (task_nbr == 0) {
                     distanceMatrix = data.getDistanceMatrixData();
@@ -65,6 +67,7 @@ public class TaskSink {
                 }
                 dataSet.add(data);
                 System.out.flush();
+                index++
             }
 
             for (int i = 0; i < clusterTour.getSize(); i++) {
