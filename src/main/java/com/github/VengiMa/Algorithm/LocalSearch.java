@@ -14,7 +14,7 @@ public class LocalSearch {
         int a,b,c,d;
         int steps = 0;
         if (tour.getSize() >= 4) {
-            while (steps < ((groesseTour)*2)) {
+            while (steps < ((groesseTour)*3)) {
                 //if (System.currentTimeMillis() - startTime >=10000 || counter >= 15000) {
                 //    return t;
                 //}
