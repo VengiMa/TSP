@@ -133,7 +133,7 @@ public class LocalSearchForClusters {
         int steps = 0;
         double before, after;
         if (tour.getSize() >= 4) {
-            while (steps < ((tourSize)/1.5)) {
+            while (steps < ((tourSize)*(tourSize/1.5))) {
                 for (int i =0; i<tourSize - 3;i++){
                     for (int k =i+1; k<tourSize-2; k++){
                         if(i == 0) {
@@ -160,10 +160,11 @@ public class LocalSearchForClusters {
                                 tour.setPoint(l, tempList.get(j));
                                 l++;
                             }
+                        }else{
+                            steps++;
                         }
                     }
                 }
-                steps++;
             }
         }
     }

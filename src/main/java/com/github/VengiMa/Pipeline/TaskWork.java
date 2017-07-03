@@ -74,6 +74,7 @@ public class TaskWork {
             byteArray = SerializationUtil.serialize(data);
             sender.send(byteArray, 0);
             System.out.println("and sendt!");
+            System.gc();
 
         }
         sender.close();

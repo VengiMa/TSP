@@ -11,7 +11,16 @@ import com.github.VengiMa.Algorithm.*;
 import java.sql.*;
 import java.util.ArrayList;
 
+
+/***
+ *
+ */
 public class TaskSink {
+    /***
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main (String[] args) throws Exception {
 
         //  Prepare our context and socket
@@ -81,7 +90,13 @@ public class TaskSink {
             }
             //  Calculate and report duration of batch
             Timestamp tend = new Timestamp(System.currentTimeMillis());
-            dur = (tend.getTime()-tstart.getTime());
+            dur = -1;
+            try {
+                dur = (tend.getTime() - tstart.getTime());
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
             //todo:
             //10 nearest neighbours, storage
             //clusterung, schnittebenen
@@ -105,7 +120,7 @@ public class TaskSink {
             pst.setInt(7,maxTask_nbr);
             pst.executeUpdate();
 
-            System.out.println("Inserting successful!");
+            System.out.println("Inserting successful...!");
 
         }
 
