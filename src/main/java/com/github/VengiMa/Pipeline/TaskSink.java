@@ -122,7 +122,6 @@ public class TaskSink {
 
             System.out.println("Inserting successful...!");
             System.gc();
-
         }
 
         System.out.println("Calculation finished!");
