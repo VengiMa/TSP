@@ -121,6 +121,7 @@ public class TaskSink {
             pst.executeUpdate();
 
             System.out.println("Inserting successful...!");
+            System.gc();
 
         }
 
