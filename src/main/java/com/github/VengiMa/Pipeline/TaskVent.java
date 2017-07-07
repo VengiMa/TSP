@@ -25,7 +25,7 @@ public class TaskVent {
         int iterations;
         String host_Sink;
         String filePath;
-        boolean pointNamed = true;
+        boolean pointNamed;
         long sleeptime;
 
         try {
@@ -45,6 +45,12 @@ public class TaskVent {
         }
         catch(Exception e) {
             sleeptime = 40000;
+        }
+        try {
+            pointNamed = Boolean.getBoolean(System.getenv("TSPLIB"));
+        }
+        catch(Exception e) {
+            pointNamed = false;
         }
 
         host_Sink = System.getenv("HOST_SINK");

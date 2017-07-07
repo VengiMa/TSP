@@ -16,7 +16,7 @@ import java.util.List;
 public class Sequentiel {
     public static void main (String[] args) throws Exception {
         String filePath;
-        boolean pointNamed = true;
+        boolean pointNamed;
         Tour tour;
         long dur;
         double distance;
@@ -39,6 +39,12 @@ public class Sequentiel {
         }
         catch(Exception e) {
             choice = 1;
+        }
+        try {
+            pointNamed = Boolean.getBoolean(System.getenv("TSPLIB"));
+        }
+        catch(Exception e) {
+            pointNamed = false;
         }
 
         filePath = System.getenv("FILE_PATH");
