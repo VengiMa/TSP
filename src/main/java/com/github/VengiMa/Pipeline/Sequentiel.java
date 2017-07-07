@@ -64,6 +64,7 @@ public class Sequentiel {
         System.out.println("Iterations " + iterations);
         System.out.println("Heuristic " + choice);
         System.out.println("FILE_PATH: " + filePath);
+        System.out.println("TSPLIB: " + pointNamed);
 
 
         double coordinates[][] = InputCoordinates.FileToCoordinates(file, pointNamed);

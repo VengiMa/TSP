@@ -65,6 +65,7 @@ public class TaskVent {
         System.out.println("NUMBER_OF_CLUSTERS: " + number);
         System.out.println("HOST_SINK: " + host_Sink);
         System.out.println("FILE_PATH: " + filePath);
+        System.out.println("TSPLIB: " + pointNamed);
 
         File file = new File(filePath);
 
