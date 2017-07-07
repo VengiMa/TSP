@@ -33,7 +33,6 @@ public class Sequentiel {
         String url = "jdbc:postgresql://" + database;
         Connection conn = DriverManager.getConnection(url,"postgres","postgres");
 
-
         try {
             choice = Integer.parseInt(System.getenv("HEURISTIC"));
         }
