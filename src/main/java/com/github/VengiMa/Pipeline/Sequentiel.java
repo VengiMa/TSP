@@ -44,7 +44,7 @@ public class Sequentiel {
             pointNamed = Boolean.getBoolean(System.getenv("TSPLIB"));
         }
         catch(Exception e) {
-            pointNamed = false;
+            pointNamed = true;
         }
 
         filePath = System.getenv("FILE_PATH");
