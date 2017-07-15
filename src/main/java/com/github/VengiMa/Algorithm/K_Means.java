@@ -106,6 +106,9 @@ public class K_Means{
             if(sum==0) {
                 finish = true;
                 System.out.println("Iteration: " + iteration);
+                for (Cluster cl : clusters){
+                    System.out.println("Cluster " + cl.id + ": " + cl.getPoints().size());
+                }
                 System.out.println("######");
                 //System.out.println("Centroid distances: " + distance);
             }

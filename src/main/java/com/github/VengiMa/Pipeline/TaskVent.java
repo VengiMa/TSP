@@ -105,7 +105,7 @@ public class TaskVent {
         for(int i=0; i<iterations; i++) {
             System.out.println("Number:  " + i);
             Timestamp start = new Timestamp(System.currentTimeMillis());
-
+            //todo:look for error in clustering, algorithm stops after several iterations
             K_Means kmeans = new K_Means();
             kmeans.init(init, number);
             kmeans.calculate();
@@ -115,7 +115,6 @@ public class TaskVent {
 
             ClusterDistance[][] distance = clusterMatrix.clusterMatrix(distanceMatrix, clusters);
 
-        //todo:try and test if it works
             Tour test = VisitingOrderCluster.orderCluster(distance, distanceMatrix, clusters);
 
             //  Send number of tasks
