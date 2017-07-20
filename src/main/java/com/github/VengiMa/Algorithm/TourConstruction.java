@@ -168,7 +168,6 @@ public class TourConstruction {
                 int insertPoint = 1;
                 max =0;
                 for (int i = 0; i < numbernodes; i++) {
-                    //unvisitedRest = numbernodes - tour.getSize();
                     double minimum = Double.MAX_VALUE;
 
                     int cityIndex = cluster.getPoints().get(i).getPointNumber() - 1;

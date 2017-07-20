@@ -115,6 +115,51 @@ public class LocalSearch {
         }
     }
 
+    public void twoOptAfter (Tour tour, double[][] distance, long duration) {
+        //long startTime = System.currentTimeMillis();
+        int groesseTour = tour.getSize();
+        long startTime = System.currentTimeMillis();
+        boolean geschafft = false;
+        double before, after;
+        int a, b, c, d;
+        if (tour.getSize() >= 4) {
+            //todo:Zeitlimit einstellen
+            while (System.currentTimeMillis()-startTime <= duration) {
+                for (int i = 0; i < groesseTour - 3; i++) {
+                    for (int k = i + 1; k < groesseTour - 2; k++) {
+                        if (i == 0) {
+                            a = tour.getPoint(groesseTour - 1).getPointNumber() - 1;
+                        } else {
+                            a = tour.getPoint(i - 1).getPointNumber() - 1;
+                        }
+
+                        b = tour.getPoint(i).getPointNumber() - 1;
+                        c = tour.getPoint(k).getPointNumber() - 1;
+                        d = tour.getPoint(k + 1).getPointNumber() - 1;
+                        before = distance[a][b] + distance[c][d];
+                        after = distance[a][c] + distance[b][d];
+
+                        if (after < before) {
+                            LinkedList<Point> tempList = new LinkedList<Point>();
+                            int l = i;
+                            for (l = i; l <= k; l++) {
+                                tempList.add(tour.getPoint(l));
+                            }
+                            l = i;
+                            for (int j = tempList.size() - 1; j >= 0; j--) {
+                                tour.setPoint(l, tempList.get(j));
+                                l++;
+                            }
+                            geschafft = true;
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println("TwoOptAfter executed");
+    }
+
+
     /*
     public void twoOpt (double[][] distance, Cluster cluster, Tour tour){
 
