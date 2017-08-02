@@ -16,7 +16,7 @@ public class DataPackage implements Serializable {
     public String heuristic;
     public int numberClusters;
     public Timestamp startTime;
-    int iterations;
+    public int iterations;
 
 
     public DataPackage(){}

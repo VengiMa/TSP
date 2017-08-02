@@ -86,14 +86,9 @@ public class TaskVent {
         //  Socket to send messages on
         ZMQ.Socket sink = context.socket(ZMQ.PUSH);
         sink.connect("tcp://" + host_Sink + ":5558");
-        System.out.println("Sending tasks to workers\n");
-
-        //  The first message is "0" and signals start of batch
         sink.send(dataToSink, 0);
 
-        //  Initialize random number generator
-        Random srandom = new Random(System.currentTimeMillis());
-
+        System.out.println("Sending tasks to workers\n");
         /**
          * Test-File
          */
@@ -136,8 +131,6 @@ public class TaskVent {
             Thread.sleep(sleeptime);
             System.gc();
         }
-
-        Thread.sleep(1000);              //  Give 0MQ time to deliver
         sink.close();
         sender.close();
         context.term();
