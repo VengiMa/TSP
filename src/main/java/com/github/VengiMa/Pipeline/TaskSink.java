@@ -31,7 +31,9 @@ public class TaskSink {
         receiver.bind("tcp://*:5558");
         long time;
         String timestring = System.getenv("TIME");
-        time = Long.getLong(timestring);
+        if(timestring != null) {
+            time = Long.getLong(timestring);
+        }
 
         String database;
         database = System.getenv("DATABASE");
