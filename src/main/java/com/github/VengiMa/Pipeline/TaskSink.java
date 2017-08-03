@@ -30,9 +30,11 @@ public class TaskSink {
         System.out.println("Bind Sink to " + "tcp://*:5558 \n");
         receiver.bind("tcp://*:5558");
         long time = 0;
+        boolean improvementAfter = false;
         String timestring = System.getenv("TIME");
-        if(timestring != "") {
+        if(timestring.length() == 0) {
             time = Long.parseLong(timestring);
+            improvementAfter = true;
         }
 
         String database;
@@ -94,7 +96,7 @@ public class TaskSink {
                     }
                 }
             }
-            if (timestring == "") {
+            if (timestring.length() == 0) {
                 //  Calculate and report duration of batch
                 tend = new Timestamp(System.currentTimeMillis());
                 dur = -1;
@@ -124,8 +126,8 @@ public class TaskSink {
 
 
             String sql = "INSERT INTO test_results " +
-                    "(begin, ending, duration, tourlength, typ, heuristic, clusters)"+
-                    "VALUES(?,?,?,?,?,?,?)";
+                    "(begin, ending, duration, tourlength, typ, heuristic, clusters, improveafter)"+
+                    "VALUES(?,?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setTimestamp(1,tstart);
             pst.setTimestamp(2,tend);
@@ -134,6 +136,7 @@ public class TaskSink {
             pst.setString(5,typemap);
             pst.setString(6,heur);
             pst.setInt(7,maxTask_nbr);
+            pst.setBoolean(8,improvementAfter);
             pst.executeUpdate();
 
             System.out.println("Inserting successful...!");
