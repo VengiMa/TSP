@@ -29,7 +29,7 @@ public class TaskSink {
 
         System.out.println("Bind Sink to " + "tcp://*:5558 \n");
         receiver.bind("tcp://*:5558");
-        long time;
+        long time = 0;
         String timestring = System.getenv("TIME");
         if(timestring != null) {
             time = Long.getLong(timestring);
