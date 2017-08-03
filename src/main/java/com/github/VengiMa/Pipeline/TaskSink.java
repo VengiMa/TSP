@@ -94,7 +94,7 @@ public class TaskSink {
                     }
                 }
             }
-            if (timestring == null) {
+            if (timestring == "") {
                 //  Calculate and report duration of batch
                 tend = new Timestamp(System.currentTimeMillis());
                 dur = -1;

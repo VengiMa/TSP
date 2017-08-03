@@ -31,14 +31,18 @@ public class HelloWorld {
         //System.out.println(d[2].length);
 
         System.out.println(test);
+        String time = "500";
+        long timer = Long.parseLong(time);
+        System.out.println(timer);
 
-
+        /*
         filePath = "src/main/ressources/mu1979.txt";
         File file = new File(filePath);
         double [][] coordinates = InputCoordinates.FileToCoordinates(file, true);
         for (int i=0; i<coordinates.length; i++){
             System.out.println( coordinates[i][0] + "  "+ coordinates[i][1]);
         }
+        */
 
 
     }
