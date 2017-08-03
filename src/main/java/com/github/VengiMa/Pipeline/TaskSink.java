@@ -32,7 +32,7 @@ public class TaskSink {
         long time = 0;
         boolean improvementAfter = false;
         String timestring = System.getenv("TIME");
-        if(timestring.length() == 0) {
+        if(timestring.length() != 0) {
             time = Long.parseLong(timestring);
             improvementAfter = true;
         }
