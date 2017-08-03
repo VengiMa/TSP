@@ -29,6 +29,9 @@ public class TaskSink {
 
         System.out.println("Bind Sink to " + "tcp://*:5558 \n");
         receiver.bind("tcp://*:5558");
+        long time;
+        String timestring = System.getenv("TIME");
+        time = Long.getLong(timestring);
 
         String database;
         database = System.getenv("DATABASE");
@@ -53,6 +56,7 @@ public class TaskSink {
             ArrayList<DataPackage> dataSet = new ArrayList<>();
             DataPackage data;
             Timestamp tstart = null ;
+            Timestamp tend = null;
             long dur;
             String heur = "NN";
 
@@ -88,14 +92,23 @@ public class TaskSink {
                     }
                 }
             }
-            //  Calculate and report duration of batch
-            Timestamp tend = new Timestamp(System.currentTimeMillis());
-            dur = -1;
-            try {
-                dur = (tend.getTime() - tstart.getTime());
-            }
-            catch (Exception e){
-                e.printStackTrace();
+            if (timestring == null) {
+                //  Calculate and report duration of batch
+                tend = new Timestamp(System.currentTimeMillis());
+                dur = -1;
+                try {
+                    dur = (tend.getTime() - tstart.getTime());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else{
+                tend = new Timestamp(System.currentTimeMillis());
+                dur = (tend.getTime()-tstart.getTime());
+                long duration = time - dur;
+                LocalSearch improveAfter = new LocalSearch();
+                improveAfter.twoOptAfter(finalTour, distanceMatrix, duration);
+                tend = new Timestamp(System.currentTimeMillis());
+                dur = (tend.getTime()-tstart.getTime());
             }
             //todo:
             //10 nearest neighbours, storage
