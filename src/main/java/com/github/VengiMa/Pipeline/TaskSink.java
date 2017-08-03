@@ -32,7 +32,7 @@ public class TaskSink {
         long time = 0;
         String timestring = System.getenv("TIME");
         if(timestring != null) {
-            time = Long.getLong(timestring);
+            time = Long.parseLong(timestring);
         }
 
         String database;
