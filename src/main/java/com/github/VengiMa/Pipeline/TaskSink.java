@@ -109,6 +109,7 @@ public class TaskSink {
                 improveAfter.twoOptAfter(finalTour, distanceMatrix, duration);
                 tend = new Timestamp(System.currentTimeMillis());
                 dur = (tend.getTime()-tstart.getTime());
+                System.out.println("Improvement after merging together executed");
             }
             //todo:
             //10 nearest neighbours, storage
