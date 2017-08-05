@@ -1,4 +1,6 @@
-package com.github.VengiMa.Algorithm;
+package com.github.VengiMa.TSP;
+
+import com.github.VengiMa.Algorithm.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +15,7 @@ public class LocalSearchForClusters {
     *Methoden
     **/
     //2-opt move
-    public void twoOpt (Tour tour, double[][] distance){
+    public void twoOpt (com.github.VengiMa.Algorithm.Tour tour, double[][] distance){
         //long startTime = System.currentTimeMillis();
         int tourSize = tour.getSize();
         boolean nearestNeighbours = false;
@@ -26,7 +28,7 @@ public class LocalSearchForClusters {
         double minimum = Double.MAX_VALUE;
         int a, b, c, d;
         int exchangeFrom = 0, exchangeTo = 0;
-        Tour comparison = tour;
+        com.github.VengiMa.Algorithm.Tour comparison = tour;
 
 
         /*
@@ -169,7 +171,7 @@ public class LocalSearchForClusters {
         }
     }
 
-    public void threeOpt (Tour tour, double[][] distance){
+    public void threeOpt (com.github.VengiMa.Algorithm.Tour tour, double[][] distance){
         //long startTime = System.currentTimeMillis();
         int groesseTour = tour.getSize();
         boolean geschafft = true;
@@ -302,7 +304,7 @@ public class LocalSearchForClusters {
         //System.out.println(tour.tour2String());
     }
 
-    public void twoOpt (Tour tour,Cluster cluster, double[][] distance){
+    public void twoOpt (com.github.VengiMa.Algorithm.Tour tour, Cluster cluster, double[][] distance){
         //long startTime = System.currentTimeMillis();
         int tourSize = tour.getSize();
         boolean geschafft = false;

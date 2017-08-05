@@ -12,9 +12,9 @@ public class Tour implements Serializable {
     /**
     *Variables
     **/
-    public LinkedList<Point> pointList = new LinkedList<Point>();
-    public double distance;
-    public int iD;
+    private LinkedList<Point> pointList = new LinkedList<Point>();
+    private double distance;
+    private int iD;
 
     public Tour(){}
     public Tour(int iD){
@@ -99,10 +99,10 @@ public class Tour implements Serializable {
         }
         return false;
     }
-
+    /*
     public int getiD(){return iD;}
     public void setiD(int iD){this.iD = iD;}
-
+    */
     /**
      *change the permutation of the tour, so that point p is at the beginning
      */

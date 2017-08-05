@@ -8,12 +8,12 @@ import java.util.List;
  * Created by Admin on 10.04.2017.
  */
 public class Cluster implements Serializable {
-    public List<Point> points;
-    public Point centroid;
+    private List<Point> points;
+    private Point centroid;
     public int id;
-    public Point in;
-    public Point out;
-    public LinkedList<Point> pointList;
+    private Point in;
+    private Point out;
+    //private LinkedList<Point> pointList;
 
     public Cluster(int id){
         this.id = id;
@@ -75,12 +75,14 @@ public class Cluster implements Serializable {
         points.clear();
     }
 
+    /*
     public LinkedList<Point> toLinkedList() {
         for (Point p : points){
             pointList.add(p);
         }
         return pointList;
     }
+    */
 
     public void plotCluster() {
         System.out.println("[Cluster: " + id+"]");

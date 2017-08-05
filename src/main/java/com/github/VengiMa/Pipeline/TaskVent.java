@@ -18,9 +18,12 @@ import org.zeromq.ZMQ;
 //  Sends batch of tasks to workers via that socket
 //
 public class TaskVent {
+    /***
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main (String[] args) throws Exception {
-
-
         int number;
         int iterations;
         String host_Sink;

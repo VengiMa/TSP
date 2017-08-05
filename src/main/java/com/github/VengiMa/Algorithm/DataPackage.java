@@ -7,16 +7,16 @@ import java.sql.Timestamp;
  * Created by Admin on 25.05.2017.
  */
 public class DataPackage implements Serializable {
-    public Cluster cluster;
-    public double[][] distanceMatrix;
-    public Tour clusterTour;
-    public Tour tour;
-    public int iD;
-    public String typ;
-    public String heuristic;
-    public int numberClusters;
-    public Timestamp startTime;
-    public int iterations;
+    private Cluster cluster;
+    private double[][] distanceMatrix;
+    private Tour clusterTour;
+    private Tour tour;
+    private int iD;
+    private String typ;
+    private String heuristic;
+    private int numberClusters;
+    private Timestamp startTime;
+    private int iterations;
 
 
     public DataPackage(){}

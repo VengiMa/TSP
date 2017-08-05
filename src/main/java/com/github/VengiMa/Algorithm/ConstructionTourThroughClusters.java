@@ -16,7 +16,6 @@ public class ConstructionTourThroughClusters {
         numbernodes = pointList.size();
         int visited[] = new int[numbernodes];
         if (numbernodes == 2){
-
             tour.addPoint(pointList.get(0));
             tour.addPoint(pointList.get(1));
         }

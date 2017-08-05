@@ -13,6 +13,11 @@ import com.github.VengiMa.Algorithm.*;
 import java.sql.Timestamp;
 
 public class TaskWork {
+    /***
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main (String[] args) throws Exception {
         String host_Sink = String.valueOf(System.getenv("HOST_SINK"));
         String host_Master = String.valueOf(System.getenv("HOST_MASTER"));

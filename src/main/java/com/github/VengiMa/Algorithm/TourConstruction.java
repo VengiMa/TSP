@@ -8,6 +8,16 @@ import java.util.concurrent.ThreadLocalRandom;
  * Created by Admin on 19.04.2017.
  */
 public class TourConstruction {
+    /**
+     * Tour Construction inside a cluster
+     */
+
+    /***
+     *
+     * @param distancematrix
+     * @param cluster
+     * @return
+     */
     public static Tour NNHeuristic (double distancematrix [][], Cluster cluster) {
         Stack<Integer> stack= new Stack<Integer>();
         Tour tour = new Tour(0);
@@ -78,6 +88,12 @@ public class TourConstruction {
         return tour;
     }
 
+    /***
+     *
+     * @param distancematrix
+     * @param cluster
+     * @return
+     */
     public static Tour CheapInsert (double distancematrix [][], Cluster cluster) {
         Tour tour = new Tour(0);
         int start, ziel;
@@ -138,6 +154,12 @@ public class TourConstruction {
         return tour;
     }
 
+    /***
+     *
+     * @param distancematrix
+     * @param cluster
+     * @return
+     */
     public static Tour FarthestInsertion (double distancematrix [][], Cluster cluster) {
         Tour tour = new Tour(0);
         int numbernodes;
@@ -203,6 +225,16 @@ public class TourConstruction {
         return tour;
     }
 
+    /**
+     * Tour Construction for the sequential algorithm
+     */
+
+    /***
+     *
+     * @param distancematrix
+     * @param pointList
+     * @return
+     */
     public static Tour NN (double distancematrix [][], List<Point> pointList) {
         Stack<Integer> stack= new Stack<Integer>();
         Tour tour = new Tour(0);
@@ -255,6 +287,12 @@ public class TourConstruction {
         return tour;
     }
 
+    /***
+     *
+     * @param distancematrix
+     * @param pointList
+     * @return
+     */
     public static Tour Farthest (double distancematrix [][], List<Point> pointList) {
         Tour tour = new Tour(0);
         int numbernodes;
@@ -315,9 +353,14 @@ public class TourConstruction {
         return tour;
     }
 
+    /***
+     *
+     * @param distancematrix
+     * @param pointList
+     * @return
+     */
     public static Tour Cheapest (double distancematrix [][],  List<Point> pointList) {
         Tour tour = new Tour(0);
-        int start, ziel;
 
         if (pointList.size() == 1){
             tour.addPoint(pointList.get(0));

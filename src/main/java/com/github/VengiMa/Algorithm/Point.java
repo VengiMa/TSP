@@ -6,7 +6,6 @@ import java.io.Serializable;
  * Created by Admin on 05.04.2017.
  */
 public class Point implements Serializable {
-
     /**
      * Variables
      **/
@@ -19,6 +18,12 @@ public class Point implements Serializable {
     /**
      *Constructor
      **/
+    /***
+     *
+     * @param pointNumber
+     * @param xCoord
+     * @param yCoord
+     */
     public Point (int pointNumber, double xCoord, double yCoord){
         this.pointNumber = pointNumber;
         this.xCoord = xCoord;
@@ -47,6 +52,13 @@ public class Point implements Serializable {
     }
 
     //get the distance to a point z with matrix
+
+    /***
+     *
+     * @param z
+     * @param distanceMatrix
+     * @return
+     */
     public double getDistance2Point (Point z, double [][] distanceMatrix){
         double distance = -1;
         distance = distanceMatrix[this.pointNumber-1][z.pointNumber-1];
@@ -54,6 +66,13 @@ public class Point implements Serializable {
     }
 
     //calcaulate the distance between two points using the coordinates
+
+    /***
+     *
+     * @param p
+     * @param centroid
+     * @return
+     */
     public static double distance(Point p, Point centroid){
         return Math.sqrt(Math.pow((centroid.getYCoord() - p.getYCoord()), 2) + Math.pow((centroid.getXCoord() - p.getXCoord()), 2));
     }

@@ -196,8 +196,8 @@ public class InputCoordinates implements Serializable{
             tour = ConstructionTourThroughClusters.NNHeuristic(distanceMatrix, init);
             tour.isFeasible(init);
             System.out.println(tour.tour2String() + " Länge: " + tour.distanceTourLength(distanceMatrix));
-            LocalSearchForClusters two = new LocalSearchForClusters();
-            two.twoOpt(tour, distanceMatrix);
+            LocalSearch two = new LocalSearch();
+            two.twoOptCluster(tour, distanceMatrix);
             System.out.println(tour.tour2String() + "\n" + " Länge: " + tour.distanceTourLength(distanceMatrix));
             //two.threeOpt(tour, distanceMatrix);
             //System.out.println(tour.tour2String() + " Länge: " + tour.distanceTourLength(distanceMatrix));

@@ -104,7 +104,7 @@
                             <appendAssemblyId>false</appendAssemblyId>
                             <archive>
                                 <manifest>
-                                    <mainClass>com.github.VengiMa.Pipeline.Sequentiel</mainClass>
+                                    <mainClass>com.github.VengiMa.Pipeline.Sequential</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>

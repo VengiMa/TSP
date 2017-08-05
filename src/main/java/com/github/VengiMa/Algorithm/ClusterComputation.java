@@ -4,22 +4,29 @@ package com.github.VengiMa.Algorithm;
  * Created by Admin on 18.05.2017.
  */
 public class ClusterComputation {
+    /***
+     *
+     * @param c
+     * @param distanceMatrix
+     * @param choice
+     * @return
+     */
     public static Tour createTour(Cluster c, double [][] distanceMatrix, int choice){
-        Tour clusterTour;
+        Tour tour;
         switch (choice){
-            case 1: clusterTour = TourConstruction.NNHeuristic(distanceMatrix, c);
+            case 1: tour = TourConstruction.NNHeuristic(distanceMatrix, c);
             break;
-            case 2: clusterTour = TourConstruction.FarthestInsertion(distanceMatrix,c);
+            case 2: tour = TourConstruction.FarthestInsertion(distanceMatrix,c);
             break;
-            case 3: clusterTour = TourConstruction.CheapInsert(distanceMatrix,c);
+            case 3: tour = TourConstruction.CheapInsert(distanceMatrix,c);
             break;
-            default: clusterTour = TourConstruction.NNHeuristic(distanceMatrix, c);
+            default: tour = TourConstruction.NNHeuristic(distanceMatrix, c);
             break;
         }
-        System.out.println(clusterTour.distanceTourLength(distanceMatrix));
+        System.out.println(tour.distanceTourLength(distanceMatrix));
         LocalSearch two = new LocalSearch();
-        two.twoOpt(distanceMatrix,c,clusterTour);
-        System.out.println(clusterTour.distanceTourLength(distanceMatrix));
-        return clusterTour;
+        two.twoOpt(distanceMatrix,c,tour);
+        System.out.println(tour.distanceTourLength(distanceMatrix));
+        return tour;
     }
 }

@@ -6,7 +6,13 @@ import java.util.LinkedList;
  * Created by Admin on 19.04.2017.
  */
 public class LocalSearch {
-    public void twoOpt (double[][] distance, Cluster cluster, Tour tour) {
+    /***
+     *
+     * @param distanceMatrix
+     * @param cluster
+     * @param tour
+     */
+    public void twoOpt (double[][] distanceMatrix, Cluster cluster, Tour tour) {
         //long startTime = System.currentTimeMillis();
         int groesseTour = tour.getSize();
         boolean geschafft = false;
@@ -31,8 +37,8 @@ public class LocalSearch {
                         b = tour.getPoint(i).getPointNumber()-1;
                         c = tour.getPoint(k).getPointNumber()-1;
                         d = tour.getPoint(k+1).getPointNumber()-1;
-                        before = distance[a][b]+distance[c][d];
-                        after = distance[a][c]+distance[b][d];
+                        before = distanceMatrix[a][b]+distanceMatrix[c][d];
+                        after = distanceMatrix[a][c]+distanceMatrix[b][d];
 
                         if(after < before){
                             steps = 0;
@@ -62,20 +68,19 @@ public class LocalSearch {
         tour.setStartingPoint(cluster.getInPoint());
     }
 
-    public void twoOptSequentiel (Tour tour, double[][] distance) {
+    /***
+     *
+     * @param tour
+     * @param distanceMatrix
+     */
+    public void twoOptSequentiel (Tour tour, double[][] distanceMatrix) {
         //long startTime = System.currentTimeMillis();
         int groesseTour = tour.getSize();
-        boolean geschafft = false;
         double before, after;
         int a, b, c, d;
         int steps = 0;
         if (tour.getSize() >= 4) {
             while (steps < ((groesseTour)*(groesseTour/2))) {
-                //if (System.currentTimeMillis() - startTime >=10000 || counter >= 15000) {
-                //    return t;
-                //}
-                double gain = 0;
-
                 for (int i = 0; i < groesseTour - 3; i++) {
                     for (int k = i + 1; k < groesseTour - 2; k++) {
                         if (i == 0) {
@@ -87,13 +92,11 @@ public class LocalSearch {
                         b = tour.getPoint(i).getPointNumber() - 1;
                         c = tour.getPoint(k).getPointNumber() - 1;
                         d = tour.getPoint(k + 1).getPointNumber() - 1;
-                        before = distance[a][b] + distance[c][d];
-                        after = distance[a][c] + distance[b][d];
+                        before = distanceMatrix[a][b] + distanceMatrix[c][d];
+                        after = distanceMatrix[a][c] + distanceMatrix[b][d];
 
                         if (after < before) {
                             steps = 0;
-                            gain = before - after;
-
                             LinkedList<Point> tempList = new LinkedList<Point>();
                             int l = i;
                             for (l = i; l <= k; l++) {
@@ -104,7 +107,6 @@ public class LocalSearch {
                                 tour.setPoint(l, tempList.get(j));
                                 l++;
                             }
-                            geschafft = true;
                         }
                         else{
                             steps++;
@@ -115,7 +117,13 @@ public class LocalSearch {
         }
     }
 
-    public void twoOptAfter (Tour tour, double[][] distance, long duration) {
+    /***
+     *
+     * @param tour
+     * @param distanceMatrix
+     * @param duration
+     */
+    public void twoOptAfter (Tour tour, double[][] distanceMatrix, long duration) {
         //long startTime = System.currentTimeMillis();
         int groesseTour = tour.getSize();
         long startTime = System.currentTimeMillis();
@@ -136,8 +144,8 @@ public class LocalSearch {
                         b = tour.getPoint(i).getPointNumber() - 1;
                         c = tour.getPoint(k).getPointNumber() - 1;
                         d = tour.getPoint(k + 1).getPointNumber() - 1;
-                        before = distance[a][b] + distance[c][d];
-                        after = distance[a][c] + distance[b][d];
+                        before = distanceMatrix[a][b] + distanceMatrix[c][d];
+                        after = distanceMatrix[a][c] + distanceMatrix[b][d];
 
                         if (after < before) {
                             LinkedList<Point> tempList = new LinkedList<Point>();
@@ -158,6 +166,54 @@ public class LocalSearch {
         }
         System.out.println("TwoOptAfter executed");
     }
+
+    public void twoOptCluster (Tour tour, double[][] distance){
+        int tourSize = tour.getSize();
+        double minimum = Double.MAX_VALUE;
+        int a, b, c, d;
+
+        int steps = 0;
+        double before, after;
+        if (tour.getSize() >= 4) {
+            while (steps < ((tourSize)*(tourSize/1.5))) {
+                for (int i =0; i<tourSize - 3;i++){
+                    for (int k =i+1; k<tourSize-2; k++){
+                        if(i == 0) {
+                            a = tour.getPoint(tourSize-1).getPointNumber()-1;
+                        }else {
+                            a = tour.getPoint(i-1).getPointNumber()-1;
+                        }
+
+                        b = tour.getPoint(i).getPointNumber()-1;
+                        c = tour.getPoint(k).getPointNumber()-1;
+                        d = tour.getPoint(k+1).getPointNumber()-1;
+                        before = distance[a][b]+distance[c][d];
+                        after = distance[a][c]+distance[b][d];
+
+                        if(after < before){
+                            steps = 0;
+                            LinkedList<Point> tempList = new LinkedList<Point>();
+                            int l = i;
+                            for (l = i; l <= k; l++) {
+                                tempList.add(tour.getPoint(l));
+                            }
+                            l = i;
+                            for (int j = tempList.size() - 1; j >= 0; j--) {
+                                tour.setPoint(l, tempList.get(j));
+                                l++;
+                            }
+                        }else{
+                            steps++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
 
 
     /*

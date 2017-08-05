@@ -12,6 +12,13 @@ public class VisitingOrderCluster {
      *on top, when a tour is calculated, assign the in and out vertices in each cluster, so those clusters can be assigned to the CPU's
      *Take the clusterMatrix with the distances --> compute a tour with NN and 2-opt --> assign the in and out vertices for each cluster
     **/
+    /***
+     *
+     * @param clusterDistances
+     * @param distanceMatrix
+     * @param clusters
+     * @return
+     */
     public static Tour orderCluster (ClusterDistance [][] clusterDistances, double [][] distanceMatrix, List<Cluster> clusters){
         Tour orderCluster = new Tour(0);
         List<Point> clusterPoint = new LinkedList<Point>();
@@ -36,8 +43,8 @@ public class VisitingOrderCluster {
         }
         orderCluster = ConstructionTourThroughClusters.NNHeuristic(distance, clusterPoint);
 
-        LocalSearchForClusters twoOpt = new LocalSearchForClusters();
-        twoOpt.twoOpt(orderCluster, distance);
+        LocalSearch twoOpt = new LocalSearch();
+        twoOpt.twoOptCluster(orderCluster, distance);
 
         int tourLength = orderCluster.getSize();
         for (int i=0; i < tourLength; i++){

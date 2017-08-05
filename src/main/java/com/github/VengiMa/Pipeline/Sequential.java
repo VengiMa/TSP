@@ -13,7 +13,12 @@ import java.util.List;
 /**
  * Created by Admin on 12.06.2017.
  */
-public class Sequentiel {
+public class Sequential {
+    /***
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main (String[] args) throws Exception {
         String filePath;
         boolean pointNamed = false;
