@@ -8,7 +8,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by Admin on 12.06.2017.
@@ -69,9 +68,9 @@ public class Sequential {
         System.out.println("TSPLIB: " + pointNamed);
 
 
-        double coordinates[][] = InputCoordinates.FileToCoordinates(file, pointNamed);
-        LinkedList<Point> init = InputCoordinates.createPointList(coordinates);
-        double distanceMatrix[][] = InputCoordinates.distanceMatrix(coordinates);
+        double coordinates[][] = InputData.FileToCoordinates(file, pointNamed);
+        LinkedList<Point> init = InputData.createPointList(coordinates);
+        double distanceMatrix[][] = InputData.distanceMatrix(coordinates);
 
         for(int i = 0; i < iterations; i++) {
             Timestamp tstart = new Timestamp(System.currentTimeMillis());

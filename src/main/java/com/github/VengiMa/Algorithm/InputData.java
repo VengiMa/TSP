@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Admin on 05.04.2017.
  */
-public class InputCoordinates implements Serializable{
+public class InputData implements Serializable{
     public static double[][] FileToCoordinates(File data, boolean pointNamed) throws IOException {
         String line;
         BufferedReader in;

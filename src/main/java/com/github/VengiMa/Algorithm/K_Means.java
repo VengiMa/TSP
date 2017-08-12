@@ -3,9 +3,7 @@ package com.github.VengiMa.Algorithm;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
-import java.time.Duration;
 import java.util.*;
-import java.util.logging.Logger;
 
 /**
  * Created by Admin on 10.04.2017.
@@ -29,8 +27,8 @@ public class K_Means{
         double minY = Double.MAX_VALUE;
         double maxY = Double.MIN_VALUE;
 
-        maxPointsperCluster = (int)Math.ceil((points.size()/number) + 0.1*points.size());
-        minPointsperCluster = (int)Math.ceil((points.size()/number) - 0.1*points.size());
+        maxPointsperCluster = (int)Math.ceil((points.size()/number) + 0.05*points.size());
+        minPointsperCluster = (int)Math.ceil((points.size()/number) - 0.05*points.size());
 
         for (Point p: init) {
             if (p.getXCoord() < minX) {
@@ -191,11 +189,11 @@ public class K_Means{
 
                     //"C:\\Users\\Admin\\Desktop\\Hochschule\\Master\\Thesis - Richter\\Java\\Testdateien\\sgb_128.txt");
 
-            double coordinates[][] = InputCoordinates.FileToCoordinates(file, false);
+            double coordinates[][] = InputData.FileToCoordinates(file, false);
 
-            distanceMatrix = InputCoordinates.distanceMatrix(coordinates);
+            distanceMatrix = InputData.distanceMatrix(coordinates);
 
-            LinkedList<Point> init = InputCoordinates.createPointList(coordinates);
+            LinkedList<Point> init = InputData.createPointList(coordinates);
             System.out.println(init.size());
             List<Cluster> clusters = null;
 

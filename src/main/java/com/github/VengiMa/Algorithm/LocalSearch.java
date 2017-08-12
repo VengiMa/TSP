@@ -24,7 +24,6 @@ public class LocalSearch {
                 //if (System.currentTimeMillis() - startTime >=10000 || counter >= 15000) {
                 //    return t;
                 //}
-                double gain = 0;
 
                 for (int i =0; i<groesseTour - 3;i++){
                     for (int k =i+1; k<groesseTour-2; k++){
@@ -42,10 +41,9 @@ public class LocalSearch {
 
                         if(after < before){
                             steps = 0;
-                            gain = before - after;
 
                             LinkedList<Point> tempList = new LinkedList<Point>();
-                            int l = i;
+                            int l;
                             for (l = i; l <= k; l++) {
                                 tempList.add(tour.getPoint(l));
                             }

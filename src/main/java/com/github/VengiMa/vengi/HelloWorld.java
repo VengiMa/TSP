@@ -1,8 +1,5 @@
 package com.github.VengiMa.vengi;
 
-import com.github.VengiMa.Algorithm.InputCoordinates;
-
-import java.io.File;
 import java.util.ArrayList;
 /**
  * Created by Admin on 27.02.2017.
@@ -38,7 +35,7 @@ public class HelloWorld {
         /*
         filePath = "src/main/ressources/mu1979.txt";
         File file = new File(filePath);
-        double [][] coordinates = InputCoordinates.FileToCoordinates(file, true);
+        double [][] coordinates = InputData.FileToCoordinates(file, true);
         for (int i=0; i<coordinates.length; i++){
             System.out.println( coordinates[i][0] + "  "+ coordinates[i][1]);
         }

@@ -4,11 +4,9 @@ package com.github.VengiMa.Pipeline;
  * Created by Admin on 21.05.2017.
  */
 import java.io.File;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import com.github.VengiMa.Algorithm.*;
 import org.zeromq.ZMQ;
@@ -95,9 +93,9 @@ public class TaskVent {
         /**
          * Test-File
          */
-        double coordinates[][] = InputCoordinates.FileToCoordinates(file, pointNamed);
-        LinkedList<Point> init = InputCoordinates.createPointList(coordinates);
-        double distanceMatrix[][] = InputCoordinates.distanceMatrix(coordinates);
+        double coordinates[][] = InputData.FileToCoordinates(file, pointNamed);
+        LinkedList<Point> init = InputData.createPointList(coordinates);
+        double distanceMatrix[][] = InputData.distanceMatrix(coordinates);
         List<Cluster> clusters = null;
 
         for(int i=0; i<iterations; i++) {
