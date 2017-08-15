@@ -1,25 +1,46 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2017 Marco Venghaus
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+
 package com.github.VengiMa.Algorithm;
 
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by Admin on 15.04.2017.
+/***
+ * Calculates the visiting order through all clusters. Therefore, a tour is calculated and Entry and Exit points
+ * of every cluster are set, according to the calculated tour
  */
 public class VisitingOrderCluster {
-    /**
-     *Method for calcuating the visiting order of the clusters, based on Nearest Neighbour with LocalSearch Routines
-     *on top, when a tour is calculated, assign the in and out vertices in each cluster, so those clusters can be assigned to the CPU's
-     *Take the clusterMatrix with the distances --> compute a tour with NN and 2-opt --> assign the in and out vertices for each cluster
-    **/
+
     /***
-     *
-     * @param clusterDistances
-     * @param distanceMatrix
-     * @param clusters
-     * @return
+     * Calculates a tour through all clusters and iterates the tour, setting the Entry and Exit points for every cluster
+     * @param clusterDistances Two-dimensional array of ClusterDistance objects
+     * @param clusters List of clusters
+     * @return A tour through all k clusters
      */
-    public static Tour orderCluster (ClusterDistance [][] clusterDistances, double [][] distanceMatrix, List<Cluster> clusters){
+    public static Tour orderCluster (ClusterDistance [][] clusterDistances, List<Cluster> clusters){
         Tour orderCluster = new Tour(0);
         List<Point> clusterPoint = new LinkedList<Point>();
         double [][] distance = new double[clusterDistances.length][clusterDistances.length];
@@ -27,8 +48,6 @@ public class VisitingOrderCluster {
         int following = -1;
         Point fromPoint;
         Point toPoint;
-        int fromPointNumber;
-        int toPointNumber;
 
         //generate the ClusterDistance out of the MAtrix
         for (int i=0; i < clusterDistances.length; i++){
@@ -48,9 +67,6 @@ public class VisitingOrderCluster {
 
         int tourLength = orderCluster.getSize();
         for (int i=0; i < tourLength; i++){
-            //how to put the in and out points into each cluster, cluster 0 to i
-            //iterate the tour, get the pointnumber (equal to the clusternumber and get the previous and following clusternumber
-            //and with this information also the points, connecting the clusters
             clusterNumber = orderCluster.getPoint(i).getPointNumber()-1;
             following = orderCluster.getPoint((i+1)%tourLength).getPointNumber()-1;
 
@@ -60,90 +76,6 @@ public class VisitingOrderCluster {
             clusters.get(clusterNumber).setOutPoint(fromPoint);
             clusters.get(following).setInPoint(toPoint);
         }
-        //System.out.println("Successful orderCluster");
         return orderCluster;
-
-
-
-        /*
-        int tourLength = orderCluster.getSize();
-        int [] visited = new int[distanceMatrix.length];
-        for (int i=0; i < tourLength; i++){
-            //how to put the in and out points into each cluster, cluster 0 to i
-            //iterate the tour, get the pointnumber (equal to the clusternumber and get the previous and following clusternumber
-            //and with this information also the points, connecting the clusters
-            clusterNumber = orderCluster.getPoint(i).getPointNumber()-1;
-            following = orderCluster.getPoint((i+1)%tourLength).getPointNumber()-1;
-            fromPoint = clusterDistances[clusterNumber][following].getfromNode();
-            toPoint = clusterDistances[clusterNumber][following].gettoNode();
-            fromPointNumber = fromPoint.getPointNumber()-1;
-            toPointNumber = toPoint.getPointNumber()-1;
-            int quantityFromCluster = clusters.get(clusterNumber).getPoints().size();
-            int quantityToCluster = clusters.get(following).getPoints().size();
-            double minimum = Double.MAX_VALUE;
-
-            //if both points weren't used before, mark them visited
-            //and declare the in and outpoint of the clusters
-            if (visited[fromPointNumber] !=1  && visited[toPointNumber] !=1){
-                visited[fromPointNumber] = 1;
-                visited[toPointNumber] = 1;
-
-                clusters.get(clusterNumber).setOutPoint(fromPoint);
-                clusters.get(following).setInPoint(toPoint);
-
-            //if both points have been visited, search for the next shortest distance between the two clusters
-            }else if(visited[fromPointNumber] ==1 && visited[toPointNumber] ==1){
-                for (int k = 0; k < quantityFromCluster; k++) {
-                    int fromNumber = clusters.get(clusterNumber).getPoints().get(k).getPointNumber() - 1;
-                    if(visited[fromNumber] !=1) {
-                        for (int l = 0; l < quantityToCluster; l++) {
-                            int toNumber = clusters.get(following).getPoints().get(l).getPointNumber() - 1;
-                            if (distanceMatrix[fromNumber][toNumber] < minimum && visited[toNumber] != 1) {
-                                minimum = distanceMatrix[fromNumber][toNumber];
-                                fromPoint = clusters.get(clusterNumber).getPoints().get(k);
-                                toPoint = clusters.get(following).getPoints().get(l);
-                            }
-                        }
-                    }
-                }
-                visited[fromPointNumber] = 1;
-                visited[toPointNumber] = 1;
-
-                clusters.get(clusterNumber).setOutPoint(fromPoint);
-                clusters.get(following).setInPoint(toPoint);
-            }else if(visited[fromPointNumber] ==1 && visited[toPointNumber] !=1){
-                for (int k= 0; k < quantityFromCluster; k++){
-                    int fromNumber = clusters.get(clusterNumber).getPoints().get(k).getPointNumber() - 1;
-                    if(visited[fromNumber] !=1) {
-                        if (distanceMatrix[fromNumber][toPointNumber] < minimum) {
-                            minimum = distanceMatrix[fromNumber][toPointNumber];
-                            fromPoint = clusters.get(clusterNumber).getPoints().get(k);
-                        }
-                    }
-                }
-                visited[fromPointNumber] = 1;
-                visited[toPointNumber] = 1;
-
-                clusters.get(clusterNumber).setOutPoint(fromPoint);
-                clusters.get(following).setInPoint(toPoint);
-            }else if(visited[fromPointNumber] !=1 && visited[toPointNumber] ==1){
-                for (int l= 0; l < quantityToCluster; l++){
-                    int toNumber = clusters.get(following).getPoints().get(l).getPointNumber() - 1;
-                    if(visited[toNumber] !=1) {
-                        if (distanceMatrix[fromPointNumber][toNumber] < minimum) {
-                            minimum = distanceMatrix[fromPointNumber][toNumber];
-                            toPoint = clusters.get(following).getPoints().get(l);
-                        }
-                    }
-                }
-                visited[fromPointNumber] = 1;
-                visited[toPointNumber] = 1;
-
-                clusters.get(clusterNumber).setOutPoint(fromPoint);
-                clusters.get(following).setInPoint(toPoint);
-            }
-        }
-        return orderCluster;
-        */
     }
 }

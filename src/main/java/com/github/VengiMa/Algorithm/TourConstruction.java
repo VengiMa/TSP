@@ -1,22 +1,44 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2017 Marco Venghaus
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+
 package com.github.VengiMa.Algorithm;
 
 import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.ThreadLocalRandom;
 
-/**
- * Created by Admin on 19.04.2017.
+/***
+ * Provides the different construction heuristics to create a tour
  */
 public class TourConstruction {
-    /**
-     * Tour Construction inside a cluster
-     */
 
     /***
-     *
-     * @param distancematrix
-     * @param cluster
-     * @return
+     * Calculates an initial tour inside a cluster using the Nearest Neighbour heuristic
+     * @param distancematrix The distance matrix
+     * @param cluster The cluster the tour is calculated in
+     * @return A tour
      */
     public static Tour NNHeuristic (double distancematrix [][], Cluster cluster) {
         Stack<Integer> stack= new Stack<Integer>();
@@ -36,7 +58,6 @@ public class TourConstruction {
 
             tour.addPoint(out);
             tour.addPoint(in);
-            //length = length + distancematrix[out.getPointNumber()-1][in.getPointNumber()-1];
 
             visited[cluster.getPointIndex(out)] = 1;
             visited[cluster.getPointIndex(in)] = 1;
@@ -46,8 +67,6 @@ public class TourConstruction {
             //editing the stack value -1 because every city has its index -1 in the distancematrix
             element = stack.peek() - 1;
             boolean minFlag = false;
-            //System.out.print("1" + "\t");
-            //System.out.println(randomNum + "   "+ element);
             while (!stack.isEmpty()) {
                 double min = Integer.MAX_VALUE;
                 //run the loop, increasing set index
@@ -89,10 +108,10 @@ public class TourConstruction {
     }
 
     /***
-     *
-     * @param distancematrix
-     * @param cluster
-     * @return
+     * Calculates an initial tour inside a cluster using the Cheapest Insert heuristic
+     * @param distancematrix The distance matrix
+     * @param cluster The cluster the tour is calculated in
+     * @return A tour
      */
     public static Tour CheapInsert (double distancematrix [][], Cluster cluster) {
         Tour tour = new Tour(0);
@@ -155,10 +174,10 @@ public class TourConstruction {
     }
 
     /***
-     *
-     * @param distancematrix
-     * @param cluster
-     * @return
+     * Calculates an initial tour inside a cluster using the Farthest Insertion heuristic
+     * @param distancematrix The distance matrix
+     * @param cluster The cluster the tour is calculated in
+     * @return A tour
      */
     public static Tour FarthestInsertion (double distancematrix [][], Cluster cluster) {
         Tour tour = new Tour(0);
@@ -225,15 +244,11 @@ public class TourConstruction {
         return tour;
     }
 
-    /**
-     * Tour Construction for the sequential algorithm
-     */
-
     /***
-     *
-     * @param distancematrix
-     * @param pointList
-     * @return
+     * Calculates an initial tour for the sequential algorithm using the Nearest Neighbour heuristic
+     * @param distancematrix The distance matrix
+     * @param pointList A list of all points from the TSP
+     * @return A tour
      */
     public static Tour NN (double distancematrix [][], List<Point> pointList) {
         Stack<Integer> stack= new Stack<Integer>();
@@ -254,8 +269,6 @@ public class TourConstruction {
         //editiing the stack value -1 because every city has its index -1 in the distancematrix
         element = stack.peek() - 1;
         boolean minFlag = false;
-        //System.out.print("1" + "\t");
-        //System.out.println(randomNum + "   "+ element);
         while (!stack.isEmpty()) {
             double min = Integer.MAX_VALUE;
             //run the loop, increasing set index
@@ -283,15 +296,14 @@ public class TourConstruction {
             }
             stack.pop();
         }
-        //System.out.println(tour.tour2String());
         return tour;
     }
 
     /***
-     *
-     * @param distancematrix
-     * @param pointList
-     * @return
+     * Calculates an initial tour for the sequential algorithm using the Farthest Insertion heuristic
+     * @param distancematrix The distance matrix
+     * @param pointList A list of all points from the TSP
+     * @return A tour
      */
     public static Tour Farthest (double distancematrix [][], List<Point> pointList) {
         Tour tour = new Tour(0);
@@ -302,7 +314,6 @@ public class TourConstruction {
         int randomNum = ThreadLocalRandom.current().nextInt(1, numbernodes);
         int pointNumber = pointList.get(randomNum - 1).getPointNumber();
         double max;
-        double min;
         int chosenPoint = 0;
         int pos = -1;
 
@@ -354,10 +365,10 @@ public class TourConstruction {
     }
 
     /***
-     *
-     * @param distancematrix
-     * @param pointList
-     * @return
+     * Calculates an initial tour for the sequential algorithm using the Cheapest Insertion heuristic
+     * @param distancematrix The distance matrix
+     * @param pointList A list of all points from the TSP
+     * @return A tour
      */
     public static Tour Cheapest (double distancematrix [][],  List<Point> pointList) {
         Tour tour = new Tour(0);

@@ -29,7 +29,8 @@ package com.github.VengiMa.Algorithm;
 import java.io.Serializable;
 
 /***
- * What does the Point class do...
+ * Contains x- and y-coordinate, the number of the point and the number of the cluster it belongs to.
+ * Represents the smallest instance for every other class
  */
 public class Point implements Serializable {
     private int pointNumber;
@@ -39,9 +40,9 @@ public class Point implements Serializable {
 
     /***
      *
-     * @param pointNumber
-     * @param xCoord
-     * @param yCoord
+     * @param pointNumber The point number according to the text-file
+     * @param xCoord The x-coordinate as declared in the text-file
+     * @param yCoord The y-coordinate as declared in the text-file
      */
     public Point (int pointNumber, double xCoord, double yCoord){
         this.pointNumber = pointNumber;
@@ -67,13 +68,11 @@ public class Point implements Serializable {
         System.out.println("PointNumber: " + pointNumber + "; XCoord: " + xCoord + "; YCoord: " + yCoord +"; ClusterNumber: " + cluster_number);
     }
 
-    //get the distance to a point z with matrix
-
     /***
      *
-     * @param z
-     * @param distanceMatrix
-     * @return
+     * @param z The point the distance should be calculated to.
+     * @param distanceMatrix The distance matrix, where the distances are stored in.
+     * @return The distance between the current point and the point z, using a distance matrix
      */
     public double getDistance2Point (Point z, double [][] distanceMatrix){
         double distance = -1;
@@ -81,16 +80,14 @@ public class Point implements Serializable {
         return distance;
     }
 
-    //calcaulate the distance between two points using the coordinates
-
     /***
      *
-     * @param p
-     * @param centroid
-     * @return
+     * @param p The first point, the distance will be calculated from
+     * @param q The second point, the distance will be calculated to
+     * @return The distance between the two points p and q, using the coordinates
      */
-    public static double distance(Point p, Point centroid){
-        return Math.sqrt(Math.pow((centroid.getYCoord() - p.getYCoord()), 2) + Math.pow((centroid.getXCoord() - p.getXCoord()), 2));
+    public static double distance(Point p, Point q){
+        return Math.sqrt(Math.pow((q.getYCoord() - p.getYCoord()), 2) + Math.pow((q.getXCoord() - p.getXCoord()), 2));
     }
 }
 

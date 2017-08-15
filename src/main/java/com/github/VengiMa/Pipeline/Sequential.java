@@ -1,3 +1,28 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2017 Marco Venghaus
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+
 package com.github.VengiMa.Pipeline;
 
 import com.github.VengiMa.Algorithm.*;
@@ -9,14 +34,15 @@ import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 
-/**
- * Created by Admin on 12.06.2017.
+/***
+ * Represents the sequential equivalent to the distributed algorithm. Calculates a tour with a construction heuristic that
+ * is set by environment variables and is improved by a 2-opt move. The results are saved in a database.
  */
 public class Sequential {
     /***
      *
      * @param args
-     * @throws Exception
+     * @throws Exception Is thrown, if the environment variables are empty or wrong
      */
     public static void main (String[] args) throws Exception {
         String filePath;

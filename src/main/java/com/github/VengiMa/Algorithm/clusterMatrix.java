@@ -1,23 +1,50 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2017 Marco Venghaus
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+
 package com.github.VengiMa.Algorithm;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Admin on 13.04.2017.
+/***
+ * Calculates the distances between the clusters, using the pair of points with the shortest distance
  */
 public class clusterMatrix {
-
-
-    public static ClusterDistance [][] clusterMatrix (double [][] distanceMatrix, List<Cluster> clusters) {
+    /***
+     * Calculates the distance between the clusters by comparing all pair of points of the two involved clusters
+     * @param distanceMatrix Distance matrix, containing the distances betweeen all points
+     * @param clusters The list of all clusters
+     * @return a two-dimensional array of objects from ClusterDistance, primary containing the distance with the involved points
+     */
+    public static ClusterDistance[][] clusterMatrix(double[][] distanceMatrix, List<Cluster> clusters) {
 
         ClusterDistance[][] clusterMatrix = new ClusterDistance[clusters.size()][clusters.size()];
         Point from = new Point(-1, -1, -1);
         Point to = new Point(-1, -1, -1);
         int[] visited = new int[distanceMatrix.length];
 
-        //todo: find a solution for calcualting the distance between the clusters, no direct calculation of both points
-        //probably only one? and the other one when searching for the closest vertex?
         //calculate the closest edge, no matter if the vertex is already used or not, (visited)
         if (clusters.size() > 2) {
             for (int i = 0; i < clusters.size(); i++) {
@@ -73,8 +100,7 @@ public class clusterMatrix {
                     }
                 }
             }
-        }
-        else if (clusters.size() ==2){
+        } else if (clusters.size() == 2) {
             for (int i = 0; i < clusters.size(); i++) {
                 for (int j = 0; j < clusters.size(); j++) {
                     if (clusters.get(i).getPoints().size() == 0) {
@@ -130,77 +156,4 @@ public class clusterMatrix {
         }
         return clusterMatrix;
     }
-
-
-    /*
-    //todo: try to only take the shortest distance, computing the entry and exit point after computing the tour.
-    public static ClusterDistance [][] clusterMatrix (double [][] distanceMatrix, List<Cluster> clusters) {
-
-        ClusterDistance[][] clusterMatrix = new ClusterDistance[clusters.size()][clusters.size()];
-        Point from = new Point(-1, -1, -1);
-        Point to = new Point(-1, -1, -1);
-        int[] visited = new int[distanceMatrix.length];
-
-        if (clusters.size() > 2) {
-            for (int i = 0; i < clusters.size(); i++) {
-                for (int j = i; j < clusters.size(); j++) {
-                    if (i == j) {
-                        Point useless = new Point(-1, -1, -1);
-                        ClusterDistance cd = new ClusterDistance(0.00, clusters.get(i), clusters.get(j), useless, useless);
-                        clusterMatrix[i][j] = cd;
-                    } else {
-                        double minimum = Double.MAX_VALUE;
-                        int quantityFromCluster = clusters.get(i).getPoints().size();
-                        int quantityToCluster = clusters.get(j).getPoints().size();
-
-                        for (int k = 0; k < quantityFromCluster; k++) {
-                            int fromPoint = clusters.get(i).getPoints().get(k).getPointNumber() - 1;
-                            for (int l = 0; l < quantityToCluster; l++) {
-                                int toPoint = clusters.get(j).getPoints().get(l).getPointNumber() - 1;
-                                if (distanceMatrix[fromPoint][toPoint] < minimum && visited[toPoint] != 1) {
-                                    minimum = distanceMatrix[fromPoint][toPoint];
-                                    from = clusters.get(i).getPoints().get(k);
-                                    to = clusters.get(j).getPoints().get(l);
-                                }
-                            }
-                        }
-                        ClusterDistance zu = new ClusterDistance(minimum, clusters.get(i), clusters.get(j), from, to);
-                        clusterMatrix[i][j] = zu;
-                        ClusterDistance back = new ClusterDistance(minimum, clusters.get(i), clusters.get(j), to, from);
-                        clusterMatrix[j][i] = back;
-                    }
-                }
-            }
-        }
-        else if (clusters.size() ==2){
-            for (int i = 0; i < clusters.size(); i++) {
-                for (int j = 0; j < clusters.size(); j++) {
-                    if (i == j) {
-                        Point useless = new Point(-1, -1, -1);
-                        clusterMatrix[i][j] = new ClusterDistance(0.00, clusters.get(i), clusters.get(j), useless, useless);
-                    } else {
-                        double minimum = Double.MAX_VALUE;
-                        int sizeClusteri = clusters.get(i).getPoints().size();
-                        int sizeClusterj = clusters.get(j).getPoints().size();
-
-                        for (int k = 0; k < sizeClusteri; k++) {
-                            int fromPoint = clusters.get(i).getPoints().get(k).getPointNumber() - 1;
-                            for (int l = 0; l < sizeClusterj; l++) {
-                                int toPoint = clusters.get(j).getPoints().get(l).getPointNumber() - 1;
-                                if (distanceMatrix[fromPoint][toPoint] < minimum && visited[toPoint] != 1) {
-                                    minimum = distanceMatrix[fromPoint][clusters.get(j).getPoints().get(l).getPointNumber() - 1];
-                                    from = clusters.get(i).getPoints().get(k);
-                                    to = clusters.get(j).getPoints().get(l);
-                                }
-                            }
-                        }
-                        ClusterDistance zu = new ClusterDistance(minimum, clusters.get(i), clusters.get(j), from, to);
-                        clusterMatrix[i][j] = zu;
-                    }
-                }
-            }
-        }
-        return clusterMatrix;
-    }
-    */
 }

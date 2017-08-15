@@ -1,19 +1,43 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2017 Marco Venghaus
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+
 package com.github.VengiMa.Algorithm;
 
 import java.util.LinkedList;
 
-/**
- * Created by Admin on 19.04.2017.
+/***
+ * Provides the Local Search methods for improving an existing tour
  */
 public class LocalSearch {
     /***
-     *
-     * @param distanceMatrix
-     * @param cluster
-     * @param tour
+     * Improves a tour inside a cluster using the 2-opt move. Sets the starting point of the tour to the Entry point of the cluster
+     * @param distanceMatrix The distance matrix
+     * @param cluster The cluster the tour is calculated in
+     * @param tour The calculated tour
      */
     public void twoOpt (double[][] distanceMatrix, Cluster cluster, Tour tour) {
-        //long startTime = System.currentTimeMillis();
         int groesseTour = tour.getSize();
         boolean geschafft = false;
         double before, after;
@@ -21,12 +45,11 @@ public class LocalSearch {
         int steps = 0;
         if (tour.getSize() >= 4) {
             while (steps < ((groesseTour)*(groesseTour/2))) {
-                //if (System.currentTimeMillis() - startTime >=10000 || counter >= 15000) {
-                //    return t;
-                //}
 
                 for (int i =0; i<groesseTour - 3;i++){
+
                     for (int k =i+1; k<groesseTour-2; k++){
+
                         if(i == 0) {
                             a = tour.getPoint(groesseTour-1).getPointNumber()-1;
                         }else {
@@ -67,20 +90,22 @@ public class LocalSearch {
     }
 
     /***
-     *
-     * @param tour
-     * @param distanceMatrix
+     * Improves a given tour for the sequential algorithm
+     * @param tour Calculated tour through all points
+     * @param distanceMatrix The distance matrix
      */
     public void twoOptSequentiel (Tour tour, double[][] distanceMatrix) {
-        //long startTime = System.currentTimeMillis();
         int groesseTour = tour.getSize();
         double before, after;
         int a, b, c, d;
         int steps = 0;
         if (tour.getSize() >= 4) {
             while (steps < ((groesseTour)*(groesseTour/2))) {
+
                 for (int i = 0; i < groesseTour - 3; i++) {
+
                     for (int k = i + 1; k < groesseTour - 2; k++) {
+
                         if (i == 0) {
                             a = tour.getPoint(groesseTour - 1).getPointNumber() - 1;
                         } else {
@@ -116,23 +141,23 @@ public class LocalSearch {
     }
 
     /***
-     *
-     * @param tour
-     * @param distanceMatrix
-     * @param duration
+     * The improvement method that is executed for a given time after merging the hamiltonian paths from every cluster back together
+     * @param tour The calculated tour
+     * @param distanceMatrix The distance matrix
+     * @param duration The duration the whole algorithm will be executed
      */
     public void twoOptAfter (Tour tour, double[][] distanceMatrix, long duration) {
-        //long startTime = System.currentTimeMillis();
         int groesseTour = tour.getSize();
         long startTime = System.currentTimeMillis();
-        boolean geschafft = false;
         double before, after;
         int a, b, c, d;
         if (tour.getSize() >= 4) {
-            //todo:Zeitlimit einstellen
             while (System.currentTimeMillis()-startTime <= duration) {
+
                 for (int i = 0; i < groesseTour - 3; i++) {
+
                     for (int k = i + 1; k < groesseTour - 2; k++) {
+
                         if (i == 0) {
                             a = tour.getPoint(groesseTour - 1).getPointNumber() - 1;
                         } else {
@@ -156,7 +181,6 @@ public class LocalSearch {
                                 tour.setPoint(l, tempList.get(j));
                                 l++;
                             }
-                            geschafft = true;
                         }
                     }
                 }
@@ -165,17 +189,24 @@ public class LocalSearch {
         System.out.println("TwoOptAfter executed");
     }
 
-    public void twoOptCluster (Tour tour, double[][] distance){
+    /***
+     * Improves a given tour using the 2-opt move
+     * @param tour The calculated tour
+     * @param distancematrix The distance matrix
+     */
+    public void twoOptCluster (Tour tour, double[][] distancematrix){
         int tourSize = tour.getSize();
-        double minimum = Double.MAX_VALUE;
         int a, b, c, d;
 
         int steps = 0;
         double before, after;
         if (tour.getSize() >= 4) {
             while (steps < ((tourSize)*(tourSize/1.5))) {
+
                 for (int i =0; i<tourSize - 3;i++){
+
                     for (int k =i+1; k<tourSize-2; k++){
+
                         if(i == 0) {
                             a = tour.getPoint(tourSize-1).getPointNumber()-1;
                         }else {
@@ -185,8 +216,8 @@ public class LocalSearch {
                         b = tour.getPoint(i).getPointNumber()-1;
                         c = tour.getPoint(k).getPointNumber()-1;
                         d = tour.getPoint(k+1).getPointNumber()-1;
-                        before = distance[a][b]+distance[c][d];
-                        after = distance[a][c]+distance[b][d];
+                        before = distancematrix[a][b]+distancematrix[c][d];
+                        after = distancematrix[a][c]+distancematrix[b][d];
 
                         if(after < before){
                             steps = 0;
@@ -208,89 +239,4 @@ public class LocalSearch {
             }
         }
     }
-
-
-
-
-
-
-    /*
-    public void twoOpt (double[][] distance, Cluster cluster, Tour tour){
-
-        //long startTime = System.currentTimeMillis();
-        int groesseTour = tour.getSize();
-        boolean geschafft = false;
-        int counter = 0, temp2, temp4;
-        int in, out;
-        in = cluster.getInPoint().getPointNumber();
-        out = cluster.getOutPoint().getPointNumber();
-        if (tour.getSize() >= 4) {
-            while (counter < 10000) {
-                //if (System.currentTimeMillis() - startTime >=10000 || counter >= 15000) {
-                //    return t;
-                //}
-                //choose two random numbers, which are used as the reference for the twoOpt
-                Random randomNumberGenerator = new Random();
-                int randomNumber1 = randomNumberGenerator.nextInt(groesseTour);
-                int randomNumber2 = randomNumberGenerator.nextInt(groesseTour);
-
-                //get sure, that the two numbers are different
-                while (randomNumber1 == randomNumber2) {
-                    randomNumber2 = randomNumberGenerator.nextInt(groesseTour);
-                }
-
-                int[] edges = {randomNumber1, randomNumber2};
-                Arrays.sort(edges);
-                randomNumber1 = edges[0];
-                randomNumber2 = edges[1];
-                temp2 = randomNumber1 + 1;
-                temp4 = (randomNumber2 + 1) % groesseTour;
-
-                int tourIn = tour.getPointIndex(cluster.getInPoint());
-                int tourOut = tour.getPointIndex(cluster.getOutPoint());
-                //Two Opt can only be computed, if the tour has at minimum 4 points
-                if  (temp2 != randomNumber2 && temp4 != randomNumber1 &&
-                    (randomNumber2 != tourOut && temp4 != tourIn) &&
-                    (randomNumber1 != tourOut && temp2 != tourIn) &&
-                    (randomNumber1 != tourIn && temp2 != tourOut) &&
-                    (randomNumber2 != tourIn && temp4 != tourOut)){
-                    int a, b, c, d;
-                    a = tour.getPoint(randomNumber1).getPointNumber() - 1;
-                    b = tour.getPoint(temp2).getPointNumber() - 1;
-                    c = tour.getPoint(randomNumber2).getPointNumber() - 1;
-                    d = tour.getPoint(temp4).getPointNumber() - 1;
-
-                    //System.out.println(a+ "  " +b+ "  " +c+ "  " +d);
-                    //compute the distances before and after the change of the edges
-                    double vorher = distance[a][b] + distance[c][d];
-                    double danach = distance[a][c] + distance[b][d];
-
-                    //System.out.println("d1= "+vorher + "; d2= " +danach );
-                    if (danach < vorher) {
-                        LinkedList<Point> tempList = new LinkedList<Point>();
-                        int l = temp2;
-                        for (l = temp2; l <= randomNumber2; l++) {
-                            tempList.add(tour.getPoint(l));
-                        }
-                        l = temp2;
-                        for (int k = tempList.size() - 1; k >= 0; k--) {
-                            tour.setPoint(l, tempList.get(k));
-                            l++;
-                        }
-                        geschafft = true;
-                    } else {
-                        counter++;
-                    }
-                }
-                else {
-                    counter++;
-                }
-            }
-        }
-        if (geschafft) {
-            System.out.println("TwoOpt executed!");
-        }
-        tour.setStartingPoint(cluster.getInPoint());
-    }
-    */
 }

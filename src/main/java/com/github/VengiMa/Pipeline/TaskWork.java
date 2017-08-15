@@ -1,8 +1,30 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2017 Marco Venghaus
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+
 package com.github.VengiMa.Pipeline;
 
-/**
- * Created by Admin on 21.05.2017.
- */
 import com.github.VengiMa.Algorithm.Cluster;
 import com.github.VengiMa.Algorithm.ClusterComputation;
 import com.github.VengiMa.Algorithm.DataPackage;
@@ -12,11 +34,15 @@ import com.github.VengiMa.Algorithm.*;
 
 import java.sql.Timestamp;
 
+/***
+ * The worker receives the task from the ventilator. It calculates a tour through the cluster
+ * from its entry to its exit point. The final tour, respectively the hamiltonian path, is send to the sink.
+ */
 public class TaskWork {
     /***
-     *
+     * Calculates a tour through the cluster using the specified heuristic, set in an environment variable and sends it to the sink
      * @param args
-     * @throws Exception
+     * @throws Exception Is thrown, if the environment variable is empty or wrong
      */
     public static void main (String[] args) throws Exception {
         String host_Sink = String.valueOf(System.getenv("HOST_SINK"));
