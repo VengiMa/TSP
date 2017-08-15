@@ -86,7 +86,6 @@ public class TaskWork {
         while (!Thread.currentThread ().isInterrupted ()) {
 
             byte[] byteArray = receiver.recv();
-            //receiving message from Vent
 
             //work with the received message/data
             data = (DataPackage) SerializationUtil.deserialize(byteArray);
@@ -110,7 +109,6 @@ public class TaskWork {
         }
         sender.close();
         receiver.close();
-        //controller.close();
         context.term();
     }
 }

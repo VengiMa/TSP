@@ -139,10 +139,6 @@ public class TaskSink {
                 dur = (tend.getTime()-tstart.getTime());
                 System.out.println("Improvement after merging together executed");
             }
-            //todo:
-            //10 nearest neighbours, storage
-            //clusterung, schnittebenen
-            //java-doc file erzeugen, mit dokumentation
 
             double distance = ((double) Math.round(finalTour.distanceTourLength(distanceMatrix)*100))/100;
 
@@ -169,10 +165,6 @@ public class TaskSink {
 
         System.out.println("Calculation finished!");
 
-        //  Send the kill signal to the workers
-        //controller.send("KILL", 0);
-
-        //controller.close();
         receiver.close();
         context.term();
     }

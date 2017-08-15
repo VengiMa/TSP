@@ -100,10 +100,6 @@ public class TaskVent {
         ZMQ.Socket sender = context.socket(ZMQ.PUSH);
         sender.bind("tcp://*:5557");
 
-        // Socket to publish to the sink
-        //ZMQ.Socket pub = context.socket(ZMQ.PUB);
-        //pub.connect("tcp://*:5559");
-
         //  Socket to send messages on
         ZMQ.Socket sink = context.socket(ZMQ.PUSH);
         sink.connect("tcp://" + host_Sink + ":5558");
