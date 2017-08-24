@@ -52,17 +52,65 @@ public class ClusterDistance {
         this.toNode = toNode;
     }
 
-    //getter
+    /***
+     *
+     * @return The distance between two clusters
+     */
     public double getClusterDistance() {return this.distance;}
+
+    /***
+     *
+     * @return The cluster the distance is calculated from
+     */
     public Cluster getFrom() {return this.from;}
+
+    /***
+     *
+     * @return The cluster the distance is calculated to
+     */
     public Cluster getTo() {return this.to;}
+
+    /***
+     *
+     * @return The point the distance is calculated from
+     */
     public Point getfromNode() {return this.fromNode;}
+
+    /***
+     *
+     * @return The point the distance is calculated to
+     */
     public Point gettoNode() {return this.toNode;}
 
-    //Setter
+
+
+    /***
+     * Sets the distance between two clusters
+     * @param distance The distance
+     */
     public void setClusterDistance(double distance) {this.distance = distance;}
+
+    /***
+     * Sets the cluster the distance is calculated from
+     * @param k The cluster
+     */
     public void setFrom(Cluster k) {this.from = k;}
+
+    /***
+     * Sets the cluster the distance is calculated to
+     * @param l The cluster
+     */
     public void setTo(Cluster l) {this.to = l;}
+
+    /***
+     * Sets the point the distance is calculated from
+     * @param i The point
+     */
     public void setfromNode(Point i) {this.fromNode = i;}
+
+    /***
+     * Sets the point the distance is calculated to
+     * @param j The point
+     */
     public void settoNode(Point j) {this.toNode = j;}
 }

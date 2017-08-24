@@ -45,7 +45,6 @@ public class clusterMatrix {
         Point to = new Point(-1, -1, -1);
         int[] visited = new int[distanceMatrix.length];
 
-        //calculate the closest edge, no matter if the vertex is already used or not, (visited)
         if (clusters.size() > 2) {
             for (int i = 0; i < clusters.size(); i++) {
                 for (int j = i; j < clusters.size(); j++) {

@@ -31,7 +31,7 @@ import java.util.List;
 
 /***
  * A cluster is an object that contains a List of points, a centroid that represents its centre, an ID
- * and an Entry and Exit point
+ * and an Entry and Exit point. The set of points is partitioned into a fixed number of clusters
  */
 public class Cluster implements Serializable {
     private List<Point> points;
@@ -39,7 +39,6 @@ public class Cluster implements Serializable {
     public int id;
     private Point in;
     private Point out;
-    //private LinkedList<Point> pointList;
 
     /**
      *
@@ -53,11 +52,6 @@ public class Cluster implements Serializable {
         this.out = new Point(0,0,0);
     }
 
-    /**
-    *Methods
-    **/
-
-    //getter
 
     /**
      *
@@ -104,7 +98,7 @@ public class Cluster implements Serializable {
      */
     public int getId() { return id; }
 
-    //setter
+
 
     /**
      *
@@ -138,8 +132,6 @@ public class Cluster implements Serializable {
         this.out = outPoint;
     }
 
-
-    //more
 
     /**
      *

@@ -40,7 +40,12 @@ import java.sql.Timestamp;
  */
 public class TaskWork {
     /***
-     * Calculates a tour through the cluster using the specified heuristic, set in an environment variable and sends it to the sink
+     * Calculates a tour through the cluster using the specified heuristic,
+     * set in an environment variable and sends it to the sink
+     * Environment variables:
+     * The chosen heuristic, 1 = NN, 2 = FI, 3 =CI
+     * The IP of the port of the sink
+     * The IP of the port of the ventilator
      * @param args
      * @throws Exception Is thrown, if the environment variable is empty or wrong
      */

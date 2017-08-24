@@ -30,11 +30,13 @@ package com.github.VengiMa.Algorithm;
  */
 public class ClusterComputation {
     /***
-     *
+     * Creates a tour, respectively a hamiltonian path through all points, starting from the
+     * Entry point of the cluster and ending at the Exit point. First, the tour will be constructed
+     * and then it gets improved
      * @param c The cluster that will be processed
      * @param distanceMatrix The distance matrix of the points, needed for the construction and improvement method
-     * @param choice The variable for choosing the construction heuristic
-     * @return A Tour, respectively a hamiltonian path, through all points, starting from the Entry point of the cluster and ending at the Exit point
+     * @param choice The variable for choosing the construction heuristic, 1 = NN, 2 = FI, 3 = CI
+     * @return A tour
      */
     public static Tour createTour(Cluster c, double [][] distanceMatrix, int choice){
         Tour tour;

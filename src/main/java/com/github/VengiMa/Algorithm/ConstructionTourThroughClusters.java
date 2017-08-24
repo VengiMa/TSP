@@ -43,7 +43,6 @@ public class ConstructionTourThroughClusters {
         Tour tour = new Tour(0);
 
         int numbernodes;
-        //visited = List of elements, either value = 1 for visited or value = 0 for unvisited
         numbernodes = pointList.size();
         int visited[] = new int[numbernodes];
         if (numbernodes == 2){
@@ -72,23 +71,16 @@ public class ConstructionTourThroughClusters {
                 }
             }
             visited[pointNumber - 1] = 1;
-            //add the Point to the tour:
             tour.addPoint(pointList.get(randomNum - 1));
             int element, dst = 0, i, pos = 0;
             stack.push(pointNumber);
-            //editiing the stack value -1 because every city has its index -1 in the distancematrix
             element = stack.peek() - 1;
             boolean minFlag = false;
-            //System.out.print("1" + "\t");
-            //System.out.println(randomNum + "   "+ element);
             while (!stack.isEmpty()) {
                 double min = Integer.MAX_VALUE;
-                //run the loop, increasing set index
                 for (i = 0; i < pointList.size(); i++) {
                     int cityIndex = pointList.get(i).getPointNumber() - 1;
-                    //compare, if city won't visit itself and that the city has not been visited yet
                     if (distancematrix[element][cityIndex] > 0 && visited[i] == 0) {
-                        //if distance is smaller than the distances before: new minimum and next city
                         if (min > distancematrix[element][cityIndex]) {
                             min = distancematrix[element][cityIndex];
                             dst = cityIndex + 1;
@@ -101,7 +93,6 @@ public class ConstructionTourThroughClusters {
                     visited[dst - 1] = 1;
                     stack.push(dst);
                     element = stack.peek() - 1;
-                    //System.out.print(dst + "\t");
                     tour.addPoint(pointList.get(pos));
                     minFlag = false;
                     continue;
@@ -109,7 +100,6 @@ public class ConstructionTourThroughClusters {
                 stack.pop();
             }
         }
-        //System.out.println(tour.tour2String());
         return tour;
     }
 }

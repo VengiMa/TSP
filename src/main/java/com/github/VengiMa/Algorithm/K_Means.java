@@ -62,8 +62,6 @@ public class K_Means{
         for(int i =0; i < number; i++){
             Cluster cluster = new Cluster(i);
             Random r = new Random();
-            //double x = minX + (maxX - minX) * r.nextDouble();
-            //double y = minY + (maxY - minY) * r.nextDouble();
             int pointNumber = r.nextInt(points.size());
             while (chosenPoints.contains(pointNumber)){
                 pointNumber = r.nextInt(points.size());
@@ -75,7 +73,6 @@ public class K_Means{
             cluster.setCentroid(centroid);
             clusters.add(cluster);
         }
-        //plotClusters();
     }
 
     /***
@@ -122,7 +119,6 @@ public class K_Means{
                 distance = Math.sqrt(Math.pow((currentCentroids.get(i).getYCoord() - last[i][1]), 2) + Math.pow((currentCentroids.get(i).getXCoord() - last[i][0]), 2));
                 sum = sum + distance;
             }
-            //plotClusters();
 
             if(sum==0) {
                 finish = true;
@@ -131,7 +127,6 @@ public class K_Means{
                     System.out.println("Cluster " + cl.id + ": " + cl.getPoints().size());
                 }
                 System.out.println("######");
-                //System.out.println("Centroid distances: " + distance);
             }
         }
     }

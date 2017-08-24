@@ -41,7 +41,9 @@ import java.util.ArrayList;
 public class TaskSink {
     /***
      * Receives the hamiltonian paths from the workers and merges them to one final tour for the TSP.
-     * All essential information are set by environment variables.
+     * All essential information are set by the following environment variables:
+     * The address of the database
+     * Optional: Total time the algorithm should be executed
      * @param args
      * @throws Exception
      */
@@ -69,7 +71,6 @@ public class TaskSink {
         String url = "jdbc:postgresql://" + database;
         Connection conn = DriverManager.getConnection(url,"postgres","postgres");
 
-        //  Wait for start of batch
         byte[] maxTaskByte = receiver.recv();
         DataPackage fromVent = (DataPackage) SerializationUtil.deserialize(maxTaskByte);
         int maxTask_nbr = fromVent.getNumberClusters();
@@ -88,7 +89,6 @@ public class TaskSink {
             long dur;
             String heur = "NN";
 
-            //  Process the confirmations
             int task_nbr;
             int index =1;
             for (task_nbr = 0; task_nbr < maxTask_nbr; task_nbr++) {
@@ -121,7 +121,6 @@ public class TaskSink {
                 }
             }
             if (timestring.length() == 0) {
-                //  Calculate and report duration of batch
                 tend = new Timestamp(System.currentTimeMillis());
                 dur = -1;
                 try {

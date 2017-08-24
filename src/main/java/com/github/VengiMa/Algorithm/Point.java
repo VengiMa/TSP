@@ -51,19 +51,63 @@ public class Point implements Serializable {
         this.cluster_number = -1;
     }
 
-    //getter
+
+
+    /***
+     *
+     * @return The number of the point
+     */
     public int getPointNumber(){return this.pointNumber;}
+
+    /***
+     *
+     * @return The x-coordinate of the point
+     */
     public double getXCoord(){return this.xCoord;}
+
+    /***
+     *
+     * @return The y-coordinate of the point
+     */
     public double getYCoord(){return this.yCoord;}
+
+    /***
+     *
+     * @return The ID of the cluster the point belongs to
+     */
     public int getCluster(){return this.cluster_number;}
 
-    //setter
+
+
+    /***
+     * Sets the point number of the point
+     * @param i The point number
+     */
     public void setPointNumber(int i){this.pointNumber = i;}
+
+    /***
+     * Sets the x-coordinate of the point
+     * @param x The x-coordinate
+     */
     public void setXCoord (double x){this.xCoord = x;}
+
+    /***
+     * Sets the y-coordinate of the point
+     * @param y The y-coordinate
+     */
     public void setYCoord (double y){this.yCoord = y;}
+
+    /***
+     * Sets the number of the cluster the point belongs to
+     * @param n The ID of the cluster
+     */
     public void setCluster (int n) {this.cluster_number = n;}
 
-    //Print a point
+
+
+    /***
+     * Prints out all variables of the point
+     */
     public void printPoint(){
         System.out.println("PointNumber: " + pointNumber + "; XCoord: " + xCoord + "; YCoord: " + yCoord +"; ClusterNumber: " + cluster_number);
     }

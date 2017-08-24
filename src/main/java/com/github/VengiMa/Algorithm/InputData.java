@@ -49,12 +49,7 @@ public class InputData implements Serializable{
         int i = 0;
         int size = 0;
         String[] inputLines;
-        // REading of the txt file; only distancematrix, no other information before
-        // File should be opened by a dialogue, so the right one can be chosen
 
-
-
-        // Method of creating the data matrix must be written!!!!!
         try {
             in = new BufferedReader(new FileReader(data));
             line = in.readLine();
@@ -71,10 +66,10 @@ public class InputData implements Serializable{
         }
         in = new BufferedReader(new FileReader(data));
         line = in.readLine();
-        //Definition of the size of the problem, generating an array of that size: inputLines
+
         inputLines = new String[size];
         i = 0;
-        // saving the data in inputLines, read out of the file, line per line
+
         while (line != null) {
             inputLines[i] = line;
             line = in.readLine();
@@ -85,12 +80,7 @@ public class InputData implements Serializable{
         input = new double[inputLines.length][2];
         if (pointNamed){
             for (int j = 0; j < inputLines.length; j++) {
-                //first lines of the matrix cannot be parsed...only the matrix!!!
-                //Also no empty lines should be read.
-                //System.out.println("");
-                //old pattern "[-]?[0-9]+[.|,0-9]*"
                 Pattern p = Pattern.compile("[+\\-]?(?:0|[1-9]\\d*)(?:(\\,|\\.)\\d*)?(?:[eE][+\\-]?\\d+)?");
-
                 Matcher m = p.matcher(inputLines[j]);
                 int k = -1;
                 while (m.find()) {
@@ -103,16 +93,11 @@ public class InputData implements Serializable{
             }
         }else{
             for (int j = 0; j < inputLines.length; j++) {
-                //first lines of the matrix cannot be parsed...only the matrix!!!
-                //Also no empty lines should be read.
-                //System.out.println("");
-                //[-]?[0-9]+.[0-9]+
                 Pattern p = Pattern.compile("[+\\-]?(?:0|[1-9]\\d*)(?:(\\,|\\.)\\d*)?(?:[eE][+\\-]?\\d+)?");
                 Matcher m = p.matcher(inputLines[j]);
                 int k = 0;
                 while (m.find()) {
                     input[j][k] = Double.parseDouble(m.group());
-                    //System.out.print(" "+matrix[j][k]);
                     k++;
                 }
             }
@@ -131,7 +116,6 @@ public class InputData implements Serializable{
             for (int k = 0; k < coordinates.length; k++) {
                 double temp = Math.sqrt(Math.pow((coordinates[j][0] - coordinates[k][0]), 2) + Math.pow((coordinates[j][1] - coordinates[k][1]), 2));
                 matrix[j][k] = Math.round(temp * 100.00) / 100.00;
-                //Math.round(temp*100.00)/100.00;
             }
         }
         return matrix;

@@ -28,7 +28,7 @@ package com.github.VengiMa.Pipeline;
 import java.io.*;
 
 /***
- * Essential for transporting data between the system instances.
+ * Essential class for transporting data between the system instances.
  */
 public class SerializationUtil {
     /***

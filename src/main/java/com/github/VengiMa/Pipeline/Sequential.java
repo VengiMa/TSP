@@ -40,7 +40,12 @@ import java.util.LinkedList;
  */
 public class Sequential {
     /***
-     *
+     * Following environment variables are needed:
+     * The address of the database
+     * The chosen heuristic, 1 = NN, 2 = FI, 3 =CI
+     * The boolean value, if the problem instance is from the TSPLIB
+     * The number of iterations, the algorithm will be executed
+     * The path to the text file of the problem instance
      * @param args
      * @throws Exception Is thrown, if the environment variables are empty or wrong
      */

@@ -38,6 +38,13 @@ import org.zeromq.ZMQ;
 public class TaskVent {
     /***
      * Receives all essential data from environment variables, produces and sends tasks to the workers
+     * Following environment variables are needed:
+     * The number of clusters the problem instance will be partitioned into
+     * The boolean value, if the problem instance is from the TSPLIB
+     * The number of iterations, the algorithm will be executed
+     * The path to the text file of the problem instance
+     * The sleeping time of the algorithm until the next iteration starts
+     * The IP of the port of the sink
      * @param args
      * @throws Exception Is thrown, if an environment variable is empty or wrong
      */

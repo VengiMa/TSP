@@ -49,13 +49,11 @@ public class VisitingOrderCluster {
         Point fromPoint;
         Point toPoint;
 
-        //generate the ClusterDistance out of the MAtrix
         for (int i=0; i < clusterDistances.length; i++){
             for (int j =0; j < clusterDistances.length; j++){
                 distance[i][j] = clusterDistances[i][j].getClusterDistance();
             }
         }
-        //generate the PointList for the NN Heuristic
         for (int i=0; i<clusters.size(); i++){
             Point temp = new Point(i+1, -1, -1);
             clusterPoint.add(temp);

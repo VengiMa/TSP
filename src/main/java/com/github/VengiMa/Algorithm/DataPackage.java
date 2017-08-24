@@ -74,45 +74,125 @@ public class DataPackage implements Serializable {
         this.clusterTour = clusterTour;
     }
 
+    /***
+     *
+     * @return The ID of the datapackage
+     */
     public int getiDData(){return iD;}
 
+    /***
+     *
+     * @return The cluster within the datapackage
+     */
     public Cluster getClusterData(){return cluster;}
 
+    /***
+     *
+     * @return The distance matrix within the datapackage
+     */
     public double[][] getDistanceMatrixData(){return distanceMatrix;}
 
+    /***
+     *
+     * @return The tour through all clusters
+     */
     public Tour getClusterTourData() {return clusterTour;}
 
+    /***
+     *
+     * @return The tour within a cluster
+     */
     public Tour getTourData() {return tour;}
 
+    /***
+     *
+     * @return The name of the problem instance
+     */
     public String getTyp() {return typ;}
 
+    /***
+     *
+     * @return The used heuristic to construct a tour
+     */
     public String getHeuristic() {return heuristic;}
 
+    /***
+     *
+     * @return The number of clusters the problem instance is partitioned into
+     */
     public int getNumberClusters(){return numberClusters;}
 
+    /***
+     *
+     * @return The starting time of the algorithm
+     */
     public Timestamp getStartTime() {return startTime;}
 
+    /***
+     *
+     * @return The number of iterations the problem will be processed
+     */
     public int getIterations(){return iterations;}
 
 
 
+    /***
+     * Sets the ID of the datapackage
+     * @param iD The ID
+     */
     public void setiDData (int iD) {this.iD = iD;}
 
+    /***
+     * Sets the cluster of the datapackage
+     * @param c The cluster
+     */
     public void setClusterData (Cluster c){this.cluster = c;}
 
+    /***
+     * Sets the distance matrix of the datapackage
+     * @param distance The distance matrix
+     */
     public void setDistanceMatrixData (double[][] distance){this.distanceMatrix = distance;}
 
+    /***
+     * Sets the tour through all clusters
+     * @param t The tour
+     */
     public void setClusterTourData (Tour t){this.clusterTour = t;}
 
+    /***
+     * Sets the tour within a cluster
+     * @param tour A tour
+     */
     public void setTourData (Tour tour){this.tour = tour;}
 
+    /***
+     * Sets the processed problem instance
+     * @param type Problem instance
+     */
     public void setTyp (String type){this.typ = type;}
 
+    /***
+     * Sets the used heuristic to construct a tour. 1 = NN, 2 = FI, 3 = CI
+     * @param heur The heuristic
+     */
     public void setHeuristic (String heur){this.heuristic = heur;}
 
+    /***
+     * Sets the number of clusters the problem instance is partitioned into
+     * @param number The number of clusters
+     */
     public void setNumberClusters (int number){this.numberClusters = number;}
 
+    /***
+     * Sets the starting time of the algorithm within the class ventilator
+     * @param start The starting time
+     */
     public void setStartTime (Timestamp start){this.startTime = start;}
 
+    /***
+     * Sets the number of iterations the problem instance is processed
+     * @param iter The number of iterations
+     */
     public void setIterations (int iter){this.iterations = iter;}
 }
