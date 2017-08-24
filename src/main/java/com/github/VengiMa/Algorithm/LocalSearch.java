@@ -33,7 +33,7 @@ import java.util.LinkedList;
 public class LocalSearch {
     /***
      * Improves a tour inside a cluster using the 2-opt move. Sets the starting point of the tour to the Entry point of the cluster
-     * @param distanceMatrix The distance matrix
+     * @param distanceMatrix A 2-dimensional array. Contains the distances
      * @param cluster The cluster the tour is calculated in
      * @param tour The calculated tour
      */
@@ -92,7 +92,7 @@ public class LocalSearch {
     /***
      * Improves a given tour for the sequential algorithm
      * @param tour Calculated tour through all points
-     * @param distanceMatrix The distance matrix
+     * @param distanceMatrix A 2-dimensional array. Contains the distances
      */
     public void twoOptSequentiel (Tour tour, double[][] distanceMatrix) {
         int groesseTour = tour.getSize();
@@ -143,7 +143,7 @@ public class LocalSearch {
     /***
      * The improvement method that is executed for a given time after merging the hamiltonian paths from every cluster back together
      * @param tour The calculated tour
-     * @param distanceMatrix The distance matrix
+     * @param distanceMatrix A 2-dimensional array. Contains the distances
      * @param duration The duration the whole algorithm will be executed
      */
     public void twoOptAfter (Tour tour, double[][] distanceMatrix, long duration) {
@@ -192,7 +192,7 @@ public class LocalSearch {
     /***
      * Improves a given tour using the 2-opt move
      * @param tour The calculated tour
-     * @param distancematrix The distance matrix
+     * @param distancematrix A 2-dimensional array. Contains the distances
      */
     public void twoOptCluster (Tour tour, double[][] distancematrix){
         int tourSize = tour.getSize();

@@ -34,7 +34,7 @@ import java.util.List;
 public class clusterMatrix {
     /***
      * Calculates the distance between the clusters by comparing all pair of points of the two involved clusters
-     * @param distanceMatrix Distance matrix, containing the distances betweeen all points
+     * @param distanceMatrix A 2-dimensional array. Contains the distances
      * @param clusters The list of all clusters
      * @return a two-dimensional array of objects from ClusterDistance, primary containing the distance with the involved points
      */

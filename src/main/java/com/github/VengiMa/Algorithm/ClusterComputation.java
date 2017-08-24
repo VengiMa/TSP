@@ -34,7 +34,7 @@ public class ClusterComputation {
      * Entry point of the cluster and ending at the Exit point. First, the tour will be constructed
      * and then it gets improved
      * @param c The cluster that will be processed
-     * @param distanceMatrix The distance matrix of the points, needed for the construction and improvement method
+     * @param distanceMatrix A 2-dimensional array. Contains the distances
      * @param choice The variable for choosing the construction heuristic, 1 = NN, 2 = FI, 3 = CI
      * @return A tour
      */

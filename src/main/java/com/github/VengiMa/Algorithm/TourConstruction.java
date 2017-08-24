@@ -36,7 +36,7 @@ public class TourConstruction {
 
     /***
      * Calculates an initial tour inside a cluster using the Nearest Neighbour heuristic
-     * @param distancematrix The distance matrix
+     * @param distancematrix A 2-dimensional array. Contains the distances
      * @param cluster The cluster the tour is calculated in
      * @return A tour
      */
@@ -99,7 +99,7 @@ public class TourConstruction {
 
     /***
      * Calculates an initial tour inside a cluster using the Cheapest Insert heuristic
-     * @param distancematrix The distance matrix
+     * @param distancematrix A 2-dimensional array. Contains the distances
      * @param cluster The cluster the tour is calculated in
      * @return A tour
      */
@@ -156,7 +156,7 @@ public class TourConstruction {
 
     /***
      * Calculates an initial tour inside a cluster using the Farthest Insertion heuristic
-     * @param distancematrix The distance matrix
+     * @param distancematrix A 2-dimensional array. Contains the distances
      * @param cluster The cluster the tour is calculated in
      * @return A tour
      */
@@ -219,7 +219,7 @@ public class TourConstruction {
 
     /***
      * Calculates an initial tour for the sequential algorithm using the Nearest Neighbour heuristic
-     * @param distancematrix The distance matrix
+     * @param distancematrix A 2-dimensional array. Contains the distances
      * @param pointList A list of all points from the TSP
      * @return A tour
      */
@@ -267,7 +267,7 @@ public class TourConstruction {
 
     /***
      * Calculates an initial tour for the sequential algorithm using the Farthest Insertion heuristic
-     * @param distancematrix The distance matrix
+     * @param distancematrix A 2-dimensional array. Contains the distances
      * @param pointList A list of all points from the TSP
      * @return A tour
      */
@@ -325,7 +325,7 @@ public class TourConstruction {
 
     /***
      * Calculates an initial tour for the sequential algorithm using the Cheapest Insertion heuristic
-     * @param distancematrix The distance matrix
+     * @param distancematrix A 2-dimensional array. Contains the distances
      * @param pointList A list of all points from the TSP
      * @return A tour
      */

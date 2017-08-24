@@ -34,7 +34,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ConstructionTourThroughClusters {
     /***
      * The nearest neighbour heuristic is used to calculate a tour through all clusters
-     * @param distancematrix The distance matrix with all distances between the clusters
+     * @param distancematrix A 2-dimensional array. Contains the distances
      * @param pointList The clusters transformed into a List of points
      * @return A short tour through all clusters
      */

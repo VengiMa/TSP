@@ -107,7 +107,7 @@ public class InputData implements Serializable{
 
     /***
      * Calculates the distance matrix to the according coordinates, using the euclidian distance, creating a n x n distance matrix
-     * @param coordinates The coordinates of the points
+     * @param coordinates The coordinates of the points, stored in a 2-dimensional array
      * @return A two-dimensional array of double values containing the distances
      */
     public static double[][] distanceMatrix (double[][] coordinates){
@@ -123,7 +123,7 @@ public class InputData implements Serializable{
 
     /***
      * Creates a List of points that is needed for construction heuristics and k-means
-     * @param coordinates The coordinates of the points
+     * @param coordinates The coordinates of the points, stored in a 2-dimensional array
      * @return
      */
     public static LinkedList<Point> createPointList (double[][] coordinates){

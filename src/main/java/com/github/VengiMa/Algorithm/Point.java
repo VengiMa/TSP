@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-//todo: Java doc über tools
-
 package com.github.VengiMa.Algorithm;
 
 import java.io.Serializable;
@@ -115,7 +113,7 @@ public class Point implements Serializable {
     /***
      *
      * @param z The point the distance should be calculated to.
-     * @param distanceMatrix The distance matrix, where the distances are stored in.
+     * @param distanceMatrix A 2-dimensional array. Contains the distances
      * @return The distance between the current point and the point z, using a distance matrix
      */
     public double getDistance2Point (Point z, double [][] distanceMatrix){

@@ -240,7 +240,7 @@ public class Tour implements Serializable {
 
     /***
      * Calculates the length of the current tour
-     * @param distanceMatrix The distance matrix that is used for calculation
+     * @param distanceMatrix A 2-dimensional array. Contains the distances
      * @return The total tour length of the tour
      */
     public double distanceTourLength(double[][] distanceMatrix){
