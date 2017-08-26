@@ -33,11 +33,11 @@ import com.github.VengiMa.Algorithm.*;
 import org.zeromq.ZMQ;
 
 /***
- * The ventilator reads in the text file, calculates the clusters and sends the tasks to the workers
+ * The ventilator reads in the text file, calculates the clusters and sends the tasks to the workers.
  */
 public class TaskVent {
     /***
-     * Receives all essential data from environment variables, produces and sends tasks to the workers
+     * Receives all essential data from environment variables, produces and sends tasks to the workers.
      * Following environment variables are needed:
      * The number of clusters the problem instance will be partitioned into
      * The boolean value, if the problem instance is from the TSPLIB

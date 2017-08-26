@@ -28,7 +28,7 @@ package com.github.VengiMa.Pipeline;
 import java.io.*;
 
 /***
- * Essential class for transporting data between the system instances.
+ * Essential class for transporting data between the Task Vent, Work and Sink.
  */
 public class SerializationUtil {
     /***

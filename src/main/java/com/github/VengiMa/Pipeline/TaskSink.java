@@ -34,7 +34,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /***
- * The sink is the last instance. It receives information from the workers and the ventilator. Its task is to
+ * The sink receives data from the workers and the ventilator. Its task is to
  * merge the hamiltonian paths together to a final tour for the TSP and is finished or improves the final tour
  * for a fixed amount of time. The results are stored in a database.
  */

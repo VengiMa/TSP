@@ -35,7 +35,7 @@ import com.github.VengiMa.Algorithm.*;
 import java.sql.Timestamp;
 
 /***
- * The worker receives the task from the ventilator. It calculates a tour through the cluster
+ * The worker receives the task from the ventilator. It calculates a hamiltonian path in the cluster
  * from its entry to its exit point. The final tour, respectively the hamiltonian path, is send to the sink.
  */
 public class TaskWork {
