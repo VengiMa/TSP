@@ -30,7 +30,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /***
- * A cluster is an object that contains a List of points, a centroid that represents its centre, an ID
+ * Contains a List of points, a centroid that represents its centre, an ID
  * and an Entry and Exit point. The set of points is partitioned into a fixed number of clusters
  */
 public class Cluster implements Serializable {

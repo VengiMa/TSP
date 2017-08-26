@@ -33,7 +33,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /***
- * Contains all methods to read in the text file and convert it into the needed object
+ * Contains all methods to read in the text file and convert it into the distance matrix, a list of coordinates.
  */
 public class InputData implements Serializable{
     /***

@@ -30,7 +30,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 /***
- * Is a tour through n points. Represented by a List of points
+ * A tour through n points, represented by a List of points
  */
 public class Tour implements Serializable {
     private LinkedList<Point> pointList = new LinkedList<Point>();

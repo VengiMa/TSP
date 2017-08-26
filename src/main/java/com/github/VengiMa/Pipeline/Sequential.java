@@ -35,7 +35,7 @@ import java.sql.Timestamp;
 import java.util.LinkedList;
 
 /***
- * Represents the sequential equivalent to the distributed algorithm, containing of TaskVent, TaskWork and TaskSink.
+ * Represents the sequential equivalent to the distributed algorithm, consisting of TaskVent, TaskWork and TaskSink.
  * Calculates a tour with a construction heuristic that is set by environment variables
  * and is improved by a 2-opt move. The results are saved in a database.
  */

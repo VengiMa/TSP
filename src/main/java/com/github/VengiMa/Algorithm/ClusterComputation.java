@@ -26,7 +26,7 @@
 package com.github.VengiMa.Algorithm;
 
 /***
- * Calculates a tour through all points of a given cluster and improves it using the 2-opt move
+ * Calculates a tour through all points of a given cluster and improves it using the 2-opt move.
  */
 public class ClusterComputation {
     /***
